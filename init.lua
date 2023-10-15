@@ -1,1 +1,1 @@
-require('garry/main')
+require('user')
