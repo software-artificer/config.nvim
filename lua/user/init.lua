@@ -1,8 +1,6 @@
 -- Set leader button to space
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
--- Enable terminal colors
-vim.o.termguicolors = true
 -- Disable mouse integration
 vim.opt.mouse = nil
 
