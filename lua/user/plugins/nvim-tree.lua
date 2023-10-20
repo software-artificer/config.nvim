@@ -21,10 +21,10 @@ local function configure_nvim_tree()
       end
 
       set_keymap('<ESC>', nvim_tree_api.tree.close_in_this_tab, mkOption('Close Explorer'))
-      set_keymap('<', function()
+      set_keymap(',', function()
         nvim_tree_api.tree.collapse_all({ keep_buffers = true })
       end, mkOption('Collapse all'))
-      set_keymap('>', nvim_tree_api.tree.expand_all, mkOption('Expand all'))
+      set_keymap('.', nvim_tree_api.tree.expand_all, mkOption('Expand all'))
       set_keymap('n', nvim_tree_api.fs.create, mkOption('[N]ew file or directory'))
       set_keymap('d', nvim_tree_api.fs.remove, mkOption('[D]elete'))
       set_keymap('r', nvim_tree_api.fs.rename_node, mkOption('[R]ename'))
