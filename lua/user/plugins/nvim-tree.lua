@@ -1,8 +1,4 @@
 local function configure_nvim_tree()
-  -- Disable built-in neovim file browser
-  -- local loader = require('lazy.core.loader')
-  -- loader.disable_rtp_plugin('netrwPlugin')
-
   local nvim_tree = require('nvim-tree')
   local nvim_tree_api = require('nvim-tree.api')
   local function set_keymap(key, action, opts)
@@ -12,8 +8,12 @@ local function configure_nvim_tree()
   nvim_tree.setup({
     disable_netrw = true,
     hijack_netrw = true,
+    hijack_cursor = true,
     view = {
       width = 40,
+    },
+    renderer = {
+      special_files = {},
     },
     on_attach = function (bufnr)
       local function mkOption(description)
@@ -34,6 +34,9 @@ local function configure_nvim_tree()
       set_keymap('ya', nvim_tree_api.fs.copy.absolute_path, mkOption('Copy absolute path'))
       set_keymap('yr', nvim_tree_api.fs.copy.relative_path, mkOption('Copy relative path'))
       set_keymap('yy', nvim_tree_api.fs.copy.filename, mkOption('Copy filename'))
+      set_keymap('gg', nvim_tree_api.node.navigate.parent, mkOption('Go to parent'))
+      set_keymap('gk', nvim_tree_api.node.navigate.sibling.prev, mkOption('Previous sibling'))
+      set_keymap('gj', nvim_tree_api.node.navigate.sibling.next, mkOption('Next sibling'))
       set_keymap('<CR>', nvim_tree_api.node.open.edit, mkOption('Open'))
     end,
     actions = {
