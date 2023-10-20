@@ -6,11 +6,25 @@ local function initPlugin()
       enable = true,
     },
     additional_vim_regex_highlighting = false,
+    ident = {
+      enable = true,
+    },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        init_selection = '<leader>v',
+	node_incremental = 'w',
+	node_decremental = 'b',
+	scope_incremental = false,
+      },
+    },
   })
 end
 
 return {
   'nvim-treesitter/nvim-treesitter',
+  build = ':TSUpdate',
+  event = { 'BufReadPre', 'BufNewFile' },
   tag = 'v0.9.1',
   config = initPlugin,
 }

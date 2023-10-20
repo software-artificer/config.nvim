@@ -54,7 +54,7 @@ local function configure_nvim_tree()
   set_keymap('<leader>e', function()
     nvim_tree_api.tree.toggle({ find_file = true })
   end, {
-    desc = "nvim-tree: Toggle [E]xplorer",
+    desc = 'nvim-tree: Toggle [E]xplorer',
     noremap = true,
     silent = true,
     nowait = true,
@@ -64,6 +64,6 @@ end
 return {
   'nvim-tree/nvim-tree.lua',
   lazy = false,
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = configure_nvim_tree,
 }
