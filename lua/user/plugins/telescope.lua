@@ -9,6 +9,12 @@ local function initTelescope(plugin)
       selection_caret = ' ',
       multi_icon = ' ',
       default_mappings = {},
+      preview = {
+        tresitter = true,
+      },
+      file_ignore_patterns = {
+        '.git',
+      },
       mappings = {
         i = {
           ['<ESC>'] = actions.close,
