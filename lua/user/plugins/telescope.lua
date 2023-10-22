@@ -1,4 +1,4 @@
-local function initTelescope(plugin)
+local function initTelescope()
   local telescope = require('telescope')
   local pickers = require('telescope.builtin')
   local actions = require('telescope.actions')
@@ -49,6 +49,8 @@ local function initTelescope(plugin)
   set_keymap('<leader>fp', pickers.resume)
   -- find in current buffer
   set_keymap('<leader>fc', pickers.current_buffer_fuzzy_find)
+  -- navigate the jumplist
+  set_keymap('<leader>fj', pickers.jumplist)
   --gd = pickers.lsp_definitions({jump_type = 'never'})
   --gi = pickers.lsp_implementations({jump_type = 'never'})
   --gs = pickers.lsp_workspace_symbols()
