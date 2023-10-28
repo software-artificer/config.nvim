@@ -21,14 +21,19 @@ local function initTelescope()
           ['<C-n>'] = actions.move_selection_next,
           ['<C-p>'] = actions.move_selection_previous,
           ['<CR>'] = actions.select_default,
+	  ['<C-u>'] = actions.preview_scrolling_up,
+	  ['<C-d>'] = actions.preview_scrolling_down,
+	  -- Only in master, not available in the latest release (yet)
+	  --['<C-f>'] = actions.preview_scrolling_left,
+	  --['<C-b>'] = actions.preview_scrolling_right,
         },
       },
       layout_strategy = 'vertical',
     },
   })
 
-  local function set_keymap(keymap, action)
-    vim.keymap.set('n', keymap, action)
+  local function set_keymap(keymap, action, opts)
+    vim.keymap.set('n', keymap, function() action(opts or {}) end)
   end
 
   -- find files
@@ -38,9 +43,7 @@ local function initTelescope()
   -- open buffers
   set_keymap('<leader>fb', pickers.buffers)
   -- find all files, including ignored
-  set_keymap('<leader>fa', function()
-    pickers.find_files({ hidden = true, no_ignore = true })
-  end)
+  set_keymap('<leader>fa', pickers.find_files, { hidden = true, no_ignore = true })
   -- find text
   set_keymap('<leader>ft', pickers.live_grep)
   -- open previous picker
@@ -49,13 +52,14 @@ local function initTelescope()
   set_keymap('<leader>fc', pickers.current_buffer_fuzzy_find)
   -- navigate the jumplist
   set_keymap('<leader>fj', pickers.jumplist)
-  --gd = pickers.lsp_definitions({jump_type = 'never'})
-  --gi = pickers.lsp_implementations({jump_type = 'never'})
-  --gs = pickers.lsp_workspace_symbols()
-  --pickers.lsp_references()
-  --pickers.diagnostics()
-  --telescope.load_extension()
-  --telescope.disable_all_keybindings()
+  -- list diagnostic messages (problems)
+  set_keymap('<leader>fd', pickers.diagnostics)
+  -- list all workspace symbols
+  set_keymap('<leader>fs', pickers.lsp_workspace_symbols)
+  -- list all implementations for the method under the cursor
+  set_keymap('<leader>fi', pickers.lsp_implementations, { jump_type = 'never' })
+  -- list all references
+  set_keymap('<leader>fr', pickers.lsp_references, { jump_type = 'never' })
 end
 
 return {
