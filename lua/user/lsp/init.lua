@@ -47,6 +47,9 @@ local function configLsp()
   local on_attach = function(client, bufnr)
     lsp_format.on_attach(client, bufnr)
 
+    -- Will be available in Neovim 0.10.x
+    -- vim.lsp.inlay_hints(bufnr, true)
+
     bufmap('n', 'K', vim.lsp.buf.hover)
     bufmap('n', 'gd', vim.lsp.buf.definition)
     bufmap('n', 'gD', vim.lsp.buf.declaration)
