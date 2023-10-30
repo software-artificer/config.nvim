@@ -81,6 +81,7 @@ local function setupCmp()
     sources = {
       { name = 'nvim_lua' },
       { name = 'nvim_lsp' },
+      { name = 'nvim_lsp_signature_help' },
       { name = 'path' },
       { name = 'buffer', keyword_length = 5 },
     },
@@ -96,6 +97,7 @@ return {
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
       'L3MON4D3/LuaSnip',
     },
   },
@@ -114,5 +116,8 @@ return {
   },
   {
     'hrsh7th/cmp-nvim-lua',
+  },
+  {
+    'hrsh7th/cmp-nvim-lsp-signature-help',
   },
 }
