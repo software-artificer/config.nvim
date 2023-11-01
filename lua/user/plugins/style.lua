@@ -56,11 +56,26 @@ local function setupTheme()
   })
 
   vim.cmd.colorscheme('tokyonight-night')
-  vim.fn.sign_define('DiagnosticSignError', { texthl = 'DiagnosticSignError', text = '', })
-  vim.fn.sign_define('DiagnosticSignWarn', { texthl = 'DiagnosticSignWarn', text = '', })
-  vim.fn.sign_define('DiagnosticSignOk', { texthl = 'DiagnosticSignOk', text = '', })
-  vim.fn.sign_define('DiagnosticSignInfo', { texthl = 'DiagnosticSignInfo', text = '', })
-  vim.fn.sign_define('DiagnosticSignHint', { texthl = 'DiagnosticSignHint', text = '', })
+  vim.fn.sign_define(
+    'DiagnosticSignError',
+    { texthl = 'DiagnosticSignError', text = '' }
+  )
+  vim.fn.sign_define(
+    'DiagnosticSignWarn',
+    { texthl = 'DiagnosticSignWarn', text = '' }
+  )
+  vim.fn.sign_define(
+    'DiagnosticSignOk',
+    { texthl = 'DiagnosticSignOk', text = '' }
+  )
+  vim.fn.sign_define(
+    'DiagnosticSignInfo',
+    { texthl = 'DiagnosticSignInfo', text = '' }
+  )
+  vim.fn.sign_define(
+    'DiagnosticSignHint',
+    { texthl = 'DiagnosticSignHint', text = '' }
+  )
 end
 
 return {

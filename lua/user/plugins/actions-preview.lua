@@ -5,7 +5,7 @@ local function setupActions()
 
   plugin.setup({
     diff = { ctxlen = 5 },
-    backend = { "telescope" },
+    backend = { 'telescope' },
     telescope = {
       layout_strategy = 'vertical',
     },
