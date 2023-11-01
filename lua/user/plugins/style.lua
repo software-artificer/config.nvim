@@ -18,6 +18,7 @@ local function setupTheme()
       highlights.RainbowDelimiterGreen = { fg = '#9ece6a' }
       highlights.RainbowDelimiterViolet = { fg = '#bb9af7' }
       highlights.RainbowDelimiterCyan = { fg = '#2ac3de' }
+      highlights.LightBulbSign = { fg = colors.yellow }
 
       -- color scheme for nvim-cmp
       --highlights.CmpItemAbbrDeprecated = {}
