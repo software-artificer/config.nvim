@@ -46,7 +46,7 @@ local function initTelescope()
   set_keymap('<leader>fb', pickers.buffers)
   -- find all files, including ignored
   set_keymap(
-    '<leader>fa',
+    '<leader>fF',
     pickers.find_files,
     { hidden = true, no_ignore = true }
   )
