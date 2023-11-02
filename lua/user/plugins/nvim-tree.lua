@@ -27,6 +27,11 @@ local function configure_nvim_tree()
       end
 
       set_keymap(
+        'q',
+        nvim_tree_api.tree.close_in_this_tab,
+        mkOption('Close Explorer')
+      )
+      set_keymap(
         '<ESC>',
         nvim_tree_api.tree.close_in_this_tab,
         mkOption('Close Explorer')

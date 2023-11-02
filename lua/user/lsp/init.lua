@@ -23,8 +23,8 @@ local function load_lsp_modules(lspconfig, opts)
   end
 end
 
-local function bufmap(mode, keymap, action)
-  vim.keymap.set(mode, keymap, action, { buffer = true })
+local function bufmap(mode, keymap, action, desc)
+  vim.keymap.set(mode, keymap, action, { buffer = true, desc = desc })
 end
 
 local function configLsp()
@@ -50,9 +50,9 @@ local function configLsp()
     -- Will be available in Neovim 0.10.x
     -- vim.lsp.inlay_hints(bufnr, true)
 
-    bufmap('n', 'K', vim.lsp.buf.hover)
-    bufmap('n', 'gd', vim.lsp.buf.definition)
-    bufmap('n', 'gD', vim.lsp.buf.declaration)
+    bufmap('n', 'K', vim.lsp.buf.hover, 'LSP: show symbol documentation')
+    bufmap('n', 'gd', vim.lsp.buf.definition, 'LSP: go to definition')
+    bufmap('n', 'gD', vim.lsp.buf.declaration, 'LSP: go to declaration')
 
     -- Lists all the implementations for the symbol under the cursor
     -- bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')

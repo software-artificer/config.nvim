@@ -32,44 +32,77 @@ local function initTelescope()
     },
   })
 
-  local function set_keymap(keymap, action, opts)
+  local function set_keymap(keymap, desc, action, opts)
     vim.keymap.set('n', keymap, function()
       action(opts or {})
-    end)
+    end, { desc = desc })
   end
 
   -- find files
-  set_keymap('<leader>ff', function()
+  set_keymap('<leader>ff', 'Telescope: files, exclude ignored', function()
     pickers.find_files({ hidden = true })
   end)
   -- open buffers
-  set_keymap('<leader>fb', pickers.buffers)
+  set_keymap('<leader>fb', 'Telescope: buffers', pickers.buffers)
   -- find all files, including ignored
   set_keymap(
     '<leader>fF',
+    'Telescope: files, include ignored',
     pickers.find_files,
     { hidden = true, no_ignore = true }
   )
   -- find text
-  set_keymap('<leader>ft', pickers.live_grep)
+  set_keymap('<leader>ft', 'Telescope: live [t]ext grep', pickers.live_grep)
   -- open previous picker
-  set_keymap('<leader>fp', pickers.resume)
+  set_keymap(
+    '<leader>fp',
+    'Telescope: resume [p]revious picker',
+    pickers.resume
+  )
   -- find in current buffer
-  set_keymap('<leader>fc', pickers.current_buffer_fuzzy_find)
+  set_keymap(
+    '<leader>fc',
+    'Telescope: [c]urrent buffer fuzzy find',
+    pickers.current_buffer_fuzzy_find
+  )
   -- navigate the jumplist
-  set_keymap('<leader>fj', pickers.jumplist)
+  set_keymap('<leader>fj', 'Telescope: [j]umplist', pickers.jumplist)
   -- list workspace/document diagnostic messages (problems)
-  set_keymap('<leader>fD', pickers.diagnostics)
-  set_keymap('<leader>fd', function()
+  set_keymap(
+    '<leader>fD',
+    'Telescope: workspace [d]iagnostic',
+    pickers.diagnostics
+  )
+  set_keymap('<leader>fd', 'Telescope: buffer [d]iagnostics', function()
     pickers.diagnostics({ bufnr = 0 })
   end)
   -- list all workspace/document symbols
-  set_keymap('<leader>fS', pickers.lsp_workspace_symbols)
-  set_keymap('<leader>fs', pickers.lsp_document_symbols)
+  set_keymap(
+    '<leader>fS',
+    'Telescope: workspace [s]ymbols',
+    pickers.lsp_workspace_symbols
+  )
+  set_keymap(
+    '<leader>fs',
+    'Telescope: document [s]ymbols',
+    pickers.lsp_document_symbols
+  )
   -- list all implementations for the method under the cursor
-  set_keymap('<leader>fi', pickers.lsp_implementations, { jump_type = 'never' })
+  set_keymap(
+    '<leader>fi',
+    'Telescope: [i]mplementations',
+    pickers.lsp_implementations,
+    { jump_type = 'never' }
+  )
   -- list all references
-  set_keymap('<leader>fr', pickers.lsp_references, { jump_type = 'never' })
+  set_keymap(
+    '<leader>fr',
+    'Telescope: [r]eferences',
+    pickers.lsp_references,
+    { jump_type = 'never' }
+  )
+  -- show keymap help
+  set_keymap('<leader>fk', 'Telescope: show [k]eymaps', pickers.keymaps)
 end
 
 return {
