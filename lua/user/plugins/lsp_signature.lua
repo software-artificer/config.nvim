@@ -2,6 +2,7 @@ local function setupPlugin()
   require('lsp_signature').setup({
     floating_window = false,
     doc_lines = 0,
+    hint_prefix = '󱃺 ',
   })
 end
 
