@@ -25,6 +25,6 @@ return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   event = { 'BufReadPre', 'BufNewFile' },
-  tag = 'v0.9.1',
+  version = '^0.9',
   config = initPlugin,
 }

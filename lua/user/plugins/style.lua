@@ -80,6 +80,6 @@ end
 
 return {
   'folke/tokyonight.nvim',
-  tag = 'v2.8.0',
+  version = '^2.8',
   config = setupTheme,
 }

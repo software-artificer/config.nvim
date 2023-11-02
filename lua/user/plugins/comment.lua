@@ -21,6 +21,6 @@ end
 
 return {
   'numToStr/Comment.nvim',
-  tag = 'v0.8.0',
+  version = '^0.8',
   config = setupComment,
 }

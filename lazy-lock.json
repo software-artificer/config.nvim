@@ -18,5 +18,5 @@
   "plenary.nvim": { "branch": "master", "commit": "50012918b2fc8357b87cff2a7f7f0446e47da174" },
   "rainbow-delimiters.nvim": { "branch": "master", "commit": "df8cdf68234fbf056202a9684931c3dfa89988c1" },
   "telescope.nvim": { "branch": "master", "commit": "7011eaae0ac1afe036e30c95cf80200b8dc3f21a" },
-  "tokyonight.nvim": { "branch": "main", "commit": "b3330499038766734389555c23375e61b38011eb" }
+  "tokyonight.nvim": { "branch": "main", "commit": "633039585dff7fd2b9b62fb190bf768702609d95" }
 }

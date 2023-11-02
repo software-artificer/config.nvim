@@ -10,6 +10,6 @@ end
 
 return {
   'kosayoda/nvim-lightbulb',
-  tag = 'v1.0.0',
+  version = '^1',
   config = setupLightBulb,
 }

@@ -107,7 +107,7 @@ end
 
 return {
   'nvim-telescope/telescope.nvim',
-  tag = '0.1.4',
+  version = '^0.1',
   config = initTelescope,
   dependencies = {
     'nvim-lua/plenary.nvim',
