@@ -18,7 +18,7 @@ local function configure_nvim_tree()
     on_attach = function(bufnr)
       local function mkOption(description)
         return {
-          desc = 'nvim-tree: ' .. description,
+          desc = 'NvimTree: ' .. description,
           buffer = bufnr,
           noremap = true,
           silent = true,
@@ -27,12 +27,12 @@ local function configure_nvim_tree()
       end
 
       set_keymap(
-        'q',
+        '<ESC>',
         nvim_tree_api.tree.close_in_this_tab,
         mkOption('Close Explorer')
       )
       set_keymap(
-        '<ESC>',
+        'q',
         nvim_tree_api.tree.close_in_this_tab,
         mkOption('Close Explorer')
       )
@@ -53,22 +53,22 @@ local function configure_nvim_tree()
       set_keymap(
         'ya',
         nvim_tree_api.fs.copy.absolute_path,
-        mkOption('Copy absolute path')
+        mkOption('[Y]ank [a]bsolute path')
       )
       set_keymap(
         'yr',
         nvim_tree_api.fs.copy.relative_path,
-        mkOption('Copy relative path')
+        mkOption('[Y]ank [r]elative path')
       )
       set_keymap(
         'yy',
         nvim_tree_api.fs.copy.filename,
-        mkOption('Copy filename')
+        mkOption('[Y]ank filename')
       )
       set_keymap(
         'gg',
         nvim_tree_api.node.navigate.parent,
-        mkOption('Go to parent')
+        mkOption('[G]o to parent')
       )
       set_keymap(
         'gk',

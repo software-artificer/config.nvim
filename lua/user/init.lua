@@ -25,5 +25,3 @@ require('lazy').setup({
     require('user.lsp'),
   },
 })
-
-require('user.keymaps')
