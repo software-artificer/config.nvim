@@ -159,6 +159,7 @@ local function setupPlugin()
           })
         end,
         description = ' Show [h]elp for current mode',
+        mode = { 'n', 'v' },
       },
     },
   })

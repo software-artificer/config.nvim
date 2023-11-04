@@ -12,7 +12,7 @@ local function initPlugin()
     incremental_selection = {
       enable = true,
       keymaps = {
-        init_selection = '󰾂 <leader>v',
+        init_selection = false,
         node_incremental = 'w',
         node_decremental = 'b',
         scope_incremental = false,
@@ -27,4 +27,14 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   version = '^0.9',
   config = initPlugin,
+  keys = {
+    {
+      '<leader>v',
+      function()
+        require('nvim-treesitter.incremental_selection').init_selection()
+      end,
+      mode = { 'n' },
+      desc = '󰾂 TreeSitter: start incremental selection',
+    },
+  },
 }
