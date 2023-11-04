@@ -12,7 +12,7 @@ local function initPlugin()
     incremental_selection = {
       enable = true,
       keymaps = {
-        init_selection = '<leader>v',
+        init_selection = '󰾂 <leader>v',
         node_incremental = 'w',
         node_decremental = 'b',
         scope_incremental = false,

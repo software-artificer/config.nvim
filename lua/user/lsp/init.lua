@@ -23,12 +23,25 @@ local function load_lsp_modules(lspconfig, opts)
   end
 end
 
-local function bufmap(mode, keymap, action, desc)
-  vim.keymap.set(mode, keymap, action, { buffer = true, desc = desc })
-end
-
 local function configLsp()
   local lspconfig = require('lspconfig')
+  local has_legendary, legendary = pcall(require, 'legendary')
+  local bufmap = nil
+  if has_legendary then
+    bufmap = function(bufnr, mode, keymap, action, desc)
+      legendary.keymap({
+        keymap,
+        action,
+        mode = mode,
+        opts = { buffer = bufnr },
+        description = desc,
+      })
+    end
+  else
+    bufmap = function(bufnr, mode, keymap, action, desc)
+      vim.keymap.set(mode, keymap, action, { buffer = bufnr, desc = desc })
+    end
+  end
 
   -- Enable cmp-nvim-lsp capabilities for LSPs
   local cmp_nvim_lsp = require('cmp_nvim_lsp')
@@ -50,9 +63,27 @@ local function configLsp()
     -- Will be available in Neovim 0.10.x
     -- vim.lsp.inlay_hints(bufnr, true)
 
-    bufmap('n', 'K', vim.lsp.buf.hover, 'LSP: show symbol documentation')
-    bufmap('n', 'gd', vim.lsp.buf.definition, 'LSP: go to definition')
-    bufmap('n', 'gD', vim.lsp.buf.declaration, 'LSP: go to declaration')
+    bufmap(
+      bufnr,
+      { 'n', 'v' },
+      'K',
+      vim.lsp.buf.hover,
+      ' LSP: show symbol documentation'
+    )
+    bufmap(
+      bufnr,
+      { 'n', 'v' },
+      'gd',
+      vim.lsp.buf.definition,
+      '󰈮 LSP: go to definition'
+    )
+    bufmap(
+      bufnr,
+      { 'n', 'v' },
+      'gD',
+      vim.lsp.buf.declaration,
+      ' LSP: go to declaration'
+    )
 
     -- Lists all the implementations for the symbol under the cursor
     -- bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')

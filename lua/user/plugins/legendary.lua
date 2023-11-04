@@ -93,27 +93,27 @@ local function setupPlugin()
             vim.api.nvim_buf_delete(0, { force = true })
           end,
         },
-        description = '[Q]uit current buffer',
+        description = ' [Q]uit current buffer',
       },
       {
         '<leader>d',
         { n = vim.diagnostic.open_float },
-        description = 'Show [d]iagnostic popup',
+        description = '󰮦 Show [d]iagnostic popup',
       },
       {
         ']d',
         { n = vim.diagnostic.goto_next },
-        description = 'Go to next [d]iagnostic message',
+        description = ' Go to next [d]iagnostic message',
       },
       {
         '[d',
         { n = vim.diagnostic.goto_prev },
-        description = 'Go to previous [d]iagnostic message',
+        description = ' Go to previous [d]iagnostic message',
       },
       {
         '<leader>F',
         { n = vim.lsp.buf.format },
-        description = '[F]ormat document using LSP',
+        description = '󰉼 [F]ormat document using LSP',
       },
       {
         '<leader>hk',
@@ -122,7 +122,7 @@ local function setupPlugin()
             legendary.find({ filters = { filters.keymaps() } })
           end,
         },
-        description = 'Show [h]elp for [k]eymaps',
+        description = '󰌌 Show [h]elp for [k]eymaps',
       },
       {
         '<leader>hc',
@@ -131,7 +131,7 @@ local function setupPlugin()
             legendary.find({ filters = { filters.commands() } })
           end,
         },
-        description = 'Show [h]elp for [c]ommands',
+        description = ' Show [h]elp for [c]ommands',
       },
       {
         '<leader>hf',
@@ -140,7 +140,7 @@ local function setupPlugin()
             legendary.find({ filters = { filters.funcs() } })
           end,
         },
-        description = 'Show [h]elp for [f]unctions',
+        description = '󰡱 Show [h]elp for [f]unctions',
       },
       {
         '<leader>ha',
@@ -149,7 +149,7 @@ local function setupPlugin()
             legendary.find({ filters = { filters.autocmds() } })
           end,
         },
-        description = 'Show [h]elp for [a]utocommands',
+        description = ' Show [h]elp for [a]utocommands',
       },
       {
         '<leader>H',
@@ -158,7 +158,7 @@ local function setupPlugin()
             filters = { filters.keymaps(), filters.current_mode() },
           })
         end,
-        description = 'Show [h]elp for current mode',
+        description = ' Show [h]elp for current mode',
       },
     },
   })

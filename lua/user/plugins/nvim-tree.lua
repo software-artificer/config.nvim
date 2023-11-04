@@ -16,9 +16,9 @@ local function configure_nvim_tree()
       special_files = {},
     },
     on_attach = function(bufnr)
-      local function mkOption(description)
+      local function mkOption(icon, description)
         return {
-          desc = 'NvimTree: ' .. description,
+          desc = icon .. ' NvimTree: ' .. description,
           buffer = bufnr,
           noremap = true,
           silent = true,
@@ -29,58 +29,66 @@ local function configure_nvim_tree()
       set_keymap(
         '<ESC>',
         nvim_tree_api.tree.close_in_this_tab,
-        mkOption('Close Explorer')
+        mkOption('', 'Close Explorer')
       )
       set_keymap(
         'q',
         nvim_tree_api.tree.close_in_this_tab,
-        mkOption('Close Explorer')
+        mkOption('', 'Close Explorer')
       )
       set_keymap(',', function()
         nvim_tree_api.tree.collapse_all({ keep_buffers = true })
-      end, mkOption('Collapse all'))
-      set_keymap('.', nvim_tree_api.tree.expand_all, mkOption('Expand all'))
+      end, mkOption('󰪦', 'Collapse all'))
+      set_keymap(
+        '.',
+        nvim_tree_api.tree.expand_all,
+        mkOption('󰪴', 'Expand all')
+      )
       set_keymap(
         'n',
         nvim_tree_api.fs.create,
-        mkOption('[N]ew file or directory')
+        mkOption('', '[N]ew file or directory')
       )
-      set_keymap('d', nvim_tree_api.fs.remove, mkOption('[D]elete'))
-      set_keymap('r', nvim_tree_api.fs.rename_node, mkOption('[R]ename'))
-      set_keymap('x', nvim_tree_api.fs.cut, mkOption('Cut'))
-      set_keymap('p', nvim_tree_api.fs.paste, mkOption('[P]aste'))
-      set_keymap('c', nvim_tree_api.fs.copy.node, mkOption('[C]opy'))
+      set_keymap('d', nvim_tree_api.fs.remove, mkOption('󰧧', '[D]elete'))
+      set_keymap(
+        'r',
+        nvim_tree_api.fs.rename_node,
+        mkOption('󰑕', '[R]ename')
+      )
+      set_keymap('x', nvim_tree_api.fs.cut, mkOption('󰆐', 'Cut'))
+      set_keymap('p', nvim_tree_api.fs.paste, mkOption('', '[P]aste'))
+      set_keymap('c', nvim_tree_api.fs.copy.node, mkOption('', '[C]opy'))
       set_keymap(
         'ya',
         nvim_tree_api.fs.copy.absolute_path,
-        mkOption('[Y]ank [a]bsolute path')
+        mkOption('󰆏', '[Y]ank [a]bsolute path')
       )
       set_keymap(
         'yr',
         nvim_tree_api.fs.copy.relative_path,
-        mkOption('[Y]ank [r]elative path')
+        mkOption('󰆏', '[Y]ank [r]elative path')
       )
       set_keymap(
         'yy',
         nvim_tree_api.fs.copy.filename,
-        mkOption('[Y]ank filename')
+        mkOption('󰆏', '[Y]ank filename')
       )
       set_keymap(
         'gg',
         nvim_tree_api.node.navigate.parent,
-        mkOption('[G]o to parent')
+        mkOption('', '[G]o to parent')
       )
       set_keymap(
         'gk',
         nvim_tree_api.node.navigate.sibling.prev,
-        mkOption('Previous sibling')
+        mkOption('󰒮', 'Previous sibling')
       )
       set_keymap(
         'gj',
         nvim_tree_api.node.navigate.sibling.next,
-        mkOption('Next sibling')
+        mkOption('󰒭', 'Next sibling')
       )
-      set_keymap('<CR>', nvim_tree_api.node.open.edit, mkOption('Open'))
+      set_keymap('<CR>', nvim_tree_api.node.open.edit, mkOption('', 'Open'))
     end,
     actions = {
       open_file = {
@@ -92,16 +100,6 @@ local function configure_nvim_tree()
     },
     sync_root_with_cwd = true,
   })
-
-  -- Allow opening up the file tree browser anywhere
-  set_keymap('<leader>e', function(a, b, c)
-    nvim_tree_api.tree.toggle({ find_file = true })
-  end, {
-    desc = 'nvim-tree: Toggle [E]xplorer',
-    noremap = true,
-    silent = true,
-    nowait = true,
-  })
 end
 
 return {
@@ -109,4 +107,14 @@ return {
   lazy = false,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = configure_nvim_tree,
+  keys = {
+    {
+      '<leader>e',
+      function()
+        require('nvim-tree.api').tree.toggle({ find_file = true })
+      end,
+      mode = { 'n', 'v' },
+      desc = ' NvimTree: Toggle file [e]xplorer',
+    },
+  },
 }
