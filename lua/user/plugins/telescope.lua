@@ -43,11 +43,11 @@ local function initTelescope()
   })
 
   -- show line numbers in the telescope previewer
-  vim.api.nvim_create_autocmd("User", {
+  vim.api.nvim_create_autocmd('User', {
     pattern = 'TelescopePreviewerLoaded',
     callback = function(args, a, b)
       vim.wo.number = true
-    end
+    end,
   })
 end
 

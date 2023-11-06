@@ -73,13 +73,6 @@ local function configLsp()
     bufmap(
       bufnr,
       { 'n', 'v' },
-      'gd',
-      vim.lsp.buf.definition,
-      '󰈮 LSP: go to definition'
-    )
-    bufmap(
-      bufnr,
-      { 'n', 'v' },
       'gD',
       vim.lsp.buf.declaration,
       ' LSP: go to declaration'
