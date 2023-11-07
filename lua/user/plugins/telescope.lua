@@ -45,8 +45,25 @@ local function initTelescope()
   -- show line numbers in the telescope previewer
   vim.api.nvim_create_autocmd('User', {
     pattern = 'TelescopePreviewerLoaded',
-    callback = function(args, a, b)
+    callback = function()
       vim.wo.number = true
+    end,
+  })
+
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function()
+      vim.lsp.buf.references = function()
+        pickers.lsp_references({ jump_type = 'never' })
+      end
+      vim.lsp.buf.implementation = function()
+        pickers.lsp_implementations({ jump_type = 'never' })
+      end
+      vim.lsp.buf.document_symbol = function()
+        pickers.lsp_document_symbols()
+      end
+      vim.lsp.buf.workspace_symbol = function()
+        pickers.lsp_workspace_symbols()
+      end
     end,
   })
 end
@@ -87,22 +104,6 @@ local function show_buffer_diagnostic()
   require('telescope.builtin').diagnostics({ bufnr = 0 })
 end
 
-local function lsp_show_workspace_symbols()
-  require('telescope.builtin').lsp_workspace_symbols()
-end
-
-local function lsp_show_document_symbols()
-  require('telescope.builtin').lsp_document_symbols()
-end
-
-local function lsp_show_references()
-  require('telescope.builtin').lsp_references({ jump_type = 'never' })
-end
-
-local function lsp_show_implementations()
-  require('telescope.builtin').lsp_implementations({ jump_type = 'never' })
-end
-
 return {
   'nvim-telescope/telescope.nvim',
   version = '^0.1',
@@ -113,30 +114,6 @@ return {
     'nvim-tree/nvim-web-devicons',
   },
   keys = {
-    {
-      '<leader>fr',
-      lsp_show_references,
-      mode = { 'n', 'v' },
-      desc = ' Telescope: LSP - Show [r]eferences',
-    },
-    {
-      '<leader>fi',
-      lsp_show_implementations,
-      mode = { 'n', 'v' },
-      desc = ' Telescope: LSP - Show [i]mplementations',
-    },
-    {
-      '<leader>fs',
-      lsp_show_document_symbols,
-      mode = 'v',
-      desc = ' Telescope: LSP - Show document [s]ymbols',
-    },
-    {
-      '<leader>fS',
-      lsp_show_workspace_symbols,
-      mode = { 'n', 'v' },
-      desc = ' Telescope: LSP - Show workspace [s]ymbols',
-    },
     {
       '<leader>ff',
       find_files,

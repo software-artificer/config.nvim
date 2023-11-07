@@ -38,19 +38,20 @@ local function initPlugin()
   glance.setup({
     mappings = mappings,
   })
+
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(ev)
+      vim.lsp.buf.definition = function()
+        glance.open('definitions', {})
+      end
+      vim.lsp.buf.type_definition = function()
+        glance.open('type_definitions', {})
+      end
+    end,
+  })
 end
 
 return {
   'DNLHC/glance.nvim',
   config = initPlugin,
-  keys = {
-    {
-      'gd',
-      function()
-        require('glance').open('definitions', {})
-      end,
-      mode = { 'n', 'v' },
-      desc = '󰈮 Glance: LSP - Go to definitions',
-    },
-  },
 }

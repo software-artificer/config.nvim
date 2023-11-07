@@ -73,19 +73,52 @@ local function configLsp()
     bufmap(
       bufnr,
       { 'n', 'v' },
+      'gd',
+      vim.lsp.buf.definition,
+      '󰈮 LSP: go to the definition'
+    )
+    bufmap(
+      bufnr,
+      { 'n', 'v' },
       'gD',
       vim.lsp.buf.declaration,
-      ' LSP: go to declaration'
+      ' LSP: go to the declaration'
     )
-
-    -- Lists all the implementations for the symbol under the cursor
-    -- bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
-
-    -- Jumps to the definition of the type symbol
-    -- bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
-
-    -- Lists all the references
-    -- bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
+    bufmap(
+      bufnr,
+      { 'n', 'v' },
+      'gt',
+      vim.lsp.buf.type_definition,
+      ' LSP: go to the type definition'
+    )
+    bufmap(
+      bufnr,
+      { 'n', 'v' },
+      'gr',
+      vim.lsp.buf.references,
+      ' LSP - Show [r]eferences'
+    )
+    bufmap(
+      bufnr,
+      { 'n', 'v' },
+      'gi',
+      vim.lsp.buf.implementation,
+      ' LSP - Show [i]mplementations'
+    )
+    bufmap(
+      bufnr,
+      { 'n', 'v' },
+      'gs',
+      vim.lsp.buf.document_symbol,
+      ' Telescope: LSP - Show document [s]ymbols'
+    )
+    bufmap(
+      bufnr,
+      { 'n', 'v' },
+      'gS',
+      vim.lsp.buf.workspace_symbol,
+      ' Telescope: LSP - Show workspace [s]ymbols'
+    )
 
     -- Displays a function's signature information
     -- bufmap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>')

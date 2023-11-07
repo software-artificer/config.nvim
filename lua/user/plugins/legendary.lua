@@ -173,6 +173,6 @@ return {
   -- Needed because it should handle _all_ keymaps
   priority = 10000,
   dependencies = {
-    'telescope/telescope.nvim',
+    'nvim-telescope/telescope.nvim',
   },
 }
