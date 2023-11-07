@@ -11,13 +11,15 @@ local function setupTheme()
       highlights.LineNr = { fg = colors.dark3 }
 
       -- color scheme for HiPhish/rainbow-delimiters.nvim
-      highlights.RainbowDelimiterRed = { fg = '#b2555b' }
-      highlights.RainbowDelimiterYellow = { fg = '#e0af68' }
-      highlights.RainbowDelimiterBlue = { fg = '#0db9d7' }
-      highlights.RainbowDelimiterOrange = { fg = '#ff9e64' }
-      highlights.RainbowDelimiterGreen = { fg = '#9ece6a' }
-      highlights.RainbowDelimiterViolet = { fg = '#bb9af7' }
-      highlights.RainbowDelimiterCyan = { fg = '#2ac3de' }
+      highlights.RainbowDelimiterRed = { fg = colors.red }
+      highlights.RainbowDelimiterYellow = { fg = colors.yellow }
+      highlights.RainbowDelimiterBlue = { fg = colors.blue2 }
+      highlights.RainbowDelimiterOrange = { fg = colors.orange }
+      highlights.RainbowDelimiterGreen = { fg = colors.green }
+      highlights.RainbowDelimiterViolet = { fg = colors.magenta }
+      highlights.RainbowDelimiterCyan = { fg = colors.cyan }
+
+      -- LightBulb color style
       highlights.LightBulbSign = { fg = colors.yellow }
 
       -- color scheme for nvim-cmp
