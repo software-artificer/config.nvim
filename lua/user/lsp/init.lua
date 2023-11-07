@@ -96,28 +96,35 @@ local function configLsp()
       { 'n', 'v' },
       'gr',
       vim.lsp.buf.references,
-      ' LSP - Show [r]eferences'
+      ' LSP: Show [r]eferences'
     )
     bufmap(
       bufnr,
       { 'n', 'v' },
       'gi',
       vim.lsp.buf.implementation,
-      ' LSP - Show [i]mplementations'
+      ' LSP: Show [i]mplementations'
     )
     bufmap(
       bufnr,
       { 'n', 'v' },
       'gs',
       vim.lsp.buf.document_symbol,
-      ' Telescope: LSP - Show document [s]ymbols'
+      ' LSP: Show document [s]ymbols'
     )
     bufmap(
       bufnr,
       { 'n', 'v' },
       'gS',
       vim.lsp.buf.workspace_symbol,
-      ' Telescope: LSP - Show workspace [s]ymbols'
+      ' LSP: Show workspace [s]ymbols'
+    )
+    bufmap(
+      bufnr,
+      { 'n', 'v' },
+      'gA',
+      vim.lsp.buf.code_action,
+      ' LSP: Show code [a]ctions'
     )
 
     -- Displays a function's signature information
@@ -125,19 +132,6 @@ local function configLsp()
 
     -- Renames all references to the symbol under the cursor
     -- bufmap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
-
-    -- Selects a code action available at the current cursor position
-    -- bufmap('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>')
-    -- bufmap('x', '<F4>', '<cmd>lua vim.lsp.buf.range_code_action()<cr>')
-
-    -- Show diagnostics in a floating window
-    -- bufmap('n', 'gl', '<cmd>lua vim.diagnostic.open_float()<cr>')
-
-    -- Move to the previous diagnostic
-    -- bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
-
-    -- Move to the next diagnostic
-    -- bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
   end
 
   -- Load all LSP drop-in configurations

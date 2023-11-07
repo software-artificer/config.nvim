@@ -9,19 +9,15 @@ local function setupActions()
       layout_strategy = 'vertical',
     },
   })
+
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function()
+      vim.lsp.buf.code_action = plugin.code_actions
+    end,
+  })
 end
 
 return {
   'aznhe21/actions-preview.nvim',
   config = setupActions,
-  keys = {
-    {
-      '<leader>fa',
-      function()
-        require('actions-preview').code_actions()
-      end,
-      mode = { 'v', 'n' },
-      desc = ' Telescope: LSP - Show code [a]ctions',
-    },
-  },
 }
