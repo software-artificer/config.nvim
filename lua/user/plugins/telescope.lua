@@ -77,7 +77,11 @@ local function show_open_buffers()
 end
 
 local function find_files_including_ignored()
-  require('telescope.builtin').find_files({ hidden = true, no_ignore = true })
+  require('telescope.builtin').find_files({
+    hidden = true,
+    no_ignore = true,
+    no_ignore_parent = true,
+  })
 end
 
 local function live_grep()
