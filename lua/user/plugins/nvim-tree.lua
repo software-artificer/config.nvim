@@ -1,11 +1,8 @@
-local function configure_nvim_tree()
-  local nvim_tree = require('nvim-tree')
-  local nvim_tree_api = require('nvim-tree.api')
-  local function set_keymap(key, action, opts)
-    vim.keymap.set('n', key, action, opts)
-  end
-
-  nvim_tree.setup({
+return {
+  'nvim-tree/nvim-tree.lua',
+  lazy = false,
+  dependencies = { 'nvim-tree/nvim-web-devicons' },
+  opts = {
     disable_netrw = true,
     hijack_netrw = true,
     hijack_cursor = true,
@@ -16,6 +13,12 @@ local function configure_nvim_tree()
       special_files = {},
     },
     on_attach = function(bufnr)
+      local nvim_tree_api = require('nvim-tree.api')
+
+      local function set_keymap(key, action, opts)
+        vim.keymap.set('n', key, action, opts)
+      end
+
       local function mkOption(icon, description)
         return {
           desc = icon .. ' NvimTree: ' .. description,
@@ -99,14 +102,7 @@ local function configure_nvim_tree()
       },
     },
     sync_root_with_cwd = true,
-  })
-end
-
-return {
-  'nvim-tree/nvim-tree.lua',
-  lazy = false,
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
-  config = configure_nvim_tree,
+  },
   keys = {
     {
       '<leader>e',

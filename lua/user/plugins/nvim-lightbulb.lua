@@ -1,15 +1,11 @@
-local function setupLightBulb()
-  require('nvim-lightbulb').setup({
+return {
+  'kosayoda/nvim-lightbulb',
+  version = '^1',
+  opts = {
     sign = {
       enabled = true,
       text = '',
     },
     autocmd = { enabled = true },
-  })
-end
-
-return {
-  'kosayoda/nvim-lightbulb',
-  version = '^1',
-  config = setupLightBulb,
+  },
 }

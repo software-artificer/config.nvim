@@ -1,10 +1,3 @@
-local function setupPlugin()
-  require('gitlinker').setup({
-    mappings = nil,
-    action_callback = print,
-  })
-end
-
 local function gitLineLink()
   require('gitlinker').get_buf_range_url('n')
 end
@@ -19,6 +12,10 @@ return {
     'nvim-lua/plenary.nvim',
   },
   config = setupPlugin,
+  opts = {
+    mappings = nil,
+    action_callback = print,
+  },
   keys = {
     {
       '<leader>gl',
