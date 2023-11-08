@@ -13,7 +13,10 @@ local function initTelescope()
         tresitter = true,
       },
       file_ignore_patterns = {
-        '.git',
+        '^%.git$',
+        '/%.git$',
+        '^%.git/',
+        '/%.git/',
       },
       mappings = {
         i = {
