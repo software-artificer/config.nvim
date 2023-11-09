@@ -7,8 +7,8 @@ vim.o.cursorline = true
 local function setupTheme()
   require('tokyonight').setup({
     on_highlights = function(highlights, colors)
-      highlights.CursorLineNr = { fg = colors.dark5, bold = true }
-      highlights.LineNr = { fg = colors.dark3 }
+      highlights.CursorLineNr = { fg = colors.fg_dark, bold = true, bg = colors.bg_highlight }
+      highlights.LineNr = { fg = colors.dark5 }
 
       -- color scheme for HiPhish/rainbow-delimiters.nvim
       highlights.RainbowDelimiterRed = { fg = colors.red }
