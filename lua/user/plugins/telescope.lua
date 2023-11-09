@@ -5,7 +5,7 @@ local function initTelescope()
   local state = require('telescope.actions.state')
   telescope.setup({
     defaults = {
-      prompt_prefix = '  ',
+      prompt_prefix = '  ',
       selection_caret = ' ',
       multi_icon = ' ',
       default_mappings = {},

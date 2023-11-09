@@ -16,7 +16,7 @@ return {
       local nvim_tree_api = require('nvim-tree.api')
 
       local function set_keymap(key, action, opts)
-        vim.keymap.set('n', key, action, opts)
+        keymap_set('n', key, action, opts)
       end
 
       local function mkOption(icon, description)

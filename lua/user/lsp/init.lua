@@ -25,22 +25,8 @@ end
 
 local function configLsp()
   local lspconfig = require('lspconfig')
-  local has_legendary, legendary = pcall(require, 'legendary')
-  local bufmap = nil
-  if has_legendary then
-    bufmap = function(bufnr, mode, keymap, action, desc)
-      legendary.keymap({
-        keymap,
-        action,
-        mode = mode,
-        opts = { buffer = bufnr },
-        description = desc,
-      })
-    end
-  else
-    bufmap = function(bufnr, mode, keymap, action, desc)
-      vim.keymap.set(mode, keymap, action, { buffer = bufnr, desc = desc })
-    end
+  local bufmap = function(bufnr, mode, keymap, action, desc)
+    keymap_set(mode, keymap, action, { buffer = bufnr, desc = desc })
   end
 
   -- Enable cmp-nvim-lsp capabilities for LSPs

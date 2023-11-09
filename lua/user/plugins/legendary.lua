@@ -1,3 +1,29 @@
+function keymap_set(modes, keymaps, action, opts)
+  local legendary = package.loaded.legendary
+
+  local description = opts.desc
+  if opts.desc ~= nil then
+    opts.desc = nil
+  end
+
+  if type(keymaps) == 'string' then
+    keymaps = { keymaps }
+  end
+
+  local config = {}
+  for _, keymap in next, keymaps do
+    table.insert(config, {
+      keymap,
+      action,
+      mode = modes,
+      opts = opts,
+      description = description,
+    })
+  end
+
+  legendary.keymaps(config)
+end
+
 local function telescopeSelector(items, opts, on_choice)
   local themes = require('telescope.themes')
   local actions = require('telescope.actions')
@@ -84,7 +110,7 @@ local function setupPlugin()
   end
 
   legendary.setup({
-    extensions = { lazy_nvim = { auto_register = true }, nvim_tree = true },
+    extensions = { lazy_nvim = { auto_register = true } },
     keymaps = {
       {
         '<leader>q',

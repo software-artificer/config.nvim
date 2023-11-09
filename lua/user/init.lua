@@ -9,6 +9,16 @@ vim.diagnostic.config({
   severity_sort = true,
 })
 
+function keymap_set(modes, keymaps, action, opts)
+  if type(keymaps) == 'string' then
+    keymaps = { keymaps }
+  end
+
+  for _, keymap in next, keymaps do
+    vim.keymap.set(modes, keymap, action, opts)
+  end
+end
+
 -- Install lazy.nvim plugin manager
 local lazy_path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazy_path) then
