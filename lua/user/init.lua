@@ -4,6 +4,11 @@ vim.g.maplocalleader = ' '
 -- Disable mouse integration
 vim.opt.mouse = nil
 
+-- Configure diagnostic options
+vim.diagnostic.config({
+  severity_sort = true,
+})
+
 -- Install lazy.nvim plugin manager
 local lazy_path = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazy_path) then
