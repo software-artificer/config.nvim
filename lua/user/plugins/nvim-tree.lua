@@ -30,12 +30,7 @@ return {
       end
 
       set_keymap(
-        '<ESC>',
-        nvim_tree_api.tree.close_in_this_tab,
-        mkOption('', 'Close Explorer')
-      )
-      set_keymap(
-        'q',
+        { '<ESC>', 'q' },
         nvim_tree_api.tree.close_in_this_tab,
         mkOption('', 'Close Explorer')
       )
