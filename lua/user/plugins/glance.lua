@@ -19,7 +19,6 @@ local function initPlugin()
     },
   }
 
-  print(vim.inspect(config.options))
   -- clear all default mappings
   config.setup({}, actions)
   for key, _ in next, config.options.mappings.list do
