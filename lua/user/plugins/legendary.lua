@@ -110,7 +110,7 @@ local function setupPlugin()
   end
 
   legendary.setup({
-    extensions = { lazy_nvim = { auto_register = true } },
+    extensions = { lazy_nvim = { auto_register = true }, diffview = true },
     keymaps = {
       {
         '<leader>q',
