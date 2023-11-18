@@ -15,17 +15,12 @@ return {
         gitsigns.toggle_current_line_blame,
         { buffer = bufnr, desc = ' GitSigns: Enable current line blame' }
       )
-      keymap_set(
-        'n',
-        '<leader>gB',
-        function()
-          gitsigns.blame_line({ full = true })
-        end,
-        {
-          buffer = bufnr,
-          desc = ' GitSigns: Show blame for line under the cursor',
-        }
-      )
+      keymap_set('n', '<leader>gB', function()
+        gitsigns.blame_line({ full = true })
+      end, {
+        buffer = bufnr,
+        desc = ' GitSigns: Show blame for line under the cursor',
+      })
       keymap_set(
         'n',
         '<leader>gp',
@@ -45,52 +40,40 @@ return {
         { buffer = bufnr, desc = '󱀸 GitSigns: Toggle deleted lines' }
       )
       keymap_set(
-        { 'n', 'v' },
-        '<leader>gD',
-        gitsigns.diffthis,
-        { buffer = bufnr, desc = ' GitSigns: Show diff for current buffer' }
+        'n',
+        '<leader>gs',
+        gitsigns.stage_hunk,
+        { buffer = bufnr, desc = ' Stage hunk' }
       )
+      keymap_set('v', '<leader>gs', function()
+        gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+      end, { buffer = bufnr, desc = '󰐒 Stage selection' })
       keymap_set(
         'n',
-	'<leader>gs',
-	gitsigns.stage_hunk,
-	{ buffer = bufnr, desc = ' Stage hunk' }
+        '<leader>gr',
+        gitsigns.reset_hunk,
+        { buffer = bufnr, desc = ' Reset hunk' }
       )
+      keymap_set('v', '<leader>gr', function()
+        gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
+      end, { buffer = bufnr, desc = '󰐓 Reset selection' })
       keymap_set(
-        'v',
-	'<leader>gs',
-	function() gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end,
-	{ buffer = bufnr, desc = '󰐒 Stage selection' }
-      )
-      keymap_set(
-        'n',
-	'<leader>gr',
-	gitsigns.reset_hunk,
-	{ buffer = bufnr, desc = ' Reset hunk' }
-      )
-      keymap_set(
-        'v',
-	'<leader>gr',
-	function() gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') }) end,
-	{ buffer = bufnr, desc = '󰐓 Reset selection' }
+        { 'n', 'v' },
+        '<leader>gS',
+        gitsigns.stage_buffer,
+        { buffer = bufnr, desc = '󱪝 Stage all hunks in the buffer' }
       )
       keymap_set(
         { 'n', 'v' },
-	'<leader>gS',
-	gitsigns.stage_buffer,
-	{ buffer = bufnr, desc = '󱪝 Stage all hunks in the buffer' }
+        '<leader>gR',
+        gitsigns.reset_buffer,
+        { buffer = bufnr, desc = '󱪟 Reset all hunks in the buffer' }
       )
       keymap_set(
         { 'n', 'v' },
-	'<leader>gR',
-	gitsigns.reset_buffer,
-	{ buffer = bufnr, desc = '󱪟 Reset all hunks in the buffer' }
-      )
-      keymap_set(
-        { 'n', 'v' },
-	'<leader>gu',
-	gitsigns.undo_stage_hunk,
-	{ buffer = bufnr, desc = '󰤘 Undo staged hunk' }
+        '<leader>gu',
+        gitsigns.undo_stage_hunk,
+        { buffer = bufnr, desc = '󰤘 Undo staged hunk' }
       )
     end,
   },
