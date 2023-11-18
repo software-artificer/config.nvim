@@ -43,37 +43,37 @@ return {
         'n',
         '<leader>gs',
         gitsigns.stage_hunk,
-        { buffer = bufnr, desc = ' Stage hunk' }
+        { buffer = bufnr, desc = ' GitSigns: Stage hunk' }
       )
       keymap_set('v', '<leader>gs', function()
         gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-      end, { buffer = bufnr, desc = '󰐒 Stage selection' })
+      end, { buffer = bufnr, desc = '󰐒 GitSigns: Stage selection' })
       keymap_set(
         'n',
         '<leader>gr',
         gitsigns.reset_hunk,
-        { buffer = bufnr, desc = ' Reset hunk' }
+        { buffer = bufnr, desc = ' GitSigns: Reset hunk' }
       )
       keymap_set('v', '<leader>gr', function()
         gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-      end, { buffer = bufnr, desc = '󰐓 Reset selection' })
+      end, { buffer = bufnr, desc = '󰐓 GitSigns: Reset selection' })
       keymap_set(
         { 'n', 'v' },
         '<leader>gS',
         gitsigns.stage_buffer,
-        { buffer = bufnr, desc = '󱪝 Stage all hunks in the buffer' }
+        { buffer = bufnr, desc = '󱪝 GitSigns: Stage all hunks in the buffer' }
       )
       keymap_set(
         { 'n', 'v' },
         '<leader>gR',
         gitsigns.reset_buffer,
-        { buffer = bufnr, desc = '󱪟 Reset all hunks in the buffer' }
+        { buffer = bufnr, desc = '󱪟 GitSigns: Reset all hunks in the buffer' }
       )
       keymap_set(
         { 'n', 'v' },
         '<leader>gu',
         gitsigns.undo_stage_hunk,
-        { buffer = bufnr, desc = '󰤘 Undo staged hunk' }
+        { buffer = bufnr, desc = '󰤘 GitSigns: Undo staged hunk' }
       )
     end,
   },
