@@ -13,13 +13,13 @@ return {
         { 'n', 'v' },
         '<leader>gb',
         gitsigns.toggle_current_line_blame,
-        { buffer = bufnr, desc = ' GitSigns: Enable current line blame' }
+        { buffer = bufnr, desc = '󰋇 GitSigns: Enable current line blame' }
       )
       keymap_set('n', '<leader>gB', function()
         gitsigns.blame_line({ full = true })
       end, {
         buffer = bufnr,
-        desc = ' GitSigns: Show blame for line under the cursor',
+        desc = '󰋇 GitSigns: Show blame for line under the cursor',
       })
       keymap_set(
         'n',
