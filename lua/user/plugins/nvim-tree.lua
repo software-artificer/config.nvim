@@ -34,11 +34,11 @@ return {
         nvim_tree_api.tree.close_in_this_tab,
         mkOption('', 'Close Explorer')
       )
-      set_keymap(',', function()
+      set_keymap('<', function()
         nvim_tree_api.tree.collapse_all({ keep_buffers = true })
       end, mkOption('󰪦', 'Collapse all'))
       set_keymap(
-        '.',
+        '>',
         nvim_tree_api.tree.expand_all,
         mkOption('󰪴', 'Expand all')
       )
