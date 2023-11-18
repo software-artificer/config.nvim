@@ -57,18 +57,14 @@ return {
       keymap_set('v', '<leader>gr', function()
         gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
       end, { buffer = bufnr, desc = '󰐓 GitSigns: Reset selection' })
-      keymap_set(
-        { 'n', 'v' },
-        '<leader>gS',
-        gitsigns.stage_buffer,
-        { buffer = bufnr, desc = '󱪝 GitSigns: Stage all hunks in the buffer' }
-      )
-      keymap_set(
-        { 'n', 'v' },
-        '<leader>gR',
-        gitsigns.reset_buffer,
-        { buffer = bufnr, desc = '󱪟 GitSigns: Reset all hunks in the buffer' }
-      )
+      keymap_set({ 'n', 'v' }, '<leader>gS', gitsigns.stage_buffer, {
+        buffer = bufnr,
+        desc = '󱪝 GitSigns: Stage all hunks in the buffer',
+      })
+      keymap_set({ 'n', 'v' }, '<leader>gR', gitsigns.reset_buffer, {
+        buffer = bufnr,
+        desc = '󱪟 GitSigns: Reset all hunks in the buffer',
+      })
       keymap_set(
         { 'n', 'v' },
         '<leader>gu',
