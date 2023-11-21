@@ -19,82 +19,232 @@ local function action_select_entry()
   action().select_entry()
 end
 
-local function action_select_next_entry()
-  action().select_next_entry()
+local function select_next_entry_keymap()
+  return {
+    { 'n', 'v' },
+    '<c-n>',
+    function()
+      action().select_next_entry()
+    end,
+    { desc = '󰒭 Open the diff for the [n]ext entry' },
+  }
 end
 
-local function action_select_prev_entry()
-  action().select_prev_entry()
+local function select_prev_entry_keymap()
+  return {
+    { 'n', 'v' },
+    '<c-p>',
+    function()
+      action().select_prev_entry()
+    end,
+    { desc = '󰒮 Open the diff for the [p]revious entry' },
+  }
 end
 
-local function action_cycle_layout()
-  action().cycle_layout()
+local function cycle_layouts_keymap()
+  return {
+    { 'n', 'v' },
+    '<leader>gD',
+    function()
+      action().cycle_layout()
+    end,
+    { desc = ' Cycle through available layouts' },
+  }
 end
 
-local function action_next_conflict()
-  action().next_conflict()
+local function goto_next_conflict_keymap()
+  return {
+    { 'n', 'v' },
+    ']x',
+    function()
+      action().next_conflict()
+    end,
+    { desc = '󰮱 Merge - jump to the next conflict' },
+  }
 end
 
-local function action_prev_conflict()
-  action().prev_conflict()
+local function goto_prev_conflict_keymap()
+  return {
+    { 'n', 'v' },
+    '[x',
+    function()
+      action().prev_conflict()
+    end,
+    { desc = '󰮳 Merge - jump to the previous conflict' },
+  }
 end
 
 local function noop() end
 
-local function action_conflict_file_pick_ours()
-  action().conflict_choose_all('ours')
+local function conflict_pick_ours_for_file_keymap(desc)
+  return {
+    { 'n', 'v' },
+    '<leader>cL',
+    function()
+      action().conflict_choose_all('ours')
+    end,
+    { desc = desc },
+  }
 end
 
-local function action_conflict_file_pick_theirs()
-  action().conflict_choose_all('theirs')
+local function conflict_pick_theirs_for_file_keymap(desc)
+  return {
+    { 'n', 'v' },
+    '<leader>cR',
+    function()
+      action().conflict_choose_all('theirs')
+    end,
+    {
+      desc = desc,
+    },
+  }
 end
 
-local function action_conflict_file_pick_base()
-  action().conflict_choose_all('base')
+local function conflict_pick_base_for_file_keymap(desc)
+  return {
+    { 'n', 'v' },
+    '<leader>cB',
+    function()
+      action().conflict_choose_all('base')
+    end,
+    {
+      desc = desc,
+    },
+  }
 end
 
-local function action_conflict_file_pick_all()
-  action().conflict_choose_all('all')
+local function conflict_pick_both_for_file_keymap(desc)
+  return {
+    { 'n', 'v' },
+    '<leader>cA',
+    function()
+      action().conflict_choose_all('all')
+    end,
+    {
+      desc = desc,
+    },
+  }
 end
 
-local function action_conflict_file_pick_none()
-  action().conflict_choose_all('none')
+local function conflict_pick_none_for_file_keymap(desc)
+  return {
+    { 'n', 'v' },
+    '<leader>cN',
+    function()
+      action().conflict_choose_all('none')
+    end,
+    {
+      desc = desc,
+    },
+  }
 end
 
-local function action_close_diffview()
-  require('diffview').close()
+local function close_diffview_keymap()
+  return {
+    { 'n', 'v' },
+    '<leader>q',
+    function()
+      require('diffview').close()
+    end,
+    { desc = '󰩈 [Q]uit the diff viewer tab' },
+  }
 end
 
-local function action_next_entry()
-  action().next_entry()
+local function goto_next_entry_keymap()
+  return {
+    'n',
+    'j',
+    function()
+      action().next_entry()
+    end,
+    { desc = ' Move the cursor to the next entry' },
+  }
 end
 
-local function action_prev_entry()
-  action().prev_entry()
+local function goto_prev_entry_keymap()
+  return {
+    'n',
+    'k',
+    function()
+      action().prev_entry()
+    end,
+    { desc = '󰁝 Move the cursor to the previous entry' },
+  }
 end
 
-local function action_focus_files()
-  action().focus_files()
+local function focus_file_panel_keymap()
+  return {
+    { 'n', 'v' },
+    '<leader>e',
+    function()
+      action().focus_files()
+    end,
+    { desc = '󱏒 Focus the file [e]xplorer panel' },
+  }
 end
 
-local function action_scroll_up()
-  action().scroll_view(-0.25)()
+local function scroll_view_up_keymap()
+  return {
+    'n',
+    '<c-u>',
+    function()
+      action().scroll_view(-0.25)()
+    end,
+    { desc = '󰶼 Scroll the view [u]p' },
+  }
 end
 
-local function action_scroll_down()
-  action().scroll_view(0.25)()
+local function scroll_view_down_keymap()
+  return {
+    'n',
+    '<c-d>',
+    function()
+      action().scroll_view(0.25)()
+    end,
+    { desc = '󰶹 Scroll the view [d]own' },
+  }
 end
 
-local function action_open_all_folds()
-  action().open_all_folds()
+local function expand_all_folds_keymap()
+  return {
+    'n',
+    '>',
+    function()
+      action().open_all_folds()
+    end,
+    { desc = '󰪴 Expand all folds' },
+  }
 end
 
-local function action_close_all_folds()
-  action().close_all_folds()
+local function collapse_all_folds_keymap()
+  return {
+    'n',
+    '<',
+    function()
+      action().close_all_folds()
+    end,
+    { desc = '󰪦 Collapse all folds' },
+  }
 end
 
 local function action_open_commit_log()
   action().open_commit_log()
+end
+
+local function disable_alternate_modes(keymaps)
+  table.insert(keymaps, { 'n', 'v', noop, { desc = 'diffview_ignore' } })
+  table.insert(keymaps, { 'n', 'V', noop, { desc = 'diffview_ignore' } })
+  table.insert(keymaps, { 'n', '<c-v>', noop, { desc = 'diffview_ignore' } })
+  table.insert(keymaps, { 'n', '<c-o>', noop, { desc = 'diffview_ignore' } })
+  table.insert(keymaps, { 'n', '<c-i>', noop, { desc = 'diffview_ignore' } })
+  table.insert(keymaps, { 'n', 'gh', noop, { desc = 'diffview_ignore' } })
+  table.insert(keymaps, { 'n', 'g<c-h>', noop, { desc = 'diffview_ignore' } })
+  table.insert(keymaps, { 'n', 'a', noop, { desc = 'diffview_ignore' } })
+  table.insert(keymaps, { 'n', 'A', noop, { desc = 'diffview_ignore' } })
+  table.insert(keymaps, { 'n', 'i', noop, { desc = 'diffview_ignore' } })
+  table.insert(keymaps, { 'n', 'I', noop, { desc = 'diffview_ignore' } })
+
+  return keymaps
 end
 
 return {
@@ -106,42 +256,12 @@ return {
     keymaps = {
       disable_defaults = true,
       view = {
-        {
-          { 'n', 'v' },
-          '<leader>e',
-          action_focus_files,
-          { desc = '󱏒 Focus the file [e]xplorer panel' },
-        },
-        {
-          { 'n', 'v' },
-          '<c-n>',
-          action_select_next_entry,
-          { desc = '󰒭 Open the diff for the [n]ext entry' },
-        },
-        {
-          { 'n', 'v' },
-          '<c-p>',
-          action_select_prev_entry,
-          { desc = '󰒮 Open the diff for the [p]revious entry' },
-        },
-        {
-          { 'n', 'v' },
-          '<leader>gD',
-          action_cycle_layout,
-          { desc = ' Cycle through available layouts' },
-        },
-        {
-          { 'n', 'v' },
-          ']x',
-          action_next_conflict,
-          { desc = '󰮱 Merge - jump to the next conflict' },
-        },
-        {
-          { 'n', 'v' },
-          '[x',
-          action_prev_conflict,
-          { desc = '󰮳 Merge - jump to the previous conflict' },
-        },
+        focus_file_panel_keymap(),
+        select_prev_entry_keymap(),
+        select_next_entry_keymap(),
+        cycle_layouts_keymap(),
+        goto_next_conflict_keymap(),
+        goto_prev_conflict_keymap(),
         -- merge conflict resolution
         {
           { 'n', 'v' },
@@ -187,54 +307,24 @@ return {
             desc = '󰕢 Conflict - Choose [n]one, delete the conflict region',
           },
         },
-        {
-          { 'n', 'v' },
-          '<leader>cL',
-          action_conflict_file_pick_ours,
-          {
-            desc = '󰕛 Conflict - Choose the [l]eft/[l]ocal/our version for the entire buffer',
-          },
-        },
-        {
-          { 'n', 'v' },
-          '<leader>cR',
-          action_conflict_file_pick_theirs,
-          {
-            desc = '󰕜 Conflict - Choose the [r]ight/[r]emote/thei[r] version for the entire buffer',
-          },
-        },
-        {
-          { 'n', 'v' },
-          '<leader>cB',
-          action_conflict_file_pick_base,
-          {
-            desc = ' Conflict - Choose the [b]ase version for the entire buffer',
-          },
-        },
-        {
-          { 'n', 'v' },
-          '<leader>cA',
-          action_conflict_file_pick_all,
-          {
-            desc = '󰕚 Conflict - Choose [a]ll/both versions for the entire buffer',
-          },
-        },
-        {
-          { 'n', 'v' },
-          '<leader>cN',
-          action_conflict_file_pick_none,
-          {
-            desc = '󰕢 Conflict - Choose [n]one, delete all conflict regions from the buffer',
-          },
-        },
-        {
-          { 'n', 'v' },
-          '<leader>q',
-          action_close_diffview,
-          { desc = '󰩈 [Q]uit the diff viewer tab' },
-        },
+        conflict_pick_ours_for_file_keymap(
+          '󰕛 Conflict - Choose the [l]eft/[l]ocal/our version for the entire buffer'
+        ),
+        conflict_pick_theirs_for_file_keymap(
+          '󰕜 Conflict - Choose the [r]ight/[r]emote/thei[r] version for the entire buffer'
+        ),
+        conflict_pick_base_for_file_keymap(
+          ' Conflict - Choose the [b]ase version for the entire buffer'
+        ),
+        conflict_pick_both_for_file_keymap(
+          '󰕚 Conflict - Choose [a]ll/both versions for the entire buffer'
+        ),
+        conflict_pick_none_for_file_keymap(
+          '󰕢 Conflict - Choose [n]one, delete all conflict regions from the buffer'
+        ),
+        close_diffview_keymap(),
       },
-      file_panel = {
+      file_panel = disable_alternate_modes({
         {
           'n',
           '<leader>e',
@@ -243,54 +333,14 @@ return {
           end,
           { desc = '󱏒 Toggle the file [e]xplorer panel' },
         },
-        {
-          'n',
-          '<c-n>',
-          action_select_next_entry,
-          { desc = '󰒭 Open the diff for the [n]ext entry' },
-        },
-        {
-          'n',
-          '<c-p>',
-          action_select_prev_entry,
-          { desc = '󰒮 Open the diff for the [p]revious entry' },
-        },
-        {
-          'n',
-          'j',
-          action_next_entry,
-          { desc = ' Move cursor to next entry' },
-        },
-        {
-          'n',
-          'k',
-          action_prev_entry,
-          { desc = '󰁝 Move cursor to the previous entry' },
-        },
-        {
-          'n',
-          '<leader>gD',
-          action_cycle_layout,
-          { desc = ' Cycle through available layouts' },
-        },
-        {
-          'n',
-          ']x',
-          action_next_conflict,
-          { desc = '󰮱 Merge - jump to the next conflict' },
-        },
-        {
-          'n',
-          '[x',
-          action_prev_conflict,
-          { desc = '󰮳 Merge - jump to the previous conflict' },
-        },
-        {
-          'n',
-          '<leader>q',
-          action_close_diffview,
-          { desc = '󰩈 [Q]uit the diff viewer tab' },
-        },
+        select_prev_entry_keymap(),
+        select_next_entry_keymap(),
+        goto_next_entry_keymap(),
+        goto_prev_entry_keymap(),
+        cycle_layouts_keymap(),
+        goto_next_conflict_keymap(),
+        goto_prev_conflict_keymap(),
+        close_diffview_keymap(),
         {
           'n',
           '<cr>',
@@ -335,30 +385,10 @@ return {
           end,
           { desc = ' Collapse fold' },
         },
-        {
-          'n',
-          '>',
-          action_open_all_folds,
-          { desc = '󰪴 Expand all folds' },
-        },
-        {
-          'n',
-          '<',
-          action_close_all_folds,
-          { desc = '󰪦 Collapse all folds' },
-        },
-        {
-          'n',
-          '<c-u>',
-          action_scroll_up,
-          { desc = '󰶼 Scroll the view [u]p' },
-        },
-        {
-          'n',
-          '<c-d>',
-          action_scroll_down,
-          { desc = '󰶹 Scroll the view [d]own' },
-        },
+        expand_all_folds_keymap(),
+        collapse_all_folds_keymap(),
+        scroll_view_up_keymap(),
+        scroll_view_down_keymap(),
         {
           'n',
           'R',
@@ -368,60 +398,23 @@ return {
           { desc = '󰑐 [R]efresh stats and entries in the file list' },
         },
         -- merge conflict resolution
-        {
-          'n',
-          '<leader>cL',
-          action_conflict_file_pick_ours,
-          {
-            desc = '󰕛 Conflict - Choose the [l]eft/[l]ocal/our version for the selected file',
-          },
-        },
-        {
-          'n',
-          '<leader>cR',
-          action_conflict_file_pick_theirs,
-          {
-            desc = '󰕜 Conflict - Choose the [r]ight/[r]emote/thei[r] version for the selected file',
-          },
-        },
-        {
-          'n',
-          '<leader>cB',
-          action_conflict_file_pick_base,
-          {
-            desc = ' Conflict - Choose the [b]ase version for the selected file',
-          },
-        },
-        {
-          'n',
-          '<leader>cA',
-          action_conflict_file_pick_all,
-          {
-            desc = '󰕚 Conflict - Choose [a]ll/both versions for the selected file',
-          },
-        },
-        {
-          'n',
-          '<leader>cN',
-          action_conflict_file_pick_none,
-          {
-            desc = '󰕢 Conflict - Choose [n]one, delete all conflict regions from the selected file',
-          },
-        },
-        -- Disable any visual / select / insert modes and jump keymaps
-        { 'n', 'v', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'V', noop, { desc = 'diffview_ignore' } },
-        { 'n', '<c-v>', noop, { desc = 'diffview_ignore' } },
-        { 'n', '<c-o>', noop, { desc = 'diffview_ignore' } },
-        { 'n', '<c-i>', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'gh', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'g<c-h>', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'a', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'A', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'i', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'I', noop, { desc = 'diffview_ignore' } },
-      },
-      file_history_panel = {
+        conflict_pick_ours_for_file_keymap(
+          '󰕛 Conflict - Choose the [l]eft/[l]ocal/our version for the selected file'
+        ),
+        conflict_pick_theirs_for_file_keymap(
+          '󰕜 Conflict - Choose the [r]ight/[r]emote/thei[r] version for the selected file'
+        ),
+        conflict_pick_base_for_file_keymap(
+          ' Conflict - Choose the [b]ase version for the selected file'
+        ),
+        conflict_pick_both_for_file_keymap(
+          '󰕚 Conflict - Choose [a]ll/both versions for the selected file'
+        ),
+        conflict_pick_none_for_file_keymap(
+          '󰕢 Conflict - Choose [n]one, delete all conflict regions from the selected file'
+        ),
+      }),
+      file_history_panel = disable_alternate_modes({
         {
           'n',
           'o',
@@ -430,12 +423,7 @@ return {
           end,
           { desc = ' Open the [o]ptions panel' },
         },
-        {
-          'n',
-          '<leader>q',
-          action_close_diffview,
-          { desc = '󰩈 [Q]uit the diff viewer tab' },
-        },
+        close_diffview_keymap(),
         {
           'n',
           'K',
@@ -452,86 +440,24 @@ return {
             desc = ' [Y]ank the commit hash for the entry under the cursor',
           },
         },
-        {
-          'n',
-          '>',
-          action_open_all_folds,
-          { desc = '󰪴 Expand all folds' },
-        },
-        {
-          'n',
-          '<',
-          action_close_all_folds,
-          { desc = '󰪦 Collapse all folds' },
-        },
-        {
-          'n',
-          'j',
-          action_next_entry,
-          { desc = ' Move cursor to next entry' },
-        },
-        {
-          'n',
-          'k',
-          action_prev_entry,
-          { desc = '󰁝 Move cursor to the previous entry' },
-        },
+        expand_all_folds_keymap(),
+        collapse_all_folds_keymap(),
+        goto_next_entry_keymap(),
+        goto_prev_entry_keymap(),
         {
           'n',
           '<cr>',
           action_select_entry,
           { desc = '󰂽 Open the diff for the selected entry' },
         },
-        {
-          'n',
-          '<c-u>',
-          action_scroll_up,
-          { desc = '󰶼 Scroll the view [u]p' },
-        },
-        {
-          'n',
-          '<c-d>',
-          action_scroll_down,
-          { desc = '󰶹 Scroll the view [d]own' },
-        },
-        {
-          'n',
-          '<c-p>',
-          action_select_prev_entry,
-          { desc = '󰒮 Open the diff for the [p]revious entry' },
-        },
-        {
-          'n',
-          '<c-n>',
-          action_select_next_entry,
-          { desc = '󰒭 Open the diff for the [n]ext entry' },
-        },
-        {
-          'n',
-          '<leader>gD',
-          action_cycle_layout,
-          { desc = ' Cycle through available layouts' },
-        },
-        {
-          'n',
-          '<leader>e',
-          action_focus_files,
-          { desc = '󱏒 Focus the file [e]xplorer panel' },
-        },
-        -- Disable any visual / select / insert modes and jump keymaps
-        { 'n', 'v', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'V', noop, { desc = 'diffview_ignore' } },
-        { 'n', '<c-v>', noop, { desc = 'diffview_ignore' } },
-        { 'n', '<c-o>', noop, { desc = 'diffview_ignore' } },
-        { 'n', '<c-i>', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'gh', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'g<c-h>', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'a', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'A', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'i', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'I', noop, { desc = 'diffview_ignore' } },
-      },
-      option_panel = {
+        scroll_view_up_keymap(),
+        scroll_view_down_keymap(),
+        select_prev_entry_keymap(),
+        select_next_entry_keymap(),
+        cycle_layouts_keymap(),
+        focus_file_panel_keymap(),
+      }),
+      option_panel = disable_alternate_modes({
         {
           'n',
           '<cr>',
@@ -540,15 +466,15 @@ return {
         },
         {
           'n',
-          'q',
+          '<esc>',
           function()
             action().close()
           end,
-          { desc = '󰩈 [Q]uit the options panel' },
+          { desc = '󰩈 Quit the options panel' },
         },
         {
           'n',
-          'o',
+          '<leader>o',
           function()
             action().close()
           end,
@@ -562,19 +488,7 @@ return {
           end,
           { desc = '󰩈 [Q]uit the options panel' },
         },
-        -- Disable any visual / select / insert modes and jump keymaps
-        { 'n', 'v', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'V', noop, { desc = 'diffview_ignore' } },
-        { 'n', '<c-v>', noop, { desc = 'diffview_ignore' } },
-        { 'n', '<c-o>', noop, { desc = 'diffview_ignore' } },
-        { 'n', '<c-i>', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'gh', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'g<c-h>', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'a', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'A', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'i', noop, { desc = 'diffview_ignore' } },
-        { 'n', 'I', noop, { desc = 'diffview_ignore' } },
-      },
+      }),
     },
   },
   keys = {
