@@ -511,9 +511,9 @@ return {
     {
       '<leader>gL',
       function()
-        local from = vim.api.nvim_buf_get_mark(0, "<")[1]
-        local to = vim.api.nvim_buf_get_mark(0, ">")[1]
-	require('diffview').file_history({from, to})
+        local from = vim.api.nvim_buf_get_mark(0, '<')[1]
+        local to = vim.api.nvim_buf_get_mark(0, '>')[1]
+        require('diffview').file_history({ from, to })
       end,
       mode = 'v',
       desc = 'Diffview:  Show commit log for selection',
