@@ -1,5 +1,14 @@
-local function initPlugin()
-  require('nvim-treesitter.configs').setup({
+local function initPlugin(_, opts)
+  require('nvim-treesitter.configs').setup(opts)
+end
+
+return {
+  'nvim-treesitter/nvim-treesitter',
+  build = ':TSUpdate',
+  event = { 'BufReadPre', 'BufNewFile' },
+  version = '^0.9',
+  config = initPlugin,
+  opts = {
     sync_install = false,
     auto_install = true,
     highlight = {
@@ -18,15 +27,7 @@ local function initPlugin()
         scope_incremental = false,
       },
     },
-  })
-end
-
-return {
-  'nvim-treesitter/nvim-treesitter',
-  build = ':TSUpdate',
-  event = { 'BufReadPre', 'BufNewFile' },
-  version = '^0.9',
-  config = initPlugin,
+  },
   keys = {
     {
       '<leader>v',
