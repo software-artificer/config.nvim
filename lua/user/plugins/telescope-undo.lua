@@ -36,11 +36,11 @@ return {
       undo = {
         use_delta = true,
         mappings = {
-	  i = {
-	    ['<cr>'] = action_restore,
-	    ['<c-y>'] = action_yank_additions,
-	    ['<c-r>'] = action_yank_deletions,
-	  },
+          i = {
+            ['<cr>'] = action_restore,
+            ['<c-y>'] = action_yank_additions,
+            ['<c-r>'] = action_yank_deletions,
+          },
         },
       },
     },
