@@ -46,15 +46,51 @@ local function setupTheme()
       --highlights.CmpItemKindProperty = {}
       --highlights.CmpItemKindReference = {}
       --highlights.CmpItemKindSnippet = {}
-      --highlights.CmpItemKindStruct = {}
+      --highlights.CmpItemKindStruct = { fg = colors.magenta }
       --highlights.CmpItemKindText = { bg = colors.magenta, fg = colors.bg_dark }
       --highlights.CmpItemKindTypeParameter = {}
       --highlights.CmpItemKindUnit = {}
       --highlights.CmpItemKindValue = {}
       --highlights.CmpItemKindVariable = {}
       --highlights.CmpItemMenu = {}
+
       highlights.Pmenu = { bg = colors.bg_dark }
       highlights.PmenuSel = { bg = colors.bg_highlight, fg = colors.fg }
+
+      highlights.WinBarBackground = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsFile = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsModule = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsNamespace =
+        { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsPackage = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsClass = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsMethod = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsProperty = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsField = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsConstructor =
+        { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsEnum = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsInterface =
+        { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsFunction = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsVariable = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsConstant = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsString = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsNumber = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsBoolean = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsArray = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsObject = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsKey = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsNull = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsEnumMember =
+        { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsStruct = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsEvent = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsOperator = { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicIconsTypeParameter =
+        { bg = colors.bg_dark, fg = colors.blue7 }
+      highlights.NavicText = { fg = colors.dark5, bg = colors.bg_dark }
+      highlights.NavicSeparator = { fg = colors.fg_gutter, bg = colors.bg_dark }
     end,
   })
 

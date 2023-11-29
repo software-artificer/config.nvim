@@ -43,8 +43,19 @@ local function configLsp()
   lsp_format.setup({
     sync = true,
   })
+
+  -- Support for context status-line
+  local navic = require('nvim-navic')
+
   local on_attach = function(client, bufnr)
     lsp_format.on_attach(client, bufnr)
+
+    if client.server_capabilities.documentSymbolProvider then
+      navic.attach(client, bufnr)
+    end
+
+    vim.o.winbar =
+      '%#WinBarBackground# %{%v:lua.require("nvim-navic").get_location()%}%#WinBarBackground#'
 
     -- Will be available in Neovim 0.10.x
     -- vim.lsp.inlay_hints(bufnr, true)
@@ -136,5 +147,31 @@ return {
   {
     'lukas-reineke/lsp-format.nvim',
     version = '^2.6',
+  },
+  {
+    'SmiteshP/nvim-navic',
+    opts = {
+      highlight = true,
+      separator = '  ',
+      icons = {
+        Module = '󰕳 ',
+        Class = ' ',
+        Method = '󰰐 ',
+        Property = ' ',
+        Constructor = '󱥉 ',
+        Enum = ' ',
+        Interface = ' ',
+        Function = '󰊕 ',
+        Variable = '󱄑 ',
+        Constant = '󰏿 ',
+        Struct = ' ',
+        Event = ' ',
+        Operator = ' ',
+        TypeParameter = ' ',
+      },
+    },
+  },
+  {
+    'nvim-tree/nvim-web-devicons',
   },
 }
