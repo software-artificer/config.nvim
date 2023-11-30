@@ -14,6 +14,7 @@ local function initPlugin()
       ['<c-n>'] = actions.next,
       ['<c-p>'] = actions.previous,
       ['<cr>'] = actions.jump,
+      ['<esc>'] = actions.close,
       q = actions.close,
       gl = actions.enter_win('preview'),
     },
