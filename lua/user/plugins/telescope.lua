@@ -58,7 +58,7 @@ local function initTelescope(_, opts)
         pickers.lsp_document_symbols()
       end
       vim.lsp.buf.workspace_symbol = function()
-        pickers.lsp_workspace_symbols()
+        pickers.lsp_dynamic_workspace_symbols()
       end
     end,
   })
