@@ -52,6 +52,8 @@ return {
       -- LightBulb color style
       highlights.LightBulbSign = { fg = colors.yellow }
 
+      highlights.VirtColumn = { fg = colors.bg_highlight, bg = colors.none }
+
       highlights.IblIndent = { fg = colors.bg_highlight, bg = colors.none }
 
       -- color scheme for nvim-cmp
