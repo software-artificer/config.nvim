@@ -4,8 +4,37 @@ vim.o.breakindent = true
 vim.o.showbreak = '󱞩 '
 vim.o.cursorline = true
 
-local function setupTheme()
-  require('tokyonight').setup({
+local function setupTheme(_, opts)
+  require('tokyonight').setup(opts)
+
+  vim.cmd.colorscheme('tokyonight-night')
+  vim.fn.sign_define(
+    'DiagnosticSignError',
+    { texthl = 'DiagnosticSignError', text = '' }
+  )
+  vim.fn.sign_define(
+    'DiagnosticSignWarn',
+    { texthl = 'DiagnosticSignWarn', text = '' }
+  )
+  vim.fn.sign_define(
+    'DiagnosticSignOk',
+    { texthl = 'DiagnosticSignOk', text = '' }
+  )
+  vim.fn.sign_define(
+    'DiagnosticSignInfo',
+    { texthl = 'DiagnosticSignInfo', text = '' }
+  )
+  vim.fn.sign_define(
+    'DiagnosticSignHint',
+    { texthl = 'DiagnosticSignHint', text = '' }
+  )
+end
+
+return {
+  'folke/tokyonight.nvim',
+  version = '^2.8',
+  config = setupTheme,
+  opts = {
     on_highlights = function(highlights, colors)
       highlights.CursorLineNr =
         { fg = colors.fg_dark, bold = true, bg = colors.bg_highlight }
@@ -57,33 +86,5 @@ local function setupTheme()
       highlights.Pmenu = { bg = colors.bg_dark }
       highlights.PmenuSel = { bg = colors.bg_highlight, fg = colors.fg }
     end,
-  })
-
-  vim.cmd.colorscheme('tokyonight-night')
-  vim.fn.sign_define(
-    'DiagnosticSignError',
-    { texthl = 'DiagnosticSignError', text = '' }
-  )
-  vim.fn.sign_define(
-    'DiagnosticSignWarn',
-    { texthl = 'DiagnosticSignWarn', text = '' }
-  )
-  vim.fn.sign_define(
-    'DiagnosticSignOk',
-    { texthl = 'DiagnosticSignOk', text = '' }
-  )
-  vim.fn.sign_define(
-    'DiagnosticSignInfo',
-    { texthl = 'DiagnosticSignInfo', text = '' }
-  )
-  vim.fn.sign_define(
-    'DiagnosticSignHint',
-    { texthl = 'DiagnosticSignHint', text = '' }
-  )
-end
-
-return {
-  'folke/tokyonight.nvim',
-  version = '^2.8',
-  config = setupTheme,
+  },
 }
