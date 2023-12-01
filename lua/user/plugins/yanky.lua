@@ -32,7 +32,6 @@ local function setupPlugin()
       { desc = '󱛢 Yanky: yank history' }
     )
   else
-    print(vim.inspect(yanky))
     keymap_set({ 'n' }, 'p', function()
       yanky.put('p')
     end, { desc = '󰳺 Yanky: Insert after the cursor' })
