@@ -1,13 +1,8 @@
-local function initPlugin(_, opts)
-  require('nvim-treesitter.configs').setup(opts)
-end
-
 return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   event = { 'BufReadPre', 'BufNewFile' },
   version = '^0.9',
-  config = initPlugin,
   opts = {
     sync_install = false,
     auto_install = true,
@@ -28,6 +23,7 @@ return {
       },
     },
   },
+  main = 'nvim-treesitter.configs',
   keys = {
     {
       '<leader>v',
