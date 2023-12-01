@@ -54,9 +54,6 @@ local function configLsp()
       navic.attach(client, bufnr)
     end
 
-    vim.o.winbar =
-      '%#WinBarBackground# %{%v:lua.require("nvim-navic").get_location()%}%#WinBarBackground#'
-
     -- Will be available in Neovim 0.10.x
     -- vim.lsp.inlay_hints(bufnr, true)
 
