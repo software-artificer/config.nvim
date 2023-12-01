@@ -123,12 +123,13 @@ local function configLsp()
       vim.lsp.buf.code_action,
       ' LSP: Show code [a]ctions'
     )
-
-    -- Displays a function's signature information
-    -- bufmap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
-
-    -- Renames all references to the symbol under the cursor
-    -- bufmap('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>')
+    bufmap(
+      bufnr,
+      'n',
+      '<leader>hs',
+      vim.lsp.buf.signature_help,
+      '󱜻 LSP: Show singature help'
+    )
   end
 
   -- Load all LSP drop-in configurations
