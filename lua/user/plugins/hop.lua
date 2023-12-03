@@ -101,13 +101,13 @@ return {
       desc = '󰤇 Hop: [J]ump to [l]ines before the cursor',
     },
     {
-      '<leader>jl',
+      '<leader>jf',
       hop_characters_after_cursor,
       mode = { 'n', 'v' },
       desc = '󰤇 Hop: [J]ump to [c]haracters after the cursor',
     },
     {
-      '<leader>jh',
+      '<leader>jF',
       hop_characters_before_cursor,
       mode = { 'n', 'v' },
       desc = '󰤇 Hop: [J]ump to [c]haracters before the cursor',
