@@ -69,8 +69,8 @@ local function setupCmp()
     },
     mapping = {
       ['<C-Space>'] = { i = cmp.mapping.complete() },
-      ['<C-d>'] = { i = cmp.mapping.scroll_docs(-4) },
-      ['<C-u>'] = { i = cmp.mapping.scroll_docs(4) },
+      ['<C-d>'] = { i = cmp.mapping.scroll_docs(4) },
+      ['<C-u>'] = { i = cmp.mapping.scroll_docs(-4) },
       ['<C-n>'] = { i = cmp.mapping.select_next_item() },
       ['<C-p>'] = { i = cmp.mapping.select_prev_item() },
       ['<C-e>'] = { i = cmp.mapping.abort() },
