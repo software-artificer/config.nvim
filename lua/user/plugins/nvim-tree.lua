@@ -3,6 +3,9 @@ return {
   lazy = false,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   opts = {
+    filters = {
+      custom = { '.git' },
+    },
     disable_netrw = true,
     hijack_netrw = true,
     hijack_cursor = true,
