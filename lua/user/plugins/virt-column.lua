@@ -3,6 +3,6 @@ return {
   opts = {
     virtcolumn = '80',
     highlight = 'VirtColumn',
-    char = '│'
+    char = '│',
   },
 }
