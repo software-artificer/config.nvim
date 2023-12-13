@@ -22,9 +22,16 @@ return {
         keymap_set('n', key, action, opts)
       end
 
+      local function noop() end
+
       local function mkOption(icon, description)
+        local desc = nil
+        if description ~= nil then
+          desc = icon .. ' NvimTree: ' .. description
+        end
+
         return {
-          desc = icon .. ' NvimTree: ' .. description,
+          desc = desc,
           buffer = bufnr,
           noremap = true,
           silent = true,
@@ -90,6 +97,10 @@ return {
         mkOption('󰒭', 'Next sibling')
       )
       set_keymap('<CR>', nvim_tree_api.node.open.edit, mkOption('', 'Open'))
+
+      set_keymap('K', noop, mkOption())
+      set_keymap('v', noop, mkOption())
+      set_keymap('V', noop, mkOption())
     end,
     actions = {
       open_file = {
