@@ -10,7 +10,7 @@ local function find_lsp_module_directory()
   end
 end
 
-local function load_lsp_modules(lspconfig, opts)
+local function load_lsp_modules(lspconfig, opts, bufmap)
   for _, module_path in
     next,
     vim.api.nvim_get_runtime_file(find_lsp_module_directory() .. '*.lua', true)
@@ -18,7 +18,7 @@ local function load_lsp_modules(lspconfig, opts)
     local basename = vim.fs.basename(module_path)
     if basename ~= 'init.lua' then
       local module = require(namespace .. '.' .. basename:sub(1, -5))
-      module(lspconfig, opts)
+      module(lspconfig, opts, bufmap)
     end
   end
 end
@@ -130,7 +130,7 @@ local function configLsp()
   end
 
   -- Load all LSP drop-in configurations
-  load_lsp_modules(lspconfig, { on_attach = on_attach })
+  load_lsp_modules(lspconfig, { on_attach = on_attach }, bufmap)
 end
 
 return {
