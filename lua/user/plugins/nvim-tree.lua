@@ -4,6 +4,7 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   opts = {
     filters = {
+      git_ignored = true,
       custom = { '.git' },
     },
     disable_netrw = true,
@@ -101,7 +102,10 @@ return {
       set_keymap('K', noop, mkOption())
       set_keymap('v', noop, mkOption())
       set_keymap('V', noop, mkOption())
-      set_keymap('.', function() end, mkOption('󱗣', 'Toggle hidden/dot files'))
+      set_keymap('.', function()
+        nvim_tree_api.tree.toggle_custom_filter()
+        nvim_tree_api.tree.toggle_gitignore_filter()
+      end, mkOption('󱗣', 'Toggle hidden/dot files'))
     end,
     actions = {
       open_file = {
