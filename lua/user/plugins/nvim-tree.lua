@@ -101,6 +101,7 @@ return {
       set_keymap('K', noop, mkOption())
       set_keymap('v', noop, mkOption())
       set_keymap('V', noop, mkOption())
+      set_keymap('.', function() end, mkOption('󱗣', 'Toggle hidden/dot files'))
     end,
     actions = {
       open_file = {
