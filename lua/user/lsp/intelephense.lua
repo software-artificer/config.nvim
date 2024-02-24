@@ -14,7 +14,7 @@ return function(lspconfig, opts, bufmap)
   }
 
   local on_attach = opts.on_attach or function() end
-  opts.on_attach = function(client,bufnr)
+  opts.on_attach = function(client, bufnr)
     bufmap(bufnr, { 'n', 'v' }, '<leader>lr', function()
       vim.lsp.buf.execute_command({
         command = 'intelephense.index.workspace',
@@ -22,7 +22,7 @@ return function(lspconfig, opts, bufmap)
       vim.print('Intelephense: Re-indexing the workspace')
     end, ' Intelephense: (L)SP (R)e-index workspace')
 
-    return on_attach(client,bufnr)
+    return on_attach(client, bufnr)
   end
 
   lspconfig.intelephense.setup(vim.tbl_deep_extend('force', opts or {}, {
