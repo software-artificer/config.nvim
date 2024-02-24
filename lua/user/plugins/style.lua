@@ -32,7 +32,7 @@ end
 
 return {
   'folke/tokyonight.nvim',
-  version = '^2.8',
+  version = '^3.0',
   config = setupTheme,
   opts = {
     on_colors = function(colors)
