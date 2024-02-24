@@ -35,6 +35,11 @@ return {
   version = '^2.8',
   config = setupTheme,
   opts = {
+    on_colors = function(colors)
+      local util = require("tokyonight.util")
+
+      colors.guideline = util.darken(colors.bg_highlight, 0.5)
+    end,
     on_highlights = function(highlights, colors)
       highlights.CursorLineNr =
         { fg = colors.fg_dark, bold = true, bg = colors.bg_highlight }
@@ -52,9 +57,11 @@ return {
       -- LightBulb color style
       highlights.LightBulbSign = { fg = colors.yellow }
 
-      highlights.VirtColumn = { fg = colors.bg_highlight, bg = colors.none }
+      -- Virtual column delimiter
+      highlights.VirtColumn = { fg = colors.guideline, bg = colors.none }
 
-      highlights.IblIndent = { fg = colors.bg_highlight, bg = colors.none }
+      -- Ident virtual rulers
+      highlights.IblIndent = { fg = colors.guideline, bg = colors.none }
 
       -- color scheme for nvim-cmp
       --highlights.CmpItemAbbrDeprecated = {}
