@@ -1,9 +1,16 @@
+function setupPlugin(opts)
+  require('lualine').setup(opts)
+
+  vim.opt.showmode = false
+end
+
 return {
   'nvim-lualine/lualine.nvim',
   dependencies = {
     'nvim-tree/nvim-web-devicons',
     'SmiteshP/nvim-navic',
   },
+  config = setupPlugin,
   opts = {
     options = {
       theme = 'codedark',
