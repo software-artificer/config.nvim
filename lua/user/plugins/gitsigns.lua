@@ -1,6 +1,6 @@
 return {
   'lewis6991/gitsigns.nvim',
-  version = '^0.6',
+  version = '^0.7',
   opts = {
     signs = {
       untracked = { text = '󰇙' },
