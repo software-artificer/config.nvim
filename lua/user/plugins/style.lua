@@ -67,8 +67,6 @@ return {
       highlights.VirtColumn = { fg = colors.guideline, bg = colors.none }
 
       -- Ident virtual rulers
-      highlights.IblIndent = { fg = colors.guideline, bg = colors.none }
-
       highlights.RainbowRed = { fg = colors.dark_red }
       highlights.RainbowBlue = { fg = colors.dark_blue }
       highlights.RainbowYellow = { fg = colors.dark_yellow }
