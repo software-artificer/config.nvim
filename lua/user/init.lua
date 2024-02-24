@@ -40,3 +40,10 @@ require('lazy').setup({
     require('user.lsp'),
   },
 })
+
+keymap_set(
+  'v',
+  '<leader>y',
+  '"+y',
+  { noremap = true, silent = true, desc = '󰅌 Copy to clipboard' }
+)
