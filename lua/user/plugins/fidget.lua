@@ -1,11 +1,17 @@
 return {
   'j-hui/fidget.nvim',
-  tag = 'legacy',
+  version = '^1.4',
   event = 'LspAttach',
   opts = {
-    text = {
-      commenced = ' ',
-      completed = ' ',
+    progress = {
+      display = {
+        done_icon = '',
+        progress_icon = {
+          pattern = { '󰔟', '󱦟', '󱦠' },
+          period = 0.5,
+        },
+      },
     },
+    notification = { view = { group_separator = '  ' } },
   },
 }
