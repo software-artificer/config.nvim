@@ -20,7 +20,7 @@
   "lsp-lens.nvim": { "branch": "main", "commit": "48bb1a7e271424c15f3d588d54adc9b7c319d977" },
   "lsp_signature.nvim": { "branch": "master", "commit": "4665921ff8e30601c7c1328625b3abc1427a6143" },
   "lualine.nvim": { "branch": "master", "commit": "7d131a8d3ba5016229e8a1d08bf8782acea98852" },
-  "none-ls.nvim": { "branch": "main", "commit": "45d0e8fa9094dcc3fabad9065a5822af9cf099c7" },
+  "none-ls.nvim": { "branch": "main", "commit": "0f7e1094d06c9d0fa31f545db7f00a0c518397ef" },
   "nvim-cmp": { "branch": "main", "commit": "41d7633e4146dce1072de32cea31ee31b056a131" },
   "nvim-lightbulb": { "branch": "master", "commit": "02aacd93b9b2367e6dbdd20f43b525f701faf834" },
   "nvim-lspconfig": { "branch": "master", "commit": "bd405e45c5fb122c16af8f87fa2dd7ab1981b243" },
