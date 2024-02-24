@@ -7,12 +7,11 @@ local function initPlugin()
     },
     highlight = {
       'RainbowDelimiterRed',
+      'RainbowDelimiterCyan',
       'RainbowDelimiterYellow',
-      'RainbowDelimiterBlue',
-      'RainbowDelimiterOrange',
       'RainbowDelimiterGreen',
       'RainbowDelimiterViolet',
-      'RainbowDelimiterCyan',
+      'RainbowDelimiterBlue',
     },
   })
 end

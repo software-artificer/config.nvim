@@ -36,9 +36,16 @@ return {
   config = setupTheme,
   opts = {
     on_colors = function(colors)
-      local util = require("tokyonight.util")
+      local util = require('tokyonight.util')
 
       colors.guideline = util.darken(colors.bg_highlight, 0.5)
+
+      colors.dark_red = '#291919'
+      colors.dark_cyan = '#293939'
+      colors.dark_yellow = '#393900'
+      colors.dark_green = '#193919'
+      colors.dark_violet = '#302240'
+      colors.dark_blue = '#1c2951'
     end,
     on_highlights = function(highlights, colors)
       highlights.CursorLineNr =
@@ -46,13 +53,12 @@ return {
       highlights.LineNr = { fg = colors.dark5 }
 
       -- color scheme for HiPhish/rainbow-delimiters.nvim
-      highlights.RainbowDelimiterRed = { fg = colors.red }
-      highlights.RainbowDelimiterYellow = { fg = colors.yellow }
-      highlights.RainbowDelimiterBlue = { fg = colors.blue2 }
-      highlights.RainbowDelimiterOrange = { fg = colors.orange }
-      highlights.RainbowDelimiterGreen = { fg = colors.green }
-      highlights.RainbowDelimiterViolet = { fg = colors.magenta }
+      highlights.RainbowDelimiterRed = { fg = colors.red1 }
       highlights.RainbowDelimiterCyan = { fg = colors.cyan }
+      highlights.RainbowDelimiterYellow = { fg = colors.yellow }
+      highlights.RainbowDelimiterGreen = { fg = colors.green }
+      highlights.RainbowDelimiterViolet = { fg = colors.purple }
+      highlights.RainbowDelimiterBlue = { fg = colors.blue0 }
 
       -- LightBulb color style
       highlights.LightBulbSign = { fg = colors.yellow }
@@ -62,6 +68,13 @@ return {
 
       -- Ident virtual rulers
       highlights.IblIndent = { fg = colors.guideline, bg = colors.none }
+
+      highlights.RainbowRed = { fg = colors.dark_red }
+      highlights.RainbowBlue = { fg = colors.dark_blue }
+      highlights.RainbowYellow = { fg = colors.dark_yellow }
+      highlights.RainbowViolet = { fg = colors.dark_violet }
+      highlights.RainbowGreen = { fg = colors.dark_green }
+      highlights.RainbowCyan = { fg = colors.dark_cyan }
 
       -- color scheme for nvim-cmp
       --highlights.CmpItemAbbrDeprecated = {}
