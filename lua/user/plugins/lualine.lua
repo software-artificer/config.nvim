@@ -1,4 +1,4 @@
-function setupPlugin(opts)
+local function setupPlugin(_, opts)
   require('lualine').setup(opts)
 
   vim.opt.showmode = false
@@ -9,6 +9,7 @@ return {
   dependencies = {
     'nvim-tree/nvim-web-devicons',
     'SmiteshP/nvim-navic',
+    'folke/tokyonight.nvim',
   },
   config = setupPlugin,
   opts = {
