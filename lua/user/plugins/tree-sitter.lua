@@ -2,7 +2,7 @@ return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   event = { 'BufReadPre', 'BufNewFile' },
-  version = '^0.9',
+  version = '^0.9.2',
   opts = {
     sync_install = false,
     auto_install = true,
