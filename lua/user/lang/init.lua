@@ -29,8 +29,6 @@ local function configLanguages()
     keymap_set(mode, keymap, action, { buffer = bufnr, desc = desc })
   end
 
-  local dap = require('dap')
-
   -- Enable cmp-nvim-lsp capabilities for LSPs
   local cmp_nvim_lsp = require('cmp_nvim_lsp')
   local lsp_defaults = lspconfig.util.default_config
@@ -130,6 +128,26 @@ local function configLanguages()
       '󱜻 LSP: Show singature help'
     )
   end
+
+  local dap = require('dap')
+  keymap_set({ 'n' }, { '<leader>Db' }, function()
+    dap.toggle_breakpoint()
+  end, { desc = ' DAP: Toggle breakpoint' })
+  keymap_set({ 'n' }, { '<leader>Dc' }, function()
+    dap.continue()
+  end, { desc = ' DAP: Continue execution' })
+  keymap_set({ 'n' }, { '<leader>Dw' }, function()
+    dap.step_over()
+  end, { desc = ' DAP: Step over' })
+  keymap_set({ 'n' }, { '<leader>Dj' }, function()
+    dap.step_into()
+  end, { desc = ' DAP: Step into' })
+  keymap_set({ 'n' }, { '<leader>Dk' }, function()
+    dap.step_out()
+  end, { desc = ' DAP: Step out' })
+  keymap_set({ 'n' }, { '<leader>Dq' }, function()
+    dap.terminate()
+  end, { desc = '󰜺 DAP: terminate' })
 
   -- Load all LSP drop-in configurations
   load_lang_modules(

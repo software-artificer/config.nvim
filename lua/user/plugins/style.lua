@@ -28,6 +28,23 @@ local function setupTheme(_, opts)
     'DiagnosticSignHint',
     { texthl = 'DiagnosticSignHint', text = '' }
   )
+  vim.fn.sign_define(
+    'DapBreakpoint',
+    { texthl = 'DapBreakpoint', text = '' }
+  )
+  vim.fn.sign_define(
+    'DapBreakpointCondition',
+    { texthl = 'DapBreakpointCondition', text = '󰠠' }
+  )
+  vim.fn.sign_define(
+    'DapBreakpointRejected',
+    { texthl = 'DapBreakpointRejected', text = '󰅙' }
+  )
+  vim.fn.sign_define('DapLogPoint', { texthl = 'DapLogPoint', text = '' })
+  vim.fn.sign_define(
+    'DapStopped',
+    { texthl = 'DapStopped', linehl = 'DapStoppedLine', numhl = 'DapStopped', text = '' }
+  )
 end
 
 return {
@@ -73,6 +90,14 @@ return {
       highlights.RainbowViolet = { fg = colors.dark_violet }
       highlights.RainbowGreen = { fg = colors.dark_green }
       highlights.RainbowCyan = { fg = colors.dark_cyan }
+
+      -- Dap symbols
+      highlights.DapBreakpoint = { fg = colors.red1 }
+      highlights.DapBreakpointCondition = { fg = colors.yellow }
+      highlights.DapBreakpointRejected = { fg = colors.dark5 }
+      highlights.DapLogPoint = { fg = colors.green }
+      highlights.DapStopped = { fg = colors.red1, bg = '#2d202a' }
+      highlights.DapStoppedLine = { bg = '#2d202a' }
 
       -- color scheme for nvim-cmp
       --highlights.CmpItemAbbrDeprecated = {}
