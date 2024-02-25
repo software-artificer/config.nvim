@@ -1,4 +1,4 @@
-return function(lspconfig, opts, bufmap)
+return function(set_keymap_fn, lspconfig, opts)
   if vim.fn.executable('intelephense') ~= 1 then
     return
   end
@@ -15,7 +15,7 @@ return function(lspconfig, opts, bufmap)
 
   local on_attach = opts.on_attach or function() end
   opts.on_attach = function(client, bufnr)
-    bufmap(bufnr, { 'n', 'v' }, '<leader>lr', function()
+    set_keymap_fn(bufnr, { 'n', 'v' }, '<leader>lr', function()
       vim.lsp.buf.execute_command({
         command = 'intelephense.index.workspace',
       })

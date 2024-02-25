@@ -1,6 +1,6 @@
 local namespace = ...
 
-local function find_lsp_module_directory()
+local function find_lang_module_directory()
   local my_directory = debug.getinfo(1, 'S').source:sub(2)
 
   for _, path in next, vim.api.nvim_get_runtime_file('', false) do
@@ -10,22 +10,22 @@ local function find_lsp_module_directory()
   end
 end
 
-local function load_lsp_modules(lspconfig, opts, bufmap)
+local function load_lang_modules(set_keymap_fn, lspconfig, lsp_opts)
   for _, module_path in
     next,
-    vim.api.nvim_get_runtime_file(find_lsp_module_directory() .. '*.lua', true)
+    vim.api.nvim_get_runtime_file(find_lang_module_directory() .. '*.lua', true)
   do
     local basename = vim.fs.basename(module_path)
     if basename ~= 'init.lua' then
       local module = require(namespace .. '.' .. basename:sub(1, -5))
-      module(lspconfig, opts, bufmap)
+      module(set_keymap_fn, lspconfig, lsp_opts)
     end
   end
 end
 
-local function configLsp()
+local function configLanguages()
   local lspconfig = require('lspconfig')
-  local bufmap = function(bufnr, mode, keymap, action, desc)
+  local set_buf_keymap_fn = function(bufnr, mode, keymap, action, desc)
     keymap_set(mode, keymap, action, { buffer = bufnr, desc = desc })
   end
 
@@ -57,70 +57,70 @@ local function configLsp()
     -- Will be available in Neovim 0.10.x
     -- vim.lsp.inlay_hints(bufnr, true)
 
-    bufmap(
+    set_buf_keymap_fn(
       bufnr,
       { 'n', 'v' },
       'K',
       vim.lsp.buf.hover,
       ' LSP: show symbol documentation'
     )
-    bufmap(
+    set_buf_keymap_fn(
       bufnr,
       { 'n', 'v' },
       'gd',
       vim.lsp.buf.definition,
       '󰈮 LSP: go to the definition'
     )
-    bufmap(
+    set_buf_keymap_fn(
       bufnr,
       { 'n', 'v' },
       'gD',
       vim.lsp.buf.declaration,
       ' LSP: go to the declaration'
     )
-    bufmap(
+    set_buf_keymap_fn(
       bufnr,
       { 'n', 'v' },
       'gt',
       vim.lsp.buf.type_definition,
       ' LSP: go to the type definition'
     )
-    bufmap(
+    set_buf_keymap_fn(
       bufnr,
       { 'n', 'v' },
       'gr',
       vim.lsp.buf.references,
       ' LSP: Show [r]eferences'
     )
-    bufmap(
+    set_buf_keymap_fn(
       bufnr,
       { 'n', 'v' },
       'gi',
       vim.lsp.buf.implementation,
       ' LSP: Show [i]mplementations'
     )
-    bufmap(
+    set_buf_keymap_fn(
       bufnr,
       { 'n', 'v' },
       'gs',
       vim.lsp.buf.document_symbol,
       ' LSP: Show document [s]ymbols'
     )
-    bufmap(
+    set_buf_keymap_fn(
       bufnr,
       { 'n', 'v' },
       'gS',
       vim.lsp.buf.workspace_symbol,
       ' LSP: Show workspace [s]ymbols'
     )
-    bufmap(
+    set_buf_keymap_fn(
       bufnr,
       { 'n', 'v' },
       'gA',
       vim.lsp.buf.code_action,
       ' LSP: Show code [a]ctions'
     )
-    bufmap(
+    set_buf_keymap_fn(
       bufnr,
       'n',
       '<leader>hs',
@@ -130,7 +130,11 @@ local function configLsp()
   end
 
   -- Load all LSP drop-in configurations
-  load_lsp_modules(lspconfig, { on_attach = on_attach }, bufmap)
+  load_lang_modules(
+    set_buf_keymap_fn,
+    lspconfig,
+    { on_attach = on_attach }
+  )
 end
 
 return {
@@ -140,7 +144,6 @@ return {
       'hrsh7th/cmp-nvim-lsp',
       'lukas-reineke/lsp-format.nvim',
     },
-    config = configLsp,
   },
   {
     'lukas-reineke/lsp-format.nvim',
@@ -171,5 +174,13 @@ return {
   },
   {
     'nvim-tree/nvim-web-devicons',
+  },
+  {
+    name = 'Language Support',
+    dir = '.',
+    config = configLanguages,
+    dependencies = {
+      'neovim/nvim-lspconfig',
+    },
   },
 }
