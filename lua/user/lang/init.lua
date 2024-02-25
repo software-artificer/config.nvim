@@ -142,12 +142,31 @@ local function configLanguages()
   keymap_set({ 'n' }, { '<leader>Dj' }, function()
     dap.step_into()
   end, { desc = ' DAP: Step into' })
-  keymap_set({ 'n' }, { '<leader>Dk' }, function()
+  keymap_set({ 'n' }, { '<leader>Dl' }, function()
     dap.step_out()
   end, { desc = ' DAP: Step out' })
-  keymap_set({ 'n' }, { '<leader>Dq' }, function()
+  keymap_set({ 'n' }, { '<leader>Dh' }, function()
     dap.terminate()
   end, { desc = '󰜺 DAP: terminate' })
+  keymap_set({ 'n' }, { '<leader>Dk' }, function()
+    dap.down()
+  end, { desc = '󱞺 DAP: Go up the stack' })
+  keymap_set({ 'n' }, { '<leader>Dj' }, function()
+    dap.up()
+  end, { desc = '󱞰 DAP: Go down the stack' })
+  -- TODO:
+  -- focus_frame
+  -- run_last
+  -- restart
+  -- clear_breakpoints
+  -- list_breakpoints
+  -- set_exception_breakpoints
+  -- step_back
+  -- pause
+  -- reverse_continue
+  -- restart_frame
+  -- run_to_cursor
+  -- repl
 
   -- Load all LSP drop-in configurations
   load_lang_modules(
