@@ -11,6 +11,10 @@ local function setupPlugin()
     table.insert(sources, null_ls.builtins.formatting.jsonls)
   end
 
+  if vim.fn.executable('nixfmt') == 1 then
+    table.insert(sources, null_ls.builtins.formatting.nixfmt)
+  end
+
   null_ls.setup({
     sources = sources,
   })
