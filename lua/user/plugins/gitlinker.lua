@@ -11,7 +11,6 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
   },
-  config = setupPlugin,
   opts = {
     mappings = nil,
     action_callback = print,
