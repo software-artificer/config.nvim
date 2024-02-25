@@ -15,6 +15,19 @@ return {
     },
     renderer = {
       special_files = {},
+      icons = {
+        symlink_arrow = '  ',
+        glyphs = {
+          folder = {
+	    default = '',
+	    open = '',
+	    empty = '',
+	    empty_open = '',
+            arrow_open = '',
+            arrow_closed = '',
+          },
+        },
+      },
     },
     on_attach = function(bufnr)
       local nvim_tree_api = require('nvim-tree.api')
