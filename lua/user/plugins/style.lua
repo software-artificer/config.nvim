@@ -40,7 +40,7 @@ return {
 
       colors.guideline = util.darken(colors.bg_highlight, 0.5)
 
-      colors.dark_red = '#291919'
+      colors.dark_red = '#392929'
       colors.dark_cyan = '#293939'
       colors.dark_yellow = '#393900'
       colors.dark_green = '#193919'
