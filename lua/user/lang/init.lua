@@ -168,6 +168,27 @@ local function configLanguages()
   -- run_to_cursor
   -- repl
 
+  local dapui = require('dapui')
+  dap.listeners.before.attach.dapui_config = function()
+    dapui.open()
+  end
+  dap.listeners.before.launch.dapui_config = function()
+    dapui.open()
+  end
+  dap.listeners.before.event_terminated.dapui_config = function()
+    dapui.close()
+  end
+  dap.listeners.before.event_exited.dapui_config = function()
+    dapui.close()
+  end
+  keymap_set({ 'n' }, { '<leader>Du' }, function()
+    if dap.session() == nil then
+      return
+    end
+
+    dapui.toggle()
+  end, { desc = ' DAP: Open UI' })
+
   -- Load all LSP drop-in configurations
   load_lang_modules(
     set_buf_keymap_fn,
@@ -220,12 +241,27 @@ return {
     version = '^0.7',
   },
   {
+    'rcarriga/nvim-dap-ui',
+    version = '^3',
+    opts = {
+      icons = {
+        expanded = '',
+        collapsed = '',
+        current_frame = '󰁕',
+      },
+    },
+    dependencies = {
+      'mfussenegger/nvim-dap',
+    },
+  },
+  {
     name = 'Language Support',
     dir = '.',
     config = configLanguages,
     dependencies = {
       'neovim/nvim-lspconfig',
       'mfussenegger/nvim-dap',
+      'rcarriga/nvim-dap-ui',
     },
   },
 }
