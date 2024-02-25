@@ -10,7 +10,7 @@ local function find_lang_module_directory()
   end
 end
 
-local function load_lang_modules(set_keymap_fn, lspconfig, lsp_opts)
+local function load_lang_modules(set_keymap_fn, lspconfig, lsp_opts, dap)
   for _, module_path in
     next,
     vim.api.nvim_get_runtime_file(find_lang_module_directory() .. '*.lua', true)
@@ -18,7 +18,7 @@ local function load_lang_modules(set_keymap_fn, lspconfig, lsp_opts)
     local basename = vim.fs.basename(module_path)
     if basename ~= 'init.lua' then
       local module = require(namespace .. '.' .. basename:sub(1, -5))
-      module(set_keymap_fn, lspconfig, lsp_opts)
+      module(set_keymap_fn, lspconfig, lsp_opts, dap)
     end
   end
 end
@@ -28,6 +28,8 @@ local function configLanguages()
   local set_buf_keymap_fn = function(bufnr, mode, keymap, action, desc)
     keymap_set(mode, keymap, action, { buffer = bufnr, desc = desc })
   end
+
+  local dap = require('dap')
 
   -- Enable cmp-nvim-lsp capabilities for LSPs
   local cmp_nvim_lsp = require('cmp_nvim_lsp')
@@ -133,7 +135,8 @@ local function configLanguages()
   load_lang_modules(
     set_buf_keymap_fn,
     lspconfig,
-    { on_attach = on_attach }
+    { on_attach = on_attach },
+    dap
   )
 end
 
@@ -176,11 +179,16 @@ return {
     'nvim-tree/nvim-web-devicons',
   },
   {
+    'mfussenegger/nvim-dap',
+    version = '^0.7',
+  },
+  {
     name = 'Language Support',
     dir = '.',
     config = configLanguages,
     dependencies = {
       'neovim/nvim-lspconfig',
+      'mfussenegger/nvim-dap',
     },
   },
 }
