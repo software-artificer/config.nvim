@@ -76,7 +76,7 @@ end
 
 return {
   name = 'lang:php',
-  depends = { 'lang:common', 'mfussenegger/nvim-dap' },
+  depends = { 'lang:common', 'neovim/nvim-lspconfig', 'mfussenegger/nvim-dap' },
   dir = '.',
   config = configurePhp,
 }
