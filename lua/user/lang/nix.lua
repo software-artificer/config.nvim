@@ -1,7 +1,14 @@
-return function(_, lspconfig, lsp_opts)
+local function configureNix()
   if vim.fn.executable('nil') ~= 1 then
     return
   end
 
-  lspconfig.nil_ls.setup(lsp_opts or {})
+  require('lspconfig').nil_ls.setup({})
 end
+
+return {
+  name = 'lang:nix',
+  depends = { 'lang:common', 'neovim/nvim-lspconfig' },
+  dir = '.',
+  config = configureNix,
+}

@@ -1,11 +1,18 @@
-return function(_, lspconfig, lsp_opts)
+local function configureScala()
   if vim.fn.executable('metals') ~= 1 then
     return
   end
 
-  lspconfig.metals.setup(vim.tbl_deep_extend('force', lsp_opts or {}, {
+  require('lspconfig').metals.setup('force', {}, {
     settings = {
       ['metals'] = {},
     },
-  }))
+  })
 end
+
+return {
+  name = 'lang:scala',
+  depends = { 'lang:common', 'neovim/nvim-lspconfig' },
+  dir = '.',
+  config = configureScala,
+}

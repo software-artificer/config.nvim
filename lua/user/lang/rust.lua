@@ -1,9 +1,9 @@
-return function(_, lspconfig, lsp_opts)
+local function configureRust()
   if vim.fn.executable('rust-analyzer') ~= 1 then
     return
   end
 
-  lspconfig.rust_analyzer.setup(vim.tbl_deep_extend('force', lsp_opts or {}, {
+  require('lspconfig').rust_analyzer.setup({}, {
     settings = {
       ['rust-analyzer'] = {
         checkOnSave = {
@@ -19,5 +19,12 @@ return function(_, lspconfig, lsp_opts)
         },
       },
     },
-  }))
+  })
 end
+
+return {
+  name = 'lang:rust',
+  depends = { 'lang:common', 'neovim/nvim-lspconfig' },
+  dir = '.',
+  config = configureRust,
+}

@@ -1,40 +1,12 @@
-local namespace = ...
-
-local function find_lang_module_directory()
-  local my_directory = debug.getinfo(1, 'S').source:sub(2)
-
-  for _, path in next, vim.api.nvim_get_runtime_file('', false) do
-    if my_directory:sub(1, path:len()) == path then
-      return my_directory:sub(path:len() + 1, -9)
-    end
-  end
-end
-
-local function load_lang_modules(set_keymap_fn, lspconfig, lsp_opts, dap)
-  for _, module_path in
-    next,
-    vim.api.nvim_get_runtime_file(find_lang_module_directory() .. '*.lua', true)
-  do
-    local basename = vim.fs.basename(module_path)
-    if basename ~= 'init.lua' then
-      local module = require(namespace .. '.' .. basename:sub(1, -5))
-      module(set_keymap_fn, lspconfig, lsp_opts, dap)
-    end
-  end
-end
-
 local function configLanguages()
   local lspconfig = require('lspconfig')
-  local set_buf_keymap_fn = function(bufnr, mode, keymap, action, desc)
-    keymap_set(mode, keymap, action, { buffer = bufnr, desc = desc })
-  end
-
-  -- Enable cmp-nvim-lsp capabilities for LSPs
   local cmp_nvim_lsp = require('cmp_nvim_lsp')
+
   local lsp_defaults = lspconfig.util.default_config
   lsp_defaults.capabilities = vim.tbl_deep_extend(
     'force',
     lsp_defaults.capabilities,
+    -- Enable cmp-nvim-lsp capabilities for LSPs
     cmp_nvim_lsp.default_capabilities()
   )
 
@@ -47,87 +19,86 @@ local function configLanguages()
   -- Support for context status-line
   local navic = require('nvim-navic')
 
-  local on_attach = function(client, bufnr)
-    lsp_format.on_attach(client, bufnr)
+  vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(event)
+      local bufnr = event.buf
+      local client = vim.lsp.get_client_by_id(event.data.client_id)
 
-    if client.server_capabilities.documentSymbolProvider then
-      navic.attach(client, bufnr)
-    end
+      if client == nil then
+        return
+      end
 
-    -- Will be available in Neovim 0.10.x
-    -- vim.lsp.inlay_hints(bufnr, true)
+      lsp_format.on_attach(client, bufnr)
 
-    set_buf_keymap_fn(
-      bufnr,
-      { 'n', 'v' },
-      'K',
-      vim.lsp.buf.hover,
-      ' LSP: show symbol documentation'
-    )
-    set_buf_keymap_fn(
-      bufnr,
-      { 'n', 'v' },
-      'gd',
-      vim.lsp.buf.definition,
-      '󰈮 LSP: go to the definition'
-    )
-    set_buf_keymap_fn(
-      bufnr,
-      { 'n', 'v' },
-      'gD',
-      vim.lsp.buf.declaration,
-      ' LSP: go to the declaration'
-    )
-    set_buf_keymap_fn(
-      bufnr,
-      { 'n', 'v' },
-      'gt',
-      vim.lsp.buf.type_definition,
-      ' LSP: go to the type definition'
-    )
-    set_buf_keymap_fn(
-      bufnr,
-      { 'n', 'v' },
-      'gr',
-      vim.lsp.buf.references,
-      ' LSP: Show [r]eferences'
-    )
-    set_buf_keymap_fn(
-      bufnr,
-      { 'n', 'v' },
-      'gi',
-      vim.lsp.buf.implementation,
-      ' LSP: Show [i]mplementations'
-    )
-    set_buf_keymap_fn(
-      bufnr,
-      { 'n', 'v' },
-      'gs',
-      vim.lsp.buf.document_symbol,
-      ' LSP: Show document [s]ymbols'
-    )
-    set_buf_keymap_fn(
-      bufnr,
-      { 'n', 'v' },
-      'gS',
-      vim.lsp.buf.workspace_symbol,
-      ' LSP: Show workspace [s]ymbols'
-    )
-    set_buf_keymap_fn(
-      bufnr,
-      { 'n', 'v' },
-      'gA',
-      vim.lsp.buf.code_action,
-      ' LSP: Show code [a]ctions'
-    )
-    set_buf_keymap_fn(
-      bufnr,
-      'n',
-      '<leader>hs',
-      vim.lsp.buf.signature_help,
-      '󱜻 LSP: Show singature help'
-    )
-  end
+      if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+      end
+
+      -- Will be available in Neovim 0.10.x
+      -- vim.lsp.inlay_hints(bufnr, true)
+
+      keymap_set(
+        { 'n', 'v' },
+        'K',
+        vim.lsp.buf.hover,
+        { buffer = bufnr, desc = ' LSP: show symbol documentation' }
+      )
+      keymap_set(
+        { 'n', 'v' },
+        'gd',
+        vim.lsp.buf.definition,
+        { buffer = bufnr, desc = '󰈮 LSP: go to the definition' }
+      )
+      keymap_set(
+        { 'n', 'v' },
+        'gD',
+        vim.lsp.buf.declaration,
+        { buffer = bufnr, desc = ' LSP: go to the declaration' }
+      )
+      keymap_set(
+        { 'n', 'v' },
+        'gt',
+        vim.lsp.buf.type_definition,
+        { buffer = bufnr, desc = ' LSP: go to the type definition' }
+      )
+      keymap_set(
+        { 'n', 'v' },
+        'gr',
+        vim.lsp.buf.references,
+        { buffer = bufnr, desc = ' LSP: Show [r]eferences' }
+      )
+      keymap_set(
+        { 'n', 'v' },
+        'gi',
+        vim.lsp.buf.implementation,
+        { buffer = bufnr, desc = ' LSP: Show [i]mplementations' }
+      )
+      keymap_set(
+        { 'n', 'v' },
+        'gs',
+        vim.lsp.buf.document_symbol,
+        { buffer = bufnr, desc = ' LSP: Show document [s]ymbols' }
+      )
+      keymap_set(
+        { 'n', 'v' },
+        'gS',
+        vim.lsp.buf.workspace_symbol,
+        { buffer = bufnr, desc = ' LSP: Show workspace [s]ymbols' }
+      )
+      keymap_set(
+        { 'n', 'v' },
+        'gA',
+        vim.lsp.buf.code_action,
+        { buffer = bufnr, desc = ' LSP: Show code [a]ctions' }
+      )
+      keymap_set(
+        'n',
+        '<leader>hs',
+        vim.lsp.buf.signature_help,
+        { buffer = bufnr, desc = '󱜻 LSP: Show singature help' }
+      )
+    end,
+  })
 
   local dap = require('dap')
   keymap_set({ 'n' }, { '<leader>Db' }, function()
@@ -188,14 +159,6 @@ local function configLanguages()
 
     dapui.toggle()
   end, { desc = ' DAP: Open UI' })
-
-  -- Load all LSP drop-in configurations
-  load_lang_modules(
-    set_buf_keymap_fn,
-    lspconfig,
-    { on_attach = on_attach },
-    dap
-  )
 end
 
 return {
@@ -255,7 +218,7 @@ return {
     },
   },
   {
-    name = 'Language Support',
+    name = 'lang:common',
     dir = '.',
     config = configLanguages,
     dependencies = {

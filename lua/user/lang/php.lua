@@ -1,4 +1,4 @@
-local function setup_lsp(set_keymap_fn, lspconfig, lsp_opts)
+local function setupLsp()
   if vim.fn.executable('intelephense') ~= 1 then
     return
   end
@@ -13,19 +13,21 @@ local function setup_lsp(set_keymap_fn, lspconfig, lsp_opts)
     },
   }
 
-  local on_attach = lsp_opts.on_attach or function() end
-  lsp_opts.on_attach = function(client, bufnr)
-    set_keymap_fn(bufnr, { 'n', 'v' }, '<leader>lr', function()
-      vim.lsp.buf.execute_command({
-        command = 'intelephense.index.workspace',
+  require('lspconfig').intelephense.setup({
+    on_attach = function(client, bufnr)
+      keymap_set({ 'n', 'v' }, '<leader>lr', function()
+        vim.lsp.buf.execute_command({
+          command = 'intelephense.index.workspace',
+        })
+        vim.print('Intelephense: Re-indexing the workspace')
+      end, {
+        desc = ' Intelephense: (L)SP (R)e-index workspace',
+        buffer = bufnr,
       })
-      vim.print('Intelephense: Re-indexing the workspace')
-    end, ' Intelephense: (L)SP (R)e-index workspace')
 
-    return on_attach(client, bufnr)
-  end
-
-  lspconfig.intelephense.setup(vim.tbl_deep_extend('force', lsp_opts or {}, {
+      return on_attach(client, bufnr)
+    end,
+  }, {
     settings = {
       ['intelephense'] = {
         settings = {
@@ -36,10 +38,10 @@ local function setup_lsp(set_keymap_fn, lspconfig, lsp_opts)
         capabilities = capabilities,
       },
     },
-  }))
+  })
 end
 
-local function setup_dap(dap)
+local function setupDap()
   if vim.fn.executable('node') ~= 1 then
     return
   end
@@ -48,6 +50,8 @@ local function setup_dap(dap)
   if adapter_path == nil then
     return
   end
+
+  local dap = require('dap')
 
   dap.adapters.php = {
     type = 'executable',
@@ -65,7 +69,14 @@ local function setup_dap(dap)
   }
 end
 
-return function(set_keymap_fn, lspconfig, lsp_opts, dap)
-  setup_lsp(set_keymap_fn, lspconfig, lsp_opts)
-  setup_dap(dap)
+local function configurePhp()
+  setupLsp()
+  setupDap()
 end
+
+return {
+  name = 'lang:php',
+  depends = { 'lang:common', 'mfussenegger/nvim-dap' },
+  dir = '.',
+  config = configurePhp,
+}
