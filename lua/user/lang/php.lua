@@ -51,22 +51,18 @@ local function setupDap()
     return
   end
 
-  local dap = require('dap')
+  local launch_file = vim.fn.getcwd() .. '/.vscode/launch.json'
+  if not vim.fn.filereadable(launch_file) then
+    return
+  end
 
-  dap.adapters.php = {
+  require('dap').adapters.php = {
     type = 'executable',
     command = 'node',
     args = { adapter_path },
   }
 
-  dap.configurations.php = {
-    {
-      type = 'php',
-      request = 'launch',
-      name = 'Listen for Xdebug',
-      port = 9003,
-    },
-  }
+  require('dap.ext.vscode').load_launchjs(launch_file)
 end
 
 local function configurePhp()
