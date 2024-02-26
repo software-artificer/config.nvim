@@ -37,28 +37,14 @@ local function configurePhpLsp()
   })
 end
 
-local function configurePhpDap()
-  if vim.fn.executable('node') ~= 1 then
-    return
-  end
-
-  local adapter_path = os.getenv('VSCODE_PHP_DEBUG_ADAPTER')
-  if adapter_path == nil then
-    return
-  end
-
-  local launch_file = vim.fn.getcwd() .. '/.vscode/launch.json'
-  if not vim.fn.filereadable(launch_file) then
-    return
-  end
-
+local function configurePhpDap(_, opts)
   require('dap').adapters.php = {
     type = 'executable',
     command = 'node',
-    args = { adapter_path },
+    args = { opts.adapter_path },
   }
 
-  require('dap.ext.vscode').load_launchjs(launch_file)
+  require('dap.ext.vscode').load_launchjs(opts.launch_file)
 end
 
 return {
@@ -83,5 +69,14 @@ return {
       'mfussenegger/nvim-dap',
     },
     config = configurePhpDap,
+    opts = {
+      adapter_path = os.getenv('VSCODE_PHP_DEBUG_ADAPTER'),
+      launch_file = vim.fn.getcwd() .. '/.vscode/launch.json',
+    },
+    cond = function(plugin)
+      return vim.fn.executable('node') == 1
+        and plugin.opts.adapter_path ~= nil
+        and vim.fn.filereadable(plugin.opts.launch_file)
+    end,
   },
 }
