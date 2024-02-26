@@ -101,7 +101,7 @@ local function configLanguages()
   })
 
   local dap = require('dap')
-  keymap_set({ 'n' }, { '<leader>Db' }, function()
+  keymap_set({ 'n' }, { '<leader>DB' }, function()
     dap.toggle_breakpoint()
   end, { desc = ' DAP: Toggle breakpoint' })
   keymap_set({ 'n' }, { '<leader>Dc' }, function()
