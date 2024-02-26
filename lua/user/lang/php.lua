@@ -1,8 +1,4 @@
-local function setupLsp()
-  if vim.fn.executable('intelephense') ~= 1 then
-    return
-  end
-
+local function configurePhpLsp()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -41,7 +37,7 @@ local function setupLsp()
   })
 end
 
-local function setupDap()
+local function configurePhpDap()
   if vim.fn.executable('node') ~= 1 then
     return
   end
@@ -65,14 +61,27 @@ local function setupDap()
   require('dap.ext.vscode').load_launchjs(launch_file)
 end
 
-local function configurePhp()
-  setupLsp()
-  setupDap()
-end
-
 return {
-  name = 'lang:php',
-  depends = { 'lang:common', 'neovim/nvim-lspconfig', 'mfussenegger/nvim-dap' },
-  dir = '.',
-  config = configurePhp,
+  {
+    name = 'lang:php:lsp',
+    dir = '.',
+    depends = {
+      'lang:common',
+      'neovim/nvim-lspconfig',
+    },
+    dir = '.',
+    config = configurePhpLsp,
+    enabled = function()
+      return vim.fn.executable('intelephense') == 1
+    end,
+  },
+  {
+    name = 'lang:php:dap',
+    dir = '.',
+    depends = {
+      'lang:common',
+      'mfussenegger/nvim-dap',
+    },
+    config = configurePhpDap,
+  },
 }
