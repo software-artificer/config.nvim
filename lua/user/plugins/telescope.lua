@@ -1,40 +1,5 @@
-local function actions()
-  return require('telescope.actions')
-end
-
-local function action_close(...)
-  actions().close(...)
-end
-
-local function action_move_selection_next(...)
-  actions().move_selection_next(...)
-end
-
-local function action_move_selection_prev(...)
-  actions().move_selection_previous(...)
-end
-
-local function action_select_default(...)
-  actions().select_default(...)
-end
-
-local function action_preview_scroll_up(...)
-  actions().preview_scrolling_up(...)
-end
-
-local function action_preview_scroll_down(...)
-  actions().preview_scrolling_down(...)
-end
-
-local function action_delete_buffer(...)
-  actions().delete_buffer(...)
-end
-
 local function initTelescope(_, opts)
   local telescope = require('telescope')
-  local pickers = require('telescope.builtin')
-  local actions = require('telescope.actions')
-  local state = require('telescope.actions.state')
 
   telescope.setup(opts)
 
@@ -48,6 +13,8 @@ local function initTelescope(_, opts)
 
   vim.api.nvim_create_autocmd('LspAttach', {
     callback = function()
+      local pickers = require('telescope.builtin')
+
       vim.lsp.buf.references = function()
         pickers.lsp_references({ jump_type = 'never' })
       end
@@ -104,16 +71,10 @@ local function show_buffer_diagnostic()
   require('telescope.builtin').diagnostics({ bufnr = 0 })
 end
 
-return {
-  'nvim-telescope/telescope.nvim',
-  version = '^0.1',
-  config = initTelescope,
-  dependencies = {
-    'nvim-lua/plenary.nvim',
-    'nvim-treesitter/nvim-treesitter',
-    'nvim-tree/nvim-web-devicons',
-  },
-  opts = {
+local function getPluginOpts()
+  local actions = require('telescope.actions')
+
+  return {
     defaults = {
       prompt_prefix = '  ',
       selection_caret = ' ',
@@ -130,18 +91,18 @@ return {
       },
       mappings = {
         i = {
-          ['<esc>'] = action_close,
-          ['<c-n>'] = action_move_selection_next,
-          ['<c-p>'] = action_move_selection_prev,
-          ['<cr>'] = action_select_default,
-          ['<c-u>'] = action_preview_scroll_up,
-          ['<c-d>'] = action_preview_scroll_down,
+          ['<esc>'] = actions.close,
+          ['<c-n>'] = actions.move_selection_next,
+          ['<c-p>'] = actions.move_selection_previous,
+          ['<cr>'] = actions.select_default,
+          ['<c-u>'] = actions.preview_scrolling_up,
+          ['<c-d>'] = actions.preview_scrolling_down,
           -- only in master, will be available in a future release
           -- ['<c-f>'] = actions.preview_scrolling_left,
           -- ['<c-b>'] = actions.preview_scrolling_right,
         },
         n = {
-          ['<esc>'] = action_close,
+          ['<esc>'] = actions.close,
         },
       },
       layout_strategy = 'vertical',
@@ -149,11 +110,23 @@ return {
     pickers = {
       buffers = {
         mappings = {
-          i = { ['<c-r>'] = action_delete_buffer },
+          i = { ['<c-r>'] = actions.delete_buffer },
         },
       },
     },
+  }
+end
+
+return {
+  'nvim-telescope/telescope.nvim',
+  version = '^0.1',
+  config = initTelescope,
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    'nvim-treesitter/nvim-treesitter',
+    'nvim-tree/nvim-web-devicons',
   },
+  opts = getPluginOpts,
   keys = {
     {
       '<leader>ff',
