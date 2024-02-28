@@ -7,7 +7,7 @@ return {
   depends = { 'lang:common', 'neovim/nvim-lspconfig' },
   dir = '.',
   config = configureNix,
-  enabled = function()
+  cond = function()
     return vim.fn.executable('nil') == 1
   end,
 }

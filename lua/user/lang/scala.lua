@@ -11,7 +11,7 @@ return {
   depends = { 'lang:common', 'neovim/nvim-lspconfig' },
   dir = '.',
   config = configureScala,
-  enabled = function()
+  cond = function()
     return vim.fn.executable('metals') == 1
   end,
 }

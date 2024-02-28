@@ -57,7 +57,7 @@ return {
     },
     dir = '.',
     config = configurePhpLsp,
-    enabled = function()
+    cond = function()
       return vim.fn.executable('intelephense') == 1
     end,
   },

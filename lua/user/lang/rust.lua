@@ -23,7 +23,7 @@ return {
   depends = { 'lang:common', 'neovim/nvim-lspconfig' },
   dir = '.',
   config = configureRust,
-  enabled = function()
+  cond = function()
     return vim.fn.executable('rust-analyzer') == 1
   end,
 }
