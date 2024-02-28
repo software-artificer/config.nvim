@@ -20,7 +20,7 @@ end
 
 return {
   name = 'lang:rust:lsp',
-  depends = { 'lang:common', 'neovim/nvim-lspconfig' },
+  dependencies = { 'lang:common', 'neovim/nvim-lspconfig' },
   dir = '.',
   config = configureRust,
   cond = function()

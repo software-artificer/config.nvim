@@ -28,7 +28,7 @@ end
 return {
   {
     name = 'lang:go:lsp',
-    depends = { 'lang:common', 'neovim/nvim-lspconfig' },
+    dependencies = { 'lang:common', 'neovim/nvim-lspconfig' },
     dir = '.',
     config = setupGoLsp,
     cond = function()
@@ -37,7 +37,7 @@ return {
   },
   {
     'leoluz/nvim-dap-go',
-    depends = { 'lang:common', 'mfussenegger/nvim-dap' },
+    dependencies = { 'lang:common', 'mfussenegger/nvim-dap' },
     config = setupGoDap,
     cond = function()
       return vim.fn.executable('dlv') == 1

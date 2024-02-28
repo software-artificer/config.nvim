@@ -4,7 +4,7 @@ end
 
 return {
   name = 'lang:nix:lsp',
-  depends = { 'lang:common', 'neovim/nvim-lspconfig' },
+  dependencies = { 'lang:common', 'neovim/nvim-lspconfig' },
   dir = '.',
   config = configureNix,
   cond = function()

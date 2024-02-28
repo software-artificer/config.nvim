@@ -51,7 +51,7 @@ return {
   {
     name = 'lang:php:lsp',
     dir = '.',
-    depends = {
+    dependencies = {
       'lang:common',
       'neovim/nvim-lspconfig',
     },
@@ -64,7 +64,7 @@ return {
   {
     name = 'lang:php:dap',
     dir = '.',
-    depends = {
+    dependencies = {
       'lang:common',
       'mfussenegger/nvim-dap',
     },
