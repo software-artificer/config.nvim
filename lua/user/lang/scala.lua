@@ -8,7 +8,7 @@ end
 
 return {
   name = 'lang:scala:lsp',
-  depends = { 'lang:common', 'neovim/nvim-lspconfig' },
+  dependencies = { 'lang:common', 'neovim/nvim-lspconfig' },
   dir = '.',
   config = configureScala,
   cond = function()
