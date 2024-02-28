@@ -1,7 +1,7 @@
-local function initPlugin()
+local function getPluginOpts()
   local rainbow_delimiters = require('rainbow-delimiters')
 
-  require('rainbow-delimiters.setup').setup({
+  return {
     strategy = {
       [''] = rainbow_delimiters.strategy['global'],
     },
@@ -13,11 +13,16 @@ local function initPlugin()
       'RainbowDelimiterViolet',
       'RainbowDelimiterBlue',
     },
-  })
+  }
+end
+
+local function configurePlugin(self, opts)
+  require('rainbow-delimiters.setup').setup(opts)
 end
 
 return {
   'HiPhish/rainbow-delimiters.nvim',
-  config = initPlugin,
+  opts = getPluginOpts,
+  config = configurePlugin,
   dependencies = { 'nvim-treesitter/nvim-treesitter' },
 }
