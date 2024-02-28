@@ -1,4 +1,4 @@
-local function setupPlugin()
+local function getPluginOpts()
   local null_ls = require('null-ls')
 
   local sources = {}
@@ -15,9 +15,9 @@ local function setupPlugin()
     table.insert(sources, null_ls.builtins.formatting.nixfmt)
   end
 
-  null_ls.setup({
+  return {
     sources = sources,
-  })
+  }
 end
 
 return {
@@ -25,5 +25,5 @@ return {
   dependencies = {
     'nvim-lua/plenary.nvim',
   },
-  config = setupPlugin,
+  opts = getPluginOpts,
 }
