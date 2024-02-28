@@ -28,7 +28,7 @@ local cmp_kind_icons = {
 
 local cmp_source_names = {}
 
-local function setupCmp()
+local function getPluginOpts()
   local cmp = require('cmp')
   local luasnip = require('luasnip')
 
@@ -48,7 +48,7 @@ local function setupCmp()
     luasnip_jump(-1, fallback)
   end
 
-  cmp.setup({
+  return {
     preselect = cmp.PreselectMode.Item,
     snippet = {
       expand = function(args)
@@ -84,13 +84,13 @@ local function setupCmp()
       { name = 'path' },
       { name = 'buffer', keyword_length = 5 },
     },
-  })
+  }
 end
 
 return {
   {
     'hrsh7th/nvim-cmp',
-    config = setupCmp,
+    opts = getPluginOpts,
     dependencies = {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
