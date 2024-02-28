@@ -225,6 +225,9 @@ return {
       'neovim/nvim-lspconfig',
       'mfussenegger/nvim-dap',
       'rcarriga/nvim-dap-ui',
+      'aznhe21/actions-preview.nvim',
+      'nvim-telescope/telescope.nvim',
+      'DNLHC/glance.nvim',
     },
   },
 }
