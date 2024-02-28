@@ -1,26 +1,7 @@
-local function setupPlugin()
-  local mappings = require('yanky.telescope.mapping')
+local function setupPlugin(self, opts)
   local yanky = require('yanky')
 
-  yanky.setup({
-    ring = {
-      history_length = 100,
-      storage = 'memory',
-    },
-    pickers = {
-      telescope = {
-        mappings = {
-          default = mappings.put('p'),
-          i = {
-            ['<s-cr>'] = mappings.put('P'),
-          },
-        },
-      },
-    },
-    system_clipboard = {
-      sync_with_ring = false,
-    },
-  })
+  yanky.setup(opts)
 
   local res, telescope = pcall(require, 'telescope')
   if res then
@@ -47,10 +28,35 @@ local function setupPlugin()
   end
 end
 
+local function getPluginOpts()
+  local mappings = require('yanky.telescope.mapping')
+
+  return {
+    ring = {
+      history_length = 100,
+      storage = 'memory',
+    },
+    pickers = {
+      telescope = {
+        mappings = {
+          default = mappings.put('p'),
+          i = {
+            ['<s-cr>'] = mappings.put('P'),
+          },
+        },
+      },
+    },
+    system_clipboard = {
+      sync_with_ring = false,
+    },
+  }
+end
+
 return {
   'gbprod/yanky.nvim',
   version = '^2',
   config = setupPlugin,
+  opts = getPluginOpts,
   dependencies = {
     'nvim-telescope/telescope.nvim',
   },
