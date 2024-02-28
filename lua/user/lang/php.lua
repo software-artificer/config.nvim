@@ -20,8 +20,6 @@ local function configurePhpLsp()
         desc = ' Intelephense: (L)SP (R)e-index workspace',
         buffer = bufnr,
       })
-
-      return on_attach(client, bufnr)
     end,
   }, {
     settings = {
