@@ -97,19 +97,11 @@ local function telescopeSelector(items, opts, on_choice)
     :find()
 end
 
-local function setupPlugin()
+local function getPluginOpts()
   local legendary = require('legendary')
   local filters = require('legendary.filters')
-  local selector = vim.ui.select
-  vim.ui.select = function(items, opts, on_choice)
-    if opts.kind == 'legendary.nvim' then
-      telescopeSelector(items, opts, on_choice)
-    else
-      selector(items, opts, on_choice)
-    end
-  end
 
-  legendary.setup({
+  return {
     extensions = { lazy_nvim = { auto_register = true }, diffview = true },
     keymaps = {
       {
@@ -188,7 +180,21 @@ local function setupPlugin()
         mode = { 'n', 'v' },
       },
     },
-  })
+  }
+end
+
+local function setupPlugin(self, opts)
+  local legendary = require('legendary')
+  local selector = vim.ui.select
+  vim.ui.select = function(items, opts, on_choice)
+    if opts.kind == 'legendary.nvim' then
+      telescopeSelector(items, opts, on_choice)
+    else
+      selector(items, opts, on_choice)
+    end
+  end
+
+  legendary.setup(opts)
 end
 
 return {
@@ -201,4 +207,5 @@ return {
   dependencies = {
     'nvim-telescope/telescope.nvim',
   },
+  opts = getPluginOpts,
 }
