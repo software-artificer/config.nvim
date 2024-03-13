@@ -1,5 +1,5 @@
 local function setupGoLsp()
-  require('lspconfig').gopls.setup({}, {
+  require('lspconfig').gopls.setup({
     settings = {
       ['gopls'] = {},
     },

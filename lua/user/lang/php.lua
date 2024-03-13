@@ -21,7 +21,6 @@ local function configurePhpLsp()
         buffer = bufnr,
       })
     end,
-  }, {
     settings = {
       ['intelephense'] = {
         settings = {
