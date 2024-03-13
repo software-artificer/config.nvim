@@ -4,6 +4,8 @@ local function configureRust()
       ['rust-analyzer'] = {
         checkOnSave = true,
         check = {
+          allTargets = true,
+          features = 'all',
           command = 'clippy',
         },
       },
