@@ -12,6 +12,7 @@ return {
     hijack_cursor = true,
     view = {
       width = 40,
+      preserve_window_proportions = true,
     },
     renderer = {
       special_files = {},

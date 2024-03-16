@@ -3,6 +3,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 -- Disable mouse integration
 vim.opt.mouse = nil
+-- Prevent NeoVim from changing window sizes when opening a new file
+vim.opt.equalalways = true
 
 -- Configure diagnostic options
 vim.diagnostic.config({
