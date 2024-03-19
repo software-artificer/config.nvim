@@ -105,15 +105,6 @@ local function getPluginOpts()
     extensions = { lazy_nvim = { auto_register = true }, diffview = true },
     keymaps = {
       {
-        '<leader>q',
-        {
-          n = function()
-            vim.api.nvim_buf_delete(0, { force = true })
-          end,
-        },
-        description = ' [Q]uit current buffer',
-      },
-      {
         '<leader>d',
         { n = vim.diagnostic.open_float },
         description = '󰮦 Show [d]iagnostic popup',

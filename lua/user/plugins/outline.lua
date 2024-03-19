@@ -8,7 +8,7 @@ local function setupPlugin(_, opts)
     callback = function(opts)
       keymap_set(
         'n',
-        { 'q', '<esc>', '<leader>q' },
+        { 'q', '<esc>', '<leader>q', '<leader>Q' },
         outline.close_outline,
         { desc = 'Symbols Outline: 󰩈 [Q]uit the outline', buffer = opts.buf }
       )
