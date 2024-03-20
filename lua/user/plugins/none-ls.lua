@@ -15,6 +15,10 @@ local function getPluginOpts()
     table.insert(sources, null_ls.builtins.formatting.nixfmt)
   end
 
+  if vim.fn.executable('terraform') == 1 then
+    table.insert(sources, null_ls.builtins.formatting.terraform_fmt)
+  end
+
   return {
     sources = sources,
   }
