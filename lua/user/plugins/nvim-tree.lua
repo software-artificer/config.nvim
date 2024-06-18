@@ -20,10 +20,10 @@ return {
         symlink_arrow = '  ',
         glyphs = {
           folder = {
-	    default = '',
-	    open = '',
-	    empty = '',
-	    empty_open = '',
+            default = '',
+            open = '',
+            empty = '',
+            empty_open = '',
             arrow_open = '',
             arrow_closed = '',
           },
