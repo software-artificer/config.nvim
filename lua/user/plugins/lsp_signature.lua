@@ -1,6 +1,6 @@
 return {
   'ray-x/lsp_signature.nvim',
-  version = '^0.2',
+  version = '^0.3',
   opts = {
     floating_window = false,
     doc_lines = 0,

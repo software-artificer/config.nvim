@@ -22,6 +22,7 @@ end
 
 return {
   'HiPhish/rainbow-delimiters.nvim',
+  version = "^0.4",
   opts = getPluginOpts,
   config = configurePlugin,
   dependencies = { 'nvim-treesitter/nvim-treesitter' },

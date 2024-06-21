@@ -55,6 +55,7 @@ end
 
 return {
   'hedyhli/outline.nvim',
+  version = "^1",
   config = setupPlugin,
   opts = {
     keymaps = {
