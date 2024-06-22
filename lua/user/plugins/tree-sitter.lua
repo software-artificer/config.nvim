@@ -6,6 +6,8 @@ return {
   opts = {
     sync_install = false,
     auto_install = true,
+    -- FIXME: HTML currently crashing NeoVim
+    ignore_install = { "html" },
     highlight = {
       enable = true,
     },
