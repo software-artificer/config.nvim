@@ -44,6 +44,20 @@ local function configurePhpDap(_, opts)
   require('dap.ext.vscode').load_launchjs(opts.launch_file)
 end
 
+local function configurePhpStyle()
+  vim.api.nvim_create_autocmd('FileType', {
+    group = 'set_ident',
+    pattern = 'php',
+    desc = 'Set proper identation for PHP files',
+    callback = function()
+      vim.print('This is a PHP file')
+      vim.opt_local.shiftwidth = 4
+      vim.opt_local.tabstop = 4
+      vim.opt_local.expandtab = true
+    end,
+  })
+end
+
 return {
   {
     name = 'lang:php:lsp',
@@ -75,5 +89,13 @@ return {
         and plugin.opts.adapter_path ~= nil
         and vim.fn.filereadable(plugin.opts.launch_file)
     end,
+  },
+  {
+    name = 'lang:php:style',
+    dir = '.',
+    dependencies = {
+      'lang:common',
+    },
+    config = configurePhpStyle,
   },
 }

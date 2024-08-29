@@ -1,3 +1,5 @@
+vim.api.nvim_create_augroup('set_ident', { clear = true })
+
 local function configLanguages()
   local lspconfig = require('lspconfig')
   local cmp_nvim_lsp = require('cmp_nvim_lsp')

@@ -49,13 +49,9 @@ keymap_set(
   '"+y',
   { noremap = true, silent = true, desc = '󰅌 Copy to clipboard' }
 )
-keymap_set(
-  'n',
-  '<leader>yy',
-  '"+yy',
-  {
-    noremap = true,
-    silent = true,
-    desc = '󰅌 Copy current line to clipboard',
-  }
-)
+
+keymap_set('n', '<leader>yy', '"+yy', {
+  noremap = true,
+  silent = true,
+  desc = '󰅌 Copy current line to clipboard',
+})
