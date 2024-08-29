@@ -50,7 +50,6 @@ local function configurePhpStyle()
     pattern = 'php',
     desc = 'Set proper identation for PHP files',
     callback = function()
-      vim.print('This is a PHP file')
       vim.opt_local.shiftwidth = 4
       vim.opt_local.tabstop = 4
       vim.opt_local.expandtab = true
