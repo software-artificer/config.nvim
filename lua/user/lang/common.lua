@@ -155,10 +155,6 @@ local function configLanguages()
     dapui.close()
   end
   keymap_set({ 'n' }, { '<leader>Du' }, function()
-    if dap.session() == nil then
-      return
-    end
-
     dapui.toggle()
   end, { desc = ' DAP: Open UI' })
 end
