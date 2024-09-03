@@ -120,7 +120,7 @@ local function getPluginOpts()
         description = ' Go to previous [d]iagnostic message',
       },
       {
-        '<leader>F',
+        '<leader>FF',
         { n = vim.lsp.buf.format },
         description = '󰉼 [F]ormat document using LSP',
       },

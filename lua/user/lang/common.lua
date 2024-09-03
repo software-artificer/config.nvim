@@ -170,6 +170,17 @@ return {
   {
     'lukas-reineke/lsp-format.nvim',
     version = '^2.6',
+    keys = {
+      {
+        '<leader>Ff',
+        function()
+          require('lsp-format').toggle({ args = '' })
+          vim.print('󰉼 LSP formatting toggled')
+        end,
+        mode = { 'n' },
+        desc = '󰉼 Toggle automatic LSP formatting',
+      },
+    },
   },
   {
     'SmiteshP/nvim-navic',
