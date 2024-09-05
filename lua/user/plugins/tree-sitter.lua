@@ -7,7 +7,7 @@ return {
     sync_install = false,
     auto_install = true,
     -- FIXME: HTML currently crashing NeoVim
-    ignore_install = { "html" },
+    ignore_install = { 'html' },
     highlight = {
       enable = true,
     },
@@ -19,9 +19,9 @@ return {
       enable = true,
       keymaps = {
         init_selection = false,
-        node_incremental = 'w',
-        node_decremental = 'b',
-        scope_incremental = false,
+        node_incremental = '<leader>w',
+        node_decremental = '<leader>b',
+        scope_incremental = '<leader>h',
       },
     },
   },
