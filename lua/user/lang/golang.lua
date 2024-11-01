@@ -1,7 +1,17 @@
 local function setupGoLsp()
+  local cwd = vim.fn.getcwd()
+  local wire = vim.fn.findfile('wire.go', '.')
+  local buildFlags = {}
+
+  if f ~= '' then
+    table.insert(buildFlags, '-tags=wireinject')
+  end
+
   require('lspconfig').gopls.setup({
     settings = {
-      ['gopls'] = {},
+      ['gopls'] = {
+        buildFlags = buildFlags,
+      },
     },
   })
 end
