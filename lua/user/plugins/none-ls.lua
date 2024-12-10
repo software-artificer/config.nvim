@@ -19,6 +19,10 @@ local function getPluginOpts()
     table.insert(sources, null_ls.builtins.formatting.terraform_fmt)
   end
 
+  if vim.fn.executable('revive') == 1 then
+    table.insert(sources, null_ls.builtins.diagnostics.revive)
+  end
+
   return {
     sources = sources,
   }
