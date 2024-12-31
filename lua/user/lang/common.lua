@@ -162,6 +162,7 @@ end
 return {
   {
     'neovim/nvim-lspconfig',
+    version = '^1.2',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'lukas-reineke/lsp-format.nvim',
@@ -228,7 +229,7 @@ return {
   },
   {
     name = 'lang:common',
-    dir = '.',
+    dir = './',
     config = configLanguages,
     dependencies = {
       'neovim/nvim-lspconfig',
