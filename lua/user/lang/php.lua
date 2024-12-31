@@ -40,8 +40,6 @@ local function configurePhpDap(_, opts)
     command = 'node',
     args = { opts.adapter_path },
   }
-
-  require('dap.ext.vscode').load_launchjs(opts.launch_file)
 end
 
 local function configurePhpStyle()
@@ -81,12 +79,9 @@ return {
     config = configurePhpDap,
     opts = {
       adapter_path = os.getenv('VSCODE_PHP_DEBUG_ADAPTER'),
-      launch_file = vim.fn.getcwd() .. '/.vscode/launch.json',
     },
     cond = function(plugin)
-      return vim.fn.executable('node') == 1
-        and plugin.opts.adapter_path ~= nil
-        and vim.fn.filereadable(plugin.opts.launch_file)
+      return vim.fn.executable('node') == 1 and plugin.opts.adapter_path ~= nil
     end,
   },
   {

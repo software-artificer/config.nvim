@@ -211,7 +211,7 @@ return {
   },
   {
     'mfussenegger/nvim-dap',
-    version = '^0.7',
+    version = '^0.9',
   },
   {
     'rcarriga/nvim-dap-ui',
