@@ -170,7 +170,7 @@ return {
   },
   {
     'lukas-reineke/lsp-format.nvim',
-    version = '^2.6',
+    version = '^2.7',
     keys = {
       {
         '<leader>Ff',
