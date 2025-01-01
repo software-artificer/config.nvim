@@ -13,10 +13,6 @@ local function getScalaOpts()
 
   metals_config.on_attach = function(client, bufnr)
     metals.setup_dap()
-
-    map('n', '<leader>ws', function()
-      metals.hover_worksheet()
-    end)
   end
 
   return metals_config

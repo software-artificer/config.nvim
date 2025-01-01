@@ -1,3 +1,7 @@
+local dap_adapter_path = vim.env.VSCODE_PHP_DEBUG_ADAPTER
+local has_dap = vim.fn.executable('node') == 1 and dap_adapter_path ~= nil
+local has_lsp = vim.fn.executable('intelephense') == 1
+
 local function setupLsp()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -40,8 +44,6 @@ local function setupDap()
     command = 'node',
     args = { dap_adapter_path },
   }
-
-  require('dap.ext.vscode').load_launchjs(launch_file_path)
 end
 
 local function setupStyle()
@@ -56,15 +58,6 @@ local function setupStyle()
     end,
   })
 end
-
-local dap_adapter_path = os.getenv('VSCODE_PHP_DEBUG_ADAPTER')
-local launch_file_path = vim.fn.getcwd() .. '/.vscode/launch.json'
-
-local has_dap = vim.fn.executable('node') == 1
-  and dap_adapter_path ~= nil
-  and vim.fn.filereadable(launch_file_path)
-
-local has_lsp = vim.fn.executable('intelephense') == 1
 
 return {
   dependencies = function()

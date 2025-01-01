@@ -99,6 +99,12 @@ local function configureLanguages()
         vim.lsp.buf.signature_help,
         { buffer = bufnr, desc = '󱜻 LSP: Show singature help' }
       )
+      keymap_set(
+        'n',
+        'gR',
+        vim.lsp.codelens.run,
+        { desc = '󰜎 LSP: Run code lens' }
+      )
     end,
   })
 
@@ -127,6 +133,25 @@ local function configureLanguages()
   keymap_set({ 'n' }, { '<leader>Dj' }, function()
     dap.up()
   end, { desc = '󱞰 DAP: Go down the stack' })
+  keymap_set({ 'n' }, { '<leader>DK' }, function()
+    require('dap.ui.widgets').hover()
+  end, { desc = '󰽁 DAP: Evaluate the symbol under the cursor' })
+
+  -- Make it so DAP hover can be closed with q or <leader>q
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = 'dap-float',
+    callback = function(args)
+      vim.print(args)
+      keymap_set({ 'n' }, { 'q', '<leader>q' }, function()
+        vim.api.nvim_win_close(0, true)
+      end, {
+        desc = '󰅗 DAP: Close the hover window',
+        noremap = true,
+        silent = true,
+        buffer = args.buf,
+      })
+    end,
+  })
   -- TODO:
   -- focus_frame
   -- run_last
@@ -211,7 +236,7 @@ local lang_deps = {
   },
   {
     'mfussenegger/nvim-dap',
-    version = '^0.7',
+    version = '^0.9',
   },
   {
     'rcarriga/nvim-dap-ui',
