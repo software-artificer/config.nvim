@@ -1,4 +1,4 @@
-local function configureRust()
+local function setupLsp()
   require('lspconfig').rust_analyzer.setup({
     settings = {
       ['rust-analyzer'] = {
@@ -13,12 +13,15 @@ local function configureRust()
   })
 end
 
+local has_lsp = vim.fn.executable('rust-analyzer') == 1
+
 return {
-  name = 'lang:rust:lsp',
-  dependencies = { 'lang:common', 'neovim/nvim-lspconfig' },
-  dir = '.',
-  config = configureRust,
-  cond = function()
-    return vim.fn.executable('rust-analyzer') == 1
+  dependencies = function()
+    return {}
+  end,
+  setup = function()
+    if has_lsp then
+      setupLsp()
+    end
   end,
 }

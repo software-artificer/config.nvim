@@ -35,13 +35,17 @@ if not vim.loop.fs_stat(lazy_path) then
 end
 vim.opt.rtp:prepend(lazy_path)
 
+local lang = require('user.lang')
+
 -- Install and configure plugins
 require('lazy').setup({
   spec = {
     { import = 'user.plugins' },
-    { import = 'user.lang' },
+    lang.dependencies(),
   },
 })
+
+lang.autodetect()
 
 keymap_set(
   'v',

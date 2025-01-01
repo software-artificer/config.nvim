@@ -1,13 +1,12 @@
-local function configureNix()
-  require('lspconfig').nil_ls.setup({})
-end
+local has_lsp = vim.fn.executable('nil') == 1
 
 return {
-  name = 'lang:nix:lsp',
-  dependencies = { 'lang:common', 'neovim/nvim-lspconfig' },
-  dir = '.',
-  config = configureNix,
-  cond = function()
-    return vim.fn.executable('nil') == 1
+  dependencies = function()
+    return {}
+  end,
+  setup = function()
+    if has_lsp then
+      require('lspconfig').nil_ls.setup({})
+    end
   end,
 }

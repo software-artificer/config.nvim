@@ -1,4 +1,4 @@
-local function configurePhpLsp()
+local function setupLsp()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -34,17 +34,17 @@ local function configurePhpLsp()
   })
 end
 
-local function configurePhpDap(_, opts)
+local function setupDap()
   require('dap').adapters.php = {
     type = 'executable',
     command = 'node',
-    args = { opts.adapter_path },
+    args = { dap_adapter_path },
   }
 
-  require('dap.ext.vscode').load_launchjs(opts.launch_file)
+  require('dap.ext.vscode').load_launchjs(launch_file_path)
 end
 
-local function configurePhpStyle()
+local function setupStyle()
   vim.api.nvim_create_autocmd('FileType', {
     group = 'set_ident',
     pattern = 'php',
@@ -57,44 +57,28 @@ local function configurePhpStyle()
   })
 end
 
+local dap_adapter_path = os.getenv('VSCODE_PHP_DEBUG_ADAPTER')
+local launch_file_path = vim.fn.getcwd() .. '/.vscode/launch.json'
+
+local has_dap = vim.fn.executable('node') == 1
+  and dap_adapter_path ~= nil
+  and vim.fn.filereadable(launch_file_path)
+
+local has_lsp = vim.fn.executable('intelephense') == 1
+
 return {
-  {
-    name = 'lang:php:lsp',
-    dir = '.',
-    dependencies = {
-      'lang:common',
-      'neovim/nvim-lspconfig',
-    },
-    dir = '.',
-    config = configurePhpLsp,
-    cond = function()
-      return vim.fn.executable('intelephense') == 1
-    end,
-  },
-  {
-    name = 'lang:php:dap',
-    dir = '.',
-    dependencies = {
-      'lang:common',
-      'mfussenegger/nvim-dap',
-    },
-    config = configurePhpDap,
-    opts = {
-      adapter_path = os.getenv('VSCODE_PHP_DEBUG_ADAPTER'),
-      launch_file = vim.fn.getcwd() .. '/.vscode/launch.json',
-    },
-    cond = function(plugin)
-      return vim.fn.executable('node') == 1
-        and plugin.opts.adapter_path ~= nil
-        and vim.fn.filereadable(plugin.opts.launch_file)
-    end,
-  },
-  {
-    name = 'lang:php:style',
-    dir = '.',
-    dependencies = {
-      'lang:common',
-    },
-    config = configurePhpStyle,
-  },
+  dependencies = function()
+    return {}
+  end,
+  setup = function()
+    if has_lsp then
+      setupLsp()
+    end
+
+    if has_dap then
+      setupDap()
+    end
+
+    setupStyle()
+  end,
 }

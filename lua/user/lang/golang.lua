@@ -1,4 +1,4 @@
-local function setupGoLsp()
+local function setupLsp()
   local cwd = vim.fn.getcwd()
   local wire = vim.fn.findfile('wire.go', '.')
   local buildFlags = {}
@@ -16,7 +16,7 @@ local function setupGoLsp()
   })
 end
 
-local function setupGoDap()
+local function setupDap()
   local dap_go = require('dap-go')
 
   dap_go.setup({
@@ -35,22 +35,33 @@ local function setupGoDap()
   end, { desc = '󰨰 DAP: go - debug last test' })
 end
 
+local has_lsp = vim.fn.executable('gopls') == 1
+local has_dap = vim.fn.executable('dlv') == 1
+
+local dependencies = function()
+  local deps = {}
+
+  if has_dap then
+    table.insert(deps, {
+      'leoluz/nvim-dap-go',
+      dependencies = { 'mfussenegger/nvim-dap' },
+    })
+  end
+
+  return deps
+end
+
+local setup = function()
+  if has_lsp then
+    setupLsp()
+  end
+
+  if has_dap then
+    setupDap()
+  end
+end
+
 return {
-  {
-    name = 'lang:go:lsp',
-    dependencies = { 'lang:common', 'neovim/nvim-lspconfig' },
-    dir = '.',
-    config = setupGoLsp,
-    cond = function()
-      return vim.fn.executable('gopls') == 1
-    end,
-  },
-  {
-    'leoluz/nvim-dap-go',
-    dependencies = { 'lang:common', 'mfussenegger/nvim-dap' },
-    config = setupGoDap,
-    cond = function()
-      return vim.fn.executable('dlv') == 1
-    end,
-  },
+  dependencies = dependencies,
+  setup = setup,
 }

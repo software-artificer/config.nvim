@@ -1,12 +1,3 @@
-local function configureScala(self, opts)
-  vim.api.nvim_create_autocmd('FileType', {
-    pattern = self.ft,
-    callback = function()
-      require('metals').initialize_or_attach(opts)
-    end,
-  })
-end
-
 local function getScalaOpts()
   local metals = require('metals')
 
@@ -31,18 +22,38 @@ local function getScalaOpts()
   return metals_config
 end
 
+local function setupLsp()
+  local opts = getScalaOpts()
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'scala', 'sbt', 'java' },
+    callback = function()
+      require('metals').initialize_or_attach(opts)
+    end,
+  })
+end
+
+local has_lsp = vim.fn.executable('metals') == 1
+
 return {
-  'scalameta/nvim-metals',
-  dependencies = {
-    'lang:common',
-    'scalameta/nvim-metals',
-    'hrsh7th/cmp-nvim-lsp',
-  },
-  config = configureScala,
-  cond = function()
-    return vim.fn.executable('metals') == 1
+  dependencies = function()
+    local deps = {}
+
+    if has_lsp then
+      table.insert(deps, {
+        'scalameta/nvim-metals',
+        dependencies = {
+          'nvim-lua/plenary.nvim',
+          'hrsh7th/cmp-nvim-lsp',
+          'mfussenegger/nvim-dap',
+        },
+      })
+    end
+
+    return deps
   end,
-  ft = { 'scala', 'sbt', 'java' },
-  opts = getScalaOpts,
-  config = configureScala,
+  setup = function()
+    if has_lsp then
+      setupLsp()
+    end
+  end,
 }

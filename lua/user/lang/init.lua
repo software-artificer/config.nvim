@@ -1,6 +1,6 @@
-vim.api.nvim_create_augroup('set_ident', { clear = true })
+local function configureLanguages()
+  vim.api.nvim_create_augroup('set_ident', { clear = true })
 
-local function configLanguages()
   local lspconfig = require('lspconfig')
   local cmp_nvim_lsp = require('cmp_nvim_lsp')
 
@@ -159,7 +159,7 @@ local function configLanguages()
   end, { desc = ' DAP: Open UI' })
 end
 
-return {
+local lang_deps = {
   {
     'neovim/nvim-lspconfig',
     version = '^1.2',
@@ -227,17 +227,78 @@ return {
       'mfussenegger/nvim-dap',
     },
   },
-  {
-    name = 'lang:common',
-    dir = './',
-    config = configLanguages,
-    dependencies = {
-      'neovim/nvim-lspconfig',
-      'mfussenegger/nvim-dap',
-      'rcarriga/nvim-dap-ui',
-      'aznhe21/actions-preview.nvim',
-      'nvim-telescope/telescope.nvim',
-      'DNLHC/glance.nvim',
-    },
-  },
+}
+
+local current_module_path = ...
+
+local function script_path()
+  return debug.getinfo(1, 'S').source:sub(2)
+end
+
+local function script_dir()
+  return vim.fs.dirname(script_path())
+end
+
+local function find_lua_files(dir)
+  return vim.fs.dir(dir, { depth = 1 })
+end
+
+local function load_modules(dir)
+  local mods = {}
+
+  for file in find_lua_files(dir) do
+    if file ~= 'init.lua' then
+      local mod_name = vim.fn.fnamemodify(file, ':r')
+      local mod_path = current_module_path .. '.' .. mod_name
+      mods[mod_name] = require(mod_path)
+    end
+  end
+
+  return mods
+end
+
+local loaded_modules = nil
+
+local function get_language_modules()
+  if loaded_modules == nil then
+    loaded_modules = load_modules(script_dir())
+  end
+
+  return loaded_modules
+end
+
+local function language_modules()
+  local modules = get_language_modules()
+  local index, module = next(modules)
+
+  return function()
+    if module == nil then
+      return nil
+    end
+
+    index, module = next(modules, index)
+
+    return module
+  end
+end
+
+return {
+  autodetect = function()
+    configureLanguages()
+
+    for mod in language_modules() do
+      mod.setup()
+    end
+  end,
+  dependencies = function()
+    local deps = vim.tbl_values(lang_deps)
+
+    for mod in language_modules() do
+      for _, dep in pairs(mod.dependencies()) do
+        table.insert(deps, dep)
+      end
+    end
+
+    return deps
+  end,
 }
