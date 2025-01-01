@@ -240,7 +240,7 @@ local lang_deps = {
   },
   {
     'rcarriga/nvim-dap-ui',
-    version = '^3',
+    version = '^4',
     opts = {
       icons = {
         expanded = '',
@@ -249,8 +249,13 @@ local lang_deps = {
       },
     },
     dependencies = {
+      'nvim-neotest/nvim-nio',
       'mfussenegger/nvim-dap',
     },
+  },
+  {
+    'nvim-neotest/nvim-nio',
+    version = '^1.10',
   },
 }
 
