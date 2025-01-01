@@ -39,16 +39,15 @@ local has_lsp = vim.fn.executable('gopls') == 1
 local has_dap = vim.fn.executable('dlv') == 1
 
 local dependencies = function()
-  local deps = {}
-
-  if has_dap then
-    table.insert(deps, {
+  return {
+    {
       'leoluz/nvim-dap-go',
       dependencies = { 'mfussenegger/nvim-dap' },
-    })
-  end
-
-  return deps
+      cond = function()
+        return has_dap
+      end,
+    },
+  }
 end
 
 local setup = function()

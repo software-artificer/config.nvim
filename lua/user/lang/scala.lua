@@ -32,20 +32,19 @@ local has_lsp = vim.fn.executable('metals') == 1
 
 return {
   dependencies = function()
-    local deps = {}
-
-    if has_lsp then
-      table.insert(deps, {
+    return {
+      {
         'scalameta/nvim-metals',
         dependencies = {
           'nvim-lua/plenary.nvim',
           'hrsh7th/cmp-nvim-lsp',
           'mfussenegger/nvim-dap',
         },
-      })
-    end
-
-    return deps
+        cond = function()
+          return has_lsp
+        end,
+      },
+    }
   end,
   setup = function()
     if has_lsp then
