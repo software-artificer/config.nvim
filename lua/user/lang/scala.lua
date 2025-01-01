@@ -35,8 +35,6 @@ return {
     return {
       {
         'scalameta/nvim-metals',
-        -- TODO: update to the latest once we get to NeoVim 0.10.x
-        tag = 'v0.9.x',
         dependencies = {
           'nvim-lua/plenary.nvim',
           'hrsh7th/cmp-nvim-lsp',
