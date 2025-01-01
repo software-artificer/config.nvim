@@ -2,12 +2,10 @@ return {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   event = { 'BufReadPre', 'BufNewFile' },
-  version = '^0.9.2',
+  version = '^0.9.3',
   opts = {
     sync_install = false,
     auto_install = true,
-    -- FIXME: HTML currently crashing NeoVim
-    ignore_install = { 'html' },
     highlight = {
       enable = true,
     },
