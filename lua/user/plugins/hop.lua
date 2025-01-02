@@ -52,7 +52,7 @@ end
 
 return {
   'smoka7/hop.nvim',
-  version = '^2',
+  version = '^2.7',
   opts = {
     keys = 'arstneioqwfpluy;zxcvm,./',
     quit_key = '<esc>',
