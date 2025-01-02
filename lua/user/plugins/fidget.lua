@@ -1,6 +1,6 @@
 return {
   'j-hui/fidget.nvim',
-  version = '^1.4',
+  version = '^1.5',
   event = 'LspAttach',
   opts = {
     progress = {
