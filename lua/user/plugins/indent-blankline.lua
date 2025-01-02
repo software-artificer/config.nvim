@@ -1,6 +1,6 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
-  version = '^3',
+  version = '^3.8',
   main = 'ibl',
   opts = {
     scope = { enabled = false },
