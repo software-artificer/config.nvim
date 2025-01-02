@@ -45,7 +45,6 @@ local function configureLanguages()
               then
                 return
               end
-              vim.print(ev)
 
               vim.lsp.codelens.refresh({ bufnr = bufnr })
             end,
@@ -164,7 +163,6 @@ local function configureLanguages()
   vim.api.nvim_create_autocmd('FileType', {
     pattern = 'dap-float',
     callback = function(args)
-      vim.print(args)
       keymap_set({ 'n' }, { 'q', '<leader>q' }, function()
         vim.api.nvim_win_close(0, true)
       end, {
