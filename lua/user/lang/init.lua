@@ -262,7 +262,7 @@ local lang_deps = {
     dependencies = {
       'nvim-lua/plenary.nvim',
     },
-    opts = getPluginOpts,
+    opts = {},
   },
 }
 
