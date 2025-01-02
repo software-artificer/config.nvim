@@ -12,4 +12,9 @@ return {
       expr = true,
     },
   },
+  config = function(self, opts)
+    vim.opt.inccommand = 'split'
+
+    require('inc_rename').setup(opts)
+  end,
 }
