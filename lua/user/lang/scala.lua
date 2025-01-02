@@ -1,3 +1,5 @@
+local has_lsp = vim.fn.executable('metals') == 1
+
 local function getScalaOpts()
   local metals = require('metals')
 
@@ -19,6 +21,10 @@ local function getScalaOpts()
 end
 
 local function setupLsp()
+  if not has_lsp then
+    return
+  end
+
   local opts = getScalaOpts()
   vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'scala', 'sbt', 'java' },
@@ -27,8 +33,6 @@ local function setupLsp()
     end,
   })
 end
-
-local has_lsp = vim.fn.executable('metals') == 1
 
 return {
   dependencies = function()
@@ -47,8 +51,6 @@ return {
     }
   end,
   setup = function()
-    if has_lsp then
-      setupLsp()
-    end
+    setupLsp()
   end,
 }

@@ -1,4 +1,12 @@
+local has_lsp = vim.fn.executable('gopls') == 1
+local has_dap = vim.fn.executable('dlv') == 1
+local has_revive = vim.fn.executable('revive') == 1
+
 local function setupLsp()
+  if not has_lsp then
+    return
+  end
+
   local cwd = vim.fn.getcwd()
   local wire = vim.fn.findfile('wire.go', '.')
   local buildFlags = {}
@@ -16,7 +24,21 @@ local function setupLsp()
   })
 end
 
+local function setupLints()
+  if not has_revive then
+    return
+  end
+
+  require('null-ls.sources').register(
+    require('null-ls').builtins.diagnostics.revive
+  )
+end
+
 local function setupDap()
+  if not has_dap then
+    return
+  end
+
   local dap_go = require('dap-go')
 
   dap_go.setup({
@@ -35,9 +57,6 @@ local function setupDap()
   end, { desc = '󰨰 DAP: go - debug last test' })
 end
 
-local has_lsp = vim.fn.executable('gopls') == 1
-local has_dap = vim.fn.executable('dlv') == 1
-
 local dependencies = function()
   return {
     {
@@ -51,13 +70,9 @@ local dependencies = function()
 end
 
 local setup = function()
-  if has_lsp then
-    setupLsp()
-  end
-
-  if has_dap then
-    setupDap()
-  end
+  setupLsp()
+  setupLints()
+  setupDap()
 end
 
 return {

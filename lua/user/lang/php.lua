@@ -3,6 +3,10 @@ local has_dap = vim.fn.executable('node') == 1 and dap_adapter_path ~= nil
 local has_lsp = vim.fn.executable('intelephense') == 1
 
 local function setupLsp()
+  if not has_lsp then
+    return
+  end
+
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.resolveSupport = {
@@ -39,6 +43,10 @@ local function setupLsp()
 end
 
 local function setupDap()
+  if not has_dap then
+    return
+  end
+
   require('dap').adapters.php = {
     type = 'executable',
     command = 'node',
@@ -46,7 +54,7 @@ local function setupDap()
   }
 end
 
-local function setupStyle()
+local function setupFormatter()
   vim.api.nvim_create_autocmd('FileType', {
     group = 'set_ident',
     pattern = 'php',
@@ -64,14 +72,8 @@ return {
     return {}
   end,
   setup = function()
-    if has_lsp then
-      setupLsp()
-    end
-
-    if has_dap then
-      setupDap()
-    end
-
-    setupStyle()
+    setupLsp()
+    setupFormatter()
+    setupDap()
   end,
 }

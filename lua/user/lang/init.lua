@@ -257,6 +257,13 @@ local lang_deps = {
     'nvim-neotest/nvim-nio',
     version = '^1.10',
   },
+  {
+    'nvimtools/none-ls.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+    },
+    opts = getPluginOpts,
+  },
 }
 
 local current_module_path = ...

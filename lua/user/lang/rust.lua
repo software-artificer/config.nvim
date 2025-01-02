@@ -1,4 +1,10 @@
+local has_lsp = vim.fn.executable('rust-analyzer') == 1
+
 local function setupLsp()
+  if not has_lsp then
+    return
+  end
+
   require('lspconfig').rust_analyzer.setup({
     settings = {
       ['rust-analyzer'] = {
@@ -13,15 +19,11 @@ local function setupLsp()
   })
 end
 
-local has_lsp = vim.fn.executable('rust-analyzer') == 1
-
 return {
   dependencies = function()
     return {}
   end,
   setup = function()
-    if has_lsp then
-      setupLsp()
-    end
+    setupLsp()
   end,
 }
