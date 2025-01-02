@@ -43,6 +43,7 @@ require('lazy').setup({
     { import = 'user.plugins' },
     lang.dependencies(),
   },
+  rocks = { enabled = false },
 })
 
 lang.autodetect()
