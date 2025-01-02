@@ -190,7 +190,7 @@ end
 
 return {
   'mrjones2014/legendary.nvim',
-  version = '^2',
+  version = '^2.13',
   config = setupPlugin,
   lazy = false,
   -- Needed because it should handle _all_ keymaps
