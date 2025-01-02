@@ -36,8 +36,7 @@ local function configureLanguages()
         navic.attach(client, bufnr)
       end
 
-      -- Will be available in Neovim 0.10.x
-      -- vim.lsp.inlay_hints(bufnr, true)
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 
       keymap_set(
         { 'n', 'v' },
