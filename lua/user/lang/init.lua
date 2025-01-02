@@ -30,6 +30,36 @@ local function configureLanguages()
         return
       end
 
+      if client.server_capabilities.codeLensProvider then
+        vim.api.nvim_create_autocmd(
+          { 'BufEnter', 'LspProgress', 'BufWritePost', 'InsertLeave' },
+          {
+            callback = function(ev)
+              -- Skip any LspProgress events unless it is the end of indexing
+              if
+                ev.event == 'LspProgress'
+                and (
+                  ev.file ~= 'end'
+                  or ev.data.params.value.title ~= 'Indexing'
+                )
+              then
+                return
+              end
+              vim.print(ev)
+
+              vim.lsp.codelens.refresh({ bufnr = bufnr })
+            end,
+          }
+        )
+
+        keymap_set(
+          'n',
+          'gR',
+          vim.lsp.codelens.run,
+          { desc = '󰜎 LSP: Run code lens' }
+        )
+      end
+
       lsp_format.on_attach(client, bufnr)
 
       if client.server_capabilities.documentSymbolProvider then
@@ -97,12 +127,6 @@ local function configureLanguages()
         '<leader>hs',
         vim.lsp.buf.signature_help,
         { buffer = bufnr, desc = '󱜻 LSP: Show singature help' }
-      )
-      keymap_set(
-        'n',
-        'gR',
-        vim.lsp.codelens.run,
-        { desc = '󰜎 LSP: Run code lens' }
       )
     end,
   })
