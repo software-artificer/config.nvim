@@ -1,6 +1,6 @@
 return {
   'nvim-tree/nvim-tree.lua',
-  version = "^1.4",
+  version = '^1.9',
   lazy = false,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   opts = {
@@ -16,8 +16,13 @@ return {
       preserve_window_proportions = true,
     },
     renderer = {
+      hidden_display = 'simple',
       special_files = {},
       icons = {
+        git_placement = 'right_align',
+        modified_placement = 'right_align',
+        diagnostics_placement = 'right_align',
+        bookmarks_placement = 'right_align',
         symlink_arrow = '  ',
         glyphs = {
           folder = {
