@@ -32,7 +32,7 @@ local function configureLanguages()
       return
     end
 
-    vim.lsp.codelens.refresh({ bufnr = ev.buf })
+    vim.lsp.codelens.refresh({ bufnr = 0 })
   end
 
   vim.api.nvim_create_autocmd('LspAttach', {
