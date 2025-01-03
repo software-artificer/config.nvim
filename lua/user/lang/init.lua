@@ -21,6 +21,20 @@ local function configureLanguages()
   -- Support for context status-line
   local navic = require('nvim-navic')
 
+  -- This is a function that will be triggered using autocmd to refresh any code
+  -- lenses provided by the attached LSPs
+  local function code_lens_refresh(ev)
+    -- Skip any LspProgress events unless it is the end of indexing
+    if
+      ev.event == 'LspProgress'
+      and (ev.file ~= 'end' or ev.data.params.value.title ~= 'Indexing')
+    then
+      return
+    end
+
+    vim.lsp.codelens.refresh({ bufnr = ev.buf })
+  end
+
   vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(event)
       local bufnr = event.buf
@@ -31,26 +45,22 @@ local function configureLanguages()
       end
 
       if client.server_capabilities.codeLensProvider then
-        vim.api.nvim_create_autocmd(
-          { 'BufEnter', 'LspProgress', 'BufWritePost', 'InsertLeave' },
-          {
-            callback = function(ev)
-              -- Skip any LspProgress events unless it is the end of indexing
-              if
-                ev.event == 'LspProgress'
-                and (
-                  ev.file ~= 'end'
-                  or ev.data.params.value.title ~= 'Indexing'
-                )
-              then
-                return
-              end
-
-              vim.lsp.codelens.refresh({ bufnr = bufnr })
-            end,
-          }
-        )
-
+        local timer = vim.uv.new_timer()
+        vim.api.nvim_create_autocmd({
+          'BufEnter',
+          'LspProgress',
+          'TextChanged',
+          'InsertLeave',
+        }, {
+          callback = function(ev)
+            timer:stop()
+            timer:start(500, 0, function()
+              timer:stop()
+              vim.schedule_wrap(code_lens_refresh)(ev)
+            end)
+          end,
+          buffer = bufnr,
+        })
         keymap_set(
           'n',
           'gR',
