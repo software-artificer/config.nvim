@@ -44,7 +44,7 @@ local function configureLanguages()
         return
       end
 
-      if client.server_capabilities.codeLensProvider then
+      if client.supports_method('textDocument/codeLens') then
         local timer = vim.uv.new_timer()
         vim.api.nvim_create_autocmd({
           'BufEnter',
@@ -69,13 +69,17 @@ local function configureLanguages()
         )
       end
 
-      lsp_format.on_attach(client, bufnr)
+      if client.supports_method('textDocument/formatting') then
+        lsp_format.on_attach(client, bufnr)
+      end
 
-      if client.server_capabilities.documentSymbolProvider then
+      if client.supports_method('textDocument/documentSymbol') then
         navic.attach(client, bufnr)
       end
 
-      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      if client.supports_method('textDocument/inlayHint') then
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+      end
 
       keymap_set(
         { 'n', 'v' },
