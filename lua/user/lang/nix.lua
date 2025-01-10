@@ -38,9 +38,8 @@ local function setupFormatter()
     return
   end
 
-  require('null-ls.sources').register(
-    require('null-ls').builtins.formatting.nixfmt
-  )
+  local none_ls = require('null-ls')
+  none_ls.register(none_ls.builtins.formatting.nixfmt)
 end
 
 return {

@@ -5,9 +5,8 @@ local function setupFormatter()
     return
   end
 
-  require('null-ls.sources').register(
-    require('null-ls').builtins.formatting.stylua
-  )
+  local none_ls = require('null-ls')
+  none_ls.register(none_ls.builtins.formatting.stylua)
 end
 
 return {

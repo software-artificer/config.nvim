@@ -29,9 +29,8 @@ local function setupLints()
     return
   end
 
-  require('null-ls.sources').register(
-    require('null-ls').builtins.diagnostics.revive
-  )
+  local none_ls = require('null-ls')
+  none_ls.register(none_ls.builtins.diagnostics.revive)
 end
 
 local function setupDap()
