@@ -44,9 +44,7 @@ return {
           'hrsh7th/cmp-nvim-lsp',
           'mfussenegger/nvim-dap',
         },
-        cond = function()
-          return has_lsp
-        end,
+        cond = has_lsp,
       },
     }
   end,

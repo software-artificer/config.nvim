@@ -43,9 +43,6 @@ local function setupFormatter()
 end
 
 return {
-  dependencies = function()
-    return {}
-  end,
   setup = function()
     setupLsp()
   end,

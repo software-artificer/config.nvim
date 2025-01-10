@@ -14,9 +14,6 @@ local function setupLsp()
 end
 
 return {
-  dependencies = function()
-    return {}
-  end,
   setup = function()
     setupLsp()
   end,

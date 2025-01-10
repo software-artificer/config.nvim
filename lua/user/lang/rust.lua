@@ -53,6 +53,7 @@ return {
       {
         'mrcjkb/rustaceanvim',
         version = '^5',
+        cond = has_lsp,
       },
     }
   end,

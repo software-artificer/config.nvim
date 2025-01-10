@@ -362,8 +362,10 @@ return {
     local deps = vim.tbl_values(lang_deps)
 
     for mod in language_modules() do
-      for _, dep in pairs(mod.dependencies()) do
-        table.insert(deps, dep)
+      if mod.dependencies ~= nil then
+        for _, dep in pairs(mod.dependencies()) do
+          table.insert(deps, dep)
+        end
       end
     end
 

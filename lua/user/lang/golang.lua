@@ -56,25 +56,19 @@ local function setupDap()
   end, { desc = '󰨰 DAP: go - debug last test' })
 end
 
-local dependencies = function()
-  return {
-    {
-      'leoluz/nvim-dap-go',
-      dependencies = { 'mfussenegger/nvim-dap' },
-      cond = function()
-        return has_dap
-      end,
-    },
-  }
-end
-
-local setup = function()
-  setupLsp()
-  setupLints()
-  setupDap()
-end
-
 return {
-  dependencies = dependencies,
-  setup = setup,
+  dependencies = function()
+    return {
+      {
+        'leoluz/nvim-dap-go',
+        dependencies = { 'mfussenegger/nvim-dap' },
+        cond = has_dap,
+      },
+    }
+  end,
+  setup = function()
+    setupLsp()
+    setupLints()
+    setupDap()
+  end,
 }
