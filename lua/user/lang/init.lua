@@ -341,15 +341,10 @@ end
 
 local function language_modules()
   local modules = get_language_modules()
-  local index, module = next(modules)
+  local index, module
 
   return function()
-    if module == nil then
-      return nil
-    end
-
     index, module = next(modules, index)
-
     return module
   end
 end
