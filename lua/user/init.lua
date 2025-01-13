@@ -5,6 +5,10 @@ vim.g.maplocalleader = ' '
 vim.opt.mouse = ''
 -- Prevent NeoVim from changing window sizes when opening a new file
 vim.opt.equalalways = true
+-- Always reserve some space for signcolumn to avoid layout jumps
+vim.opt.signcolumn = 'yes:1'
+-- Always display winbar to avoid layout jumps
+vim.opt.winbar = ' '
 
 -- Configure diagnostic options
 vim.diagnostic.config({

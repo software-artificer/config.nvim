@@ -11,6 +11,15 @@ return {
     disable_netrw = true,
     hijack_netrw = true,
     hijack_cursor = true,
+    diagnostics = {
+      enable = true,
+      icons = {
+        hint = '',
+        info = '',
+        warning = '',
+        error = '',
+      },
+    },
     view = {
       width = 40,
       preserve_window_proportions = true,
@@ -21,7 +30,7 @@ return {
       icons = {
         git_placement = 'right_align',
         modified_placement = 'right_align',
-        diagnostics_placement = 'right_align',
+        diagnostics_placement = 'signcolumn',
         bookmarks_placement = 'right_align',
         symlink_arrow = '  ',
         glyphs = {
