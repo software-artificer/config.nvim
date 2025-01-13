@@ -15,7 +15,7 @@ local function before_cursor()
 end
 
 local function hop_treesitter()
-  hop().hint_nodes()
+  require('hop-treesitter').hint_nodes()
 end
 
 local function hop_words_before_cursor()
