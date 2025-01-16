@@ -28,35 +28,31 @@ local cmp_kind_icons = {
 
 local cmp_source_names = {}
 
+local function snippet_jump(fallback, direction)
+  if vim.snippet.active({ direction = direction }) then
+    vim.snippet.jump(direction)
+  else
+    fallback()
+  end
+end
+
+local function jump_forward(fallback)
+  snippet_jump(fallback, 1)
+end
+
+local function jump_backward(fallback)
+  snippet_jump(fallback, -1)
+end
+
 local function getPluginOpts()
   local cmp = require('cmp')
-  local luasnip = require('luasnip')
-
-  local function luasnip_jump(direction, fallback)
-    if luasnip.jumpable(direction) then
-      luasnip.jump(direction)
-    else
-      fallback()
-    end
-  end
-
-  local function luasnip_jump_next(fallback)
-    luasnip_jump(1, fallback)
-  end
-
-  local function luasnip_jump_prev(fallback)
-    luasnip_jump(-1, fallback)
-  end
 
   return {
     preselect = cmp.PreselectMode.Item,
     snippet = {
       expand = function(args)
-        luasnip.lsp_expand(args.body)
+        vim.snippet.expand(args.body)
       end,
-    },
-    window = {
-      -- configure window appearance for documentation and completion
     },
     formatting = {
       fields = { 'kind', 'abbr', 'menu' },
@@ -74,9 +70,9 @@ local function getPluginOpts()
       ['<C-n>'] = { i = cmp.mapping.select_next_item() },
       ['<C-p>'] = { i = cmp.mapping.select_prev_item() },
       ['<C-e>'] = { i = cmp.mapping.abort() },
-      ['<C-f>'] = cmp.mapping(luasnip_jump_next, { 'i' }),
-      ['<C-b>'] = cmp.mapping(luasnip_jump_prev, { 'i' }),
       ['<C-y>'] = { i = cmp.mapping.confirm({ select = true }) },
+      ['<C-f>'] = cmp.mapping(jump_forward, { 'i', 's' }),
+      ['<C-b>'] = cmp.mapping(jump_backward, { 'i', 's' }),
     },
     sources = {
       { name = 'nvim_lua' },
@@ -96,12 +92,7 @@ return {
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-nvim-lua',
       'hrsh7th/cmp-nvim-lsp',
-      'L3MON4D3/LuaSnip',
     },
-  },
-  {
-    'L3MON4D3/LuaSnip',
-    version = '^2',
   },
   {
     'hrsh7th/cmp-buffer',
