@@ -18,6 +18,21 @@ local function configureLanguages()
     sync = true,
   })
 
+  local registerCapabilityHandler =
+    vim.lsp.handlers['client/registerCapability']
+  vim.lsp.handlers['client/registerCapability'] = function(err, params, context)
+    local client = vim.lsp.get_client_by_id(context.client_id)
+
+    for _, registration in ipairs(params.registrations) do
+      -- Manage dynamic capability registration for source formatting
+      if registration.method == 'textDocument/formatting' then
+        lsp_format.on_attach(client, vim.fn.bufnr())
+      end
+    end
+
+    return registerCapabilityHandler(err, params, context)
+  end
+
   -- Support for context status-line
   local navic = require('nvim-navic')
 
