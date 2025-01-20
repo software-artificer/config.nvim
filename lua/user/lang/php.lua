@@ -29,14 +29,12 @@ local function setupLsp()
         buffer = bufnr,
       })
     end,
+    capabilities = capabilities,
     settings = {
-      ['intelephense'] = {
-        settings = {
-          telemetry = {
-            enabled = false,
-          },
+      intelephense = {
+        telemetry = {
+          enabled = false,
         },
-        capabilities = capabilities,
       },
     },
   })
