@@ -17,9 +17,28 @@ local function setupEslint()
   require('lspconfig').eslint.setup({})
 end
 
+local function setupFormatter()
+  vim.api.nvim_create_autocmd('FileType', {
+    group = 'set_ident',
+    pattern = {
+      'typescript',
+      'javascript',
+      'typescriptreact',
+      'javascriptreact',
+    },
+    desc = 'Set proper identation for JavaScript/TypeScript files',
+    callback = function()
+      vim.opt_local.shiftwidth = 2
+      vim.opt_local.tabstop = 2
+      vim.opt_local.expandtab = true
+    end,
+  })
+end
+
 return {
   setup = function()
     setupLsp()
     setupEslint()
+    setupFormatter()
   end,
 }
