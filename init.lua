@@ -9,6 +9,9 @@ vim.opt.equalalways = true
 vim.opt.signcolumn = 'yes:1'
 -- Reserve the space for window bar to avoid layout jumps
 vim.opt.winbar = ' '
+-- Disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Configure diagnostic options
 vim.diagnostic.config({
