@@ -7,32 +7,33 @@ return {
   opts = {
     preset = 'classic',
     delay = 800,
+    win = { no_overlap = true },
     spec = {
       {
         '<leader>y',
         '"+y',
         mode = { 'n', 'v' },
         desc = 'Yank to system clipboard',
-        icon = '󰱘',
+        icon = { icon = '󰱗', color = 'yellow' },
         noremap = false,
-      }, {
+      },
+      {
         '<leader>d',
         '"+d',
         mode = { 'n', 'v' },
         desc = 'Cut to system clipboard',
-        icon = '󰆐',
+        icon = { icon = '', color = 'yellow' },
         noremap = false,
-      }
+      },
+      {
+        '<leader>?',
+        function()
+          require('which-key').show()
+        end,
+        mode = { 'n', 'v' },
+        desc = 'Show keymaps',
+        icon = { icon = '󰡾', color = 'yellow' },
+      },
     },
   },
-  keys = {
-    {
-      mode = { 'n', 'v' },
-      '<leader>?',
-      function()
-        require('which-key').show()
-      end,
-      desc = 'Show keymaps',
-    }
-  }
 }
