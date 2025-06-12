@@ -37,9 +37,23 @@ return {
     })
   end,
   opts = {
+    filters = {
+      custom = {
+        -- hide .git directory from the tree
+        '^\\.git$',
+      },
+    },
+    modified = {
+      -- display "modified buffer" icon
+      enable = true,
+    },
     renderer = {
       -- Hide the root folder label (it is printed in the title instead)
       root_folder_label = false,
+      icons = {
+        git_placement = 'after',
+        modified_placement = 'after',
+      },
     },
     view = {
       float = {
@@ -77,7 +91,7 @@ return {
       -- them in which-key legend.
       for _, keymap in
         next,
-        { 'v', 'V', '<c-v>', 'i', 'I', 'o', 'O', 'r', 'R', '<c-r>', '.' }
+        { 'v', 'V', '<c-v>', 'i', 'I', 'o', 'O', 'r', 'R', 'c', 'C' }
       do
         wk.add({ keymap, function() end, hidden = true, buffer = bufnr })
       end
@@ -118,10 +132,7 @@ return {
       wk.add({
         '<CR>',
         function()
-          api.node.open.edit(
-            api.tree.get_node_under_cursor(),
-            { quit_on_open = true }
-          )
+          api.node.open.edit(nil, { quit_on_open = true })
         end,
         buffer = bufnr,
         desc = 'Open the item under the cursor',
@@ -129,10 +140,42 @@ return {
       })
 
       wk.add({
-        '/',
-        api.live_filter.start,
+        '<c-r>',
+        api.tree.reload,
         buffer = bufnr,
+        desc = 'Refresh the file tree',
+        icon = { icon = '', color = 'yellow' },
       })
+
+      wk.add({
+        '.',
+        api.tree.toggle_enable_filters,
+        buffer = bufnr,
+        desc = 'Toggle hidden nodes',
+        icon = { icon = '󰘓', color = 'yellow' },
+      })
+
+      wk.add({
+        '?',
+        api.node.show_info_popup,
+        buffer = bufnr,
+        desc = 'Show node properties',
+        icon = { icon = '', color = 'yellow' },
+      })
+
+      -- create a new file fs.create(node?), check if `node` is needed
+      -- delete a file fs.remove(node?)
+      -- rename fs.rename_node(node?)
+      -- cut fs.cut(node?)
+      -- paste fs.paste(node?)
+      -- copy fs.copy.node(node?)
+      -- copy abs path fs.copy.absolute_path(node?)
+      -- copy filename fs.copy.filename(node?)
+      -- copy relative path fs.copy.relative_path(node?)
+      -- next item with git status ]g node.navigate.git.next_recursive(node?)
+      -- previous item with git status [g node.navigate.git.prev_recursive(node?)
+      -- next item with diagnostics ]d node.navigate.diagnostics.next_recursive(node?)
+      -- previous item with diagnostics ]d node.navigate.diagnostics.prev_recursive(node?)
     end,
     hijack_cursor = true,
     disable_netrw = true,
@@ -142,7 +185,10 @@ return {
       mode = { 'n', 'v' },
       '<leader>e',
       function()
-        require('nvim-tree.api').tree.toggle({ find_file = true })
+        require('nvim-tree.api').tree.toggle({
+          path = vim.uv.cwd(),
+          find_file = true,
+        })
       end,
       desc = 'Toggle file explorer (NvimTree)',
     },
