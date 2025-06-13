@@ -53,6 +53,21 @@ return {
       icons = {
         git_placement = 'after',
         modified_placement = 'after',
+        glyphs = {
+          folder = {
+            default = '',
+            open = '',
+          },
+          git = {
+            deleted = '󱀷',
+            staged = '󰸩',
+            unstaged = '󱇨',
+            untracked = '󰈤',
+            renamed = '󱀱',
+            ignored = '󰘓',
+            unmerged = '󰩌',
+          },
+        },
       },
     },
     view = {
@@ -89,10 +104,7 @@ return {
 
       -- Disable keympas that try to modify the buffer or switch modes and hide
       -- them in which-key legend.
-      for _, keymap in
-        next,
-        { 'v', 'V', '<c-v>', 'i', 'I', 'o', 'O', 'r', 'R', 'c', 'C' }
-      do
+      for _, keymap in next, { 'v', 'V', '<c-v>', 'I', 'o', 'O', 'R', 'C', 'D' } do
         wk.add({ keymap, function() end, hidden = true, buffer = bufnr })
       end
 
@@ -163,19 +175,130 @@ return {
         icon = { icon = '', color = 'yellow' },
       })
 
-      -- create a new file fs.create(node?), check if `node` is needed
-      -- delete a file fs.remove(node?)
-      -- rename fs.rename_node(node?)
-      -- cut fs.cut(node?)
-      -- paste fs.paste(node?)
-      -- copy fs.copy.node(node?)
-      -- copy abs path fs.copy.absolute_path(node?)
-      -- copy filename fs.copy.filename(node?)
-      -- copy relative path fs.copy.relative_path(node?)
-      -- next item with git status ]g node.navigate.git.next_recursive(node?)
-      -- previous item with git status [g node.navigate.git.prev_recursive(node?)
-      -- next item with diagnostics ]d node.navigate.diagnostics.next_recursive(node?)
-      -- previous item with diagnostics ]d node.navigate.diagnostics.prev_recursive(node?)
+      wk.add({
+        'i',
+        api.fs.create,
+        buffer = bufnr,
+        desc = 'Create a new file or directory',
+        icon = { icon = '', color = 'yellow' },
+      })
+
+      wk.add({
+        'I',
+        function()
+          local node = api.tree.get_node_under_cursor()
+          if node == nil then
+            return
+          end
+
+          if node.type == 'directory' then
+            api.fs.create(node.parent)
+
+            return
+          end
+
+          api.fs.create()
+        end,
+        buffer = bufnr,
+        desc = 'Create a new sibling file or directory',
+        icon = { icon = '', color = 'yellow' },
+      })
+
+      wk.add({
+        'd',
+        api.fs.remove,
+        buffer = bufnr,
+        desc = 'Delete a file or directory',
+        icon = { icon = '󰗨', color = 'yellow' },
+      })
+
+      wk.add({
+        'r',
+        api.fs.rename_node,
+        buffer = bufnr,
+        desc = 'Rename a file or directory',
+        icon = { icon = '󰑕', color = 'yellow' },
+      })
+
+      wk.add({
+        'x',
+        api.fs.cut,
+        buffer = bufnr,
+        desc = 'Cut a file or directory',
+        icon = { icon = '', color = 'yellow' },
+      })
+
+      wk.add({
+        'p',
+        api.fs.paste,
+        buffer = bufnr,
+        desc = 'Paste copied or cut files and directories',
+        icon = { icon = '', color = 'yellow' },
+      })
+
+      wk.add({
+        'c',
+        api.fs.copy.node,
+        buffer = bufnr,
+        desc = 'Copy a file or directory',
+        icon = { icon = '', color = 'yellow' },
+      })
+
+      wk.add({
+        'yy',
+        api.fs.copy.absolute_path,
+        buffer = bufnr,
+        desc = 'Copy an absolute path to the node',
+        icon = { icon = '', color = 'yellow' },
+      })
+
+      wk.add({
+        'ya',
+        api.fs.copy.relative_path,
+        buffer = bufnr,
+        desc = 'Copy a relative path to the node',
+        icon = { icon = '', color = 'yellow' },
+      })
+
+      wk.add({
+        'Y',
+        api.fs.copy.filename,
+        buffer = bufnr,
+        desc = 'Copy a name of a file or directory',
+        icon = { icon = '', color = 'yellow' },
+      })
+
+      wk.add({
+        ']g',
+        api.node.navigate.git.next_recursive,
+        buffer = bufnr,
+        desc = 'Go to the next node with a Git status',
+        icon = { icon = '󰊢', color = 'yellow' },
+      })
+
+      wk.add({
+        '[g',
+        api.node.navigate.git.prev_recursive,
+        buffer = bufnr,
+        desc = 'Go to the previous node with a Git status',
+        icon = { icon = '󰊢', color = 'yellow' },
+      })
+
+      wk.add({
+        ']d',
+        api.node.navigate.diagnostics.next_recursive,
+        buffer = bufnr,
+        desc = 'Go to the next node with a diagnostics status',
+        icon = { icon = '', color = 'yellow' },
+      })
+
+      wk.add({
+        '[d',
+        api.node.navigate.diagnostics.prev_recursive,
+        buffer = bufnr,
+        desc = 'Go to the previous node with a diagnostics status',
+        icon = { icon = '', color = 'yellow' },
+      })
     end,
     hijack_cursor = true,
     disable_netrw = true,
