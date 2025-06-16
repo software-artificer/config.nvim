@@ -1,5 +1,5 @@
 return {
-  dir = 'lua/user/zapbuf.nvim',
+  dir = vim.fn.stdpath('config') .. 'lua/user/zapbuf.nvim',
   name = 'zapbuf',
   opts = {},
   keys = {
