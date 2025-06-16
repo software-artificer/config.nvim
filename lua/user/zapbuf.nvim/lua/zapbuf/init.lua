@@ -106,7 +106,7 @@ function M.zap()
 
   local buf_ids = vim.api.nvim_list_bufs()
   local loaded_buf_ids = vim.tbl_filter(function(buf_id)
-    return vim.api.nvim_buf_is_loaded(buf_id)
+    return vim.api.nvim_buf_is_loaded(buf_id) and vim.fn.buflisted(buf_id)
   end, buf_ids)
   local next_buf_id = nil
   for _, buf_id in next, loaded_buf_ids do
