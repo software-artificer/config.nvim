@@ -82,6 +82,8 @@ function M.zap()
   local curr_win_conf = vim.api.nvim_win_get_config(curr_win_id)
   if curr_win_conf.relative ~= '' then
     vim.api.nvim_win_close(curr_win_id, {})
+
+    return
   end
 
   local curr_buf_id = vim.api.nvim_get_current_buf()
