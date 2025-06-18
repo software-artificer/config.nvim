@@ -6,7 +6,8 @@ return {
   opts = {
     on_colors = function(colors) end,
     on_highlights = function(highlights, colors)
-      highlights.CursorLineNr = { fg = colors.fg_dark, bold = true, bg = colors.bg_highlight }
+      highlights.CursorLineNr =
+        { fg = colors.fg_dark, bold = true, bg = colors.bg_highlight }
       highlights.LineNr = { fg = colors.dark3 }
     end,
     style = 'moon',
@@ -15,5 +16,5 @@ return {
     require('tokyonight').setup(opts)
 
     vim.cmd.colorscheme('tokyonight')
-  end
+  end,
 }
