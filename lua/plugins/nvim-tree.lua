@@ -104,7 +104,10 @@ return {
 
       -- Disable keympas that try to modify the buffer or switch modes and hide
       -- them in which-key legend.
-      for _, keymap in next, { 'v', 'V', '<c-v>', 'I', 'o', 'O', 'R', 'C', 'D' } do
+      for _, keymap in
+        next,
+        { 'v', 'V', '<c-v>', 'I', 'o', 'O', 'R', 'C', 'D', 'a', 'A' }
+      do
         wk.add({ keymap, function() end, hidden = true, buffer = bufnr })
       end
 
