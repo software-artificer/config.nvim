@@ -43,33 +43,33 @@ local function handle_buf_modified(buf_id)
 end
 
 local function close_tab()
-    local win_ids = vim.api.nvim_tabpage_list_wins(0)
+  local win_ids = vim.api.nvim_tabpage_list_wins(0)
 
-    for _, win_id in next, win_ids do
-      local buf_id = vim.api.nvim_win_get_buf(win_id)
-      local buf_wins = vim.fn.win_findbuf(buf_id)
+  for _, win_id in next, win_ids do
+    local buf_id = vim.api.nvim_win_get_buf(win_id)
+    local buf_wins = vim.fn.win_findbuf(buf_id)
 
-      if #buf_wins == 1 then
-        local action = handle_buf_modified(buf_id)
+    if #buf_wins == 1 then
+      local action = handle_buf_modified(buf_id)
 
-        if action == Action.ABORT then
-          return
-        end
-
-        local force = false
-        if action == Action.DISCARD then
-          force = true
-        end
-
-        if action == Action.WRITE then
-          vim.api.nvim_buf_call(buf_id, vim.cmd.write)
-        end
-
-        vim.api.nvim_buf_delete(buf_id, { force = force })
-      else
-        vim.api.nvim_win_close(win_id, {})
+      if action == Action.ABORT then
+        return
       end
+
+      local force = false
+      if action == Action.DISCARD then
+        force = true
+      end
+
+      if action == Action.WRITE then
+        vim.api.nvim_buf_call(buf_id, vim.cmd.write)
+      end
+
+      vim.api.nvim_buf_delete(buf_id, { force = force })
+    else
+      vim.api.nvim_win_close(win_id, {})
     end
+  end
 end
 
 function M.zap()
