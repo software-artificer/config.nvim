@@ -57,5 +57,149 @@ return {
       mode = { 'n', 'v' },
       desc = 'Full [t]ext search including ignored',
     },
+    {
+      '<leader>fw',
+      function()
+        Snacks.picker.grep_word()
+      end,
+      mode = { 'v' },
+      desc = 'Find selection or [w]ord',
+    },
+    {
+      '<leader>f"',
+      function()
+        Snacks.picker.registers()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'List register contents',
+    },
+    {
+      '<leader>fd',
+      function()
+        Snacks.picker.diagnostics_buffer()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Show buffer [d]iagnostics',
+    },
+    {
+      '<leader>fD',
+      function()
+        Snacks.picker.diagnostics()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Show project [d]iagnostics',
+    },
+    {
+      '<leader><f1>',
+      function()
+        Snacks.picker.help()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Search in NeoVim help files',
+    },
+    {
+      '<leader>fh',
+      function()
+        Snacks.picker.highlights()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'List all defined [h]ighlight groups',
+    },
+    {
+      '<leader>fi',
+      function()
+        Snacks.picker.icons()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'List all known [i]con glyphs',
+    },
+    {
+      '<leader>fj',
+      function()
+        Snacks.picker.jumps()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Open the [j]umplist',
+    },
+    {
+      '<leader>fk',
+      function()
+        Snacks.picker.keymaps()
+      end,
+      mode = { 'n', 'v', 'x' },
+      desc = 'List all [k]eymaps available in the current context',
+    },
+    {
+      '<leader>fm',
+      function()
+        Snacks.picker.marks()
+      end,
+      mode = { 'n' },
+      desc = 'List all current [m]arks',
+    },
+    {
+      '<leader>fu',
+      function()
+        Snacks.picker.undo()
+      end,
+      mode = { 'n' },
+      desc = 'Display [u]ndo history',
+    },
+    {
+      '<leader>gf',
+      function()
+        Snacks.picker.git_files()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Show [g]it [f]iles',
+    },
+    {
+      '<leader>gb',
+      function()
+        Snacks.picker.git_branches()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Manage [g]it [b]ranches',
+    },
+    {
+      '<leader>gl',
+      function()
+        Snacks.picker.git_log()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Show [g]it [l]og',
+    },
+    {
+      '<leader>gL',
+      function()
+        Snacks.picker.git_log_line()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Show [g]it log for the current [l]ine',
+    },
+    {
+      '<leader>gh',
+      function()
+        Snacks.picker.git_log_file()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Show [g]it [h]istory for the current file',
+    },
+    {
+      '<leader>gs',
+      function()
+        Snacks.picker.git_status()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Show [g]it [s]tatus',
+    },
+    {
+      '<leader>gd',
+      function()
+        Snacks.picker.git_diff()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Show [g]it [d]iff',
+    },
   },
 }
