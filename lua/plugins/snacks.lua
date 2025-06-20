@@ -1,6 +1,7 @@
 return {
   'folke/snacks.nvim',
   version = '^2.22',
+  lazy = false,
   opts = {
     picker = {
       enabled = true,
@@ -11,6 +12,17 @@ return {
             ['<C-o>'] = { '', mode = { 'i' } },
             ['<C-r>'] = { '', mode = { 'i' } },
           },
+        },
+      },
+    },
+    indent = {
+      enabled = true,
+      chunk = {
+        enabled = true,
+        only_current = true,
+        char = {
+          corner_top = '╭',
+          corner_bottom = '╰',
         },
       },
     },
