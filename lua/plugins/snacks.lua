@@ -26,6 +26,13 @@ return {
         },
       },
     },
+    gitbrowse = {
+      enabled = true,
+      what = 'permalink',
+      open = function(url)
+        vim.fn.setreg('+', url)
+      end,
+    },
   },
   priority = 1000,
   keys = {
@@ -213,5 +220,28 @@ return {
       mode = { 'n', 'v' },
       desc = 'Show [g]it [d]iff',
     },
+    {
+      '<leader>gu',
+      function()
+        Snacks.gitbrowse()
+      end,
+      mode = { 'n', 'v' },
+      desc = 'Copy [g]it [U]RL to the system clipboard',
+    },
+
+    --[[
+    -- Maybe???
+    todo_comments()
+    trouble()
+
+    -- LSP
+    lsp_definitions()
+    lsp_declarations()
+    lsp_references()
+    lsp_implementations()
+    lsp_type_definitions()
+    lsp_symbols()
+    lsp_workspace_symbols()
+    --]]
   },
 }
