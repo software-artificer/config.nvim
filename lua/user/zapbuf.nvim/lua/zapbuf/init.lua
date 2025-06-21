@@ -80,7 +80,9 @@ function M.zap()
 
   local curr_win_id = vim.api.nvim_get_current_win()
   local curr_win_conf = vim.api.nvim_win_get_config(curr_win_id)
-  if curr_win_conf.relative ~= '' then
+  local is_relative_window = curr_win_conf.relative ~= ''
+  local is_help_buffer = vim.bo.buftype == 'help'
+  if is_relative_window or is_help_buffer then
     vim.api.nvim_win_close(curr_win_id, {})
 
     return
