@@ -78,6 +78,19 @@ function M.zap()
     close_tab()
   end
 
+  if vim.wo.diff then
+    for _, win_id in next, vim.api.nvim_list_wins() do
+      local buf_id = vim.api.nvim_win_get_buf(win_id)
+      local buf_type = vim.api.nvim_buf_get_option(buf_id, 'buftype')
+
+      if buf_type == 'acwrite' then
+        vim.api.nvim_win_close(win_id, {})
+      end
+    end
+
+    return
+  end
+
   local curr_win_id = vim.api.nvim_get_current_win()
   local curr_win_conf = vim.api.nvim_win_get_config(curr_win_id)
   local is_relative_window = curr_win_conf.relative ~= ''
@@ -128,7 +141,9 @@ function M.zap()
   vim.api.nvim_win_set_buf(curr_win_id, next_buf_id)
 
   if #curr_buf_wins == 1 then
-    vim.api.nvim_buf_delete(curr_buf_id, { force = force })
+    pcall(function()
+      vim.api.nvim_buf_delete(curr_buf_id, { force = force })
+    end)
   end
 end
 
