@@ -7,7 +7,7 @@ return {
     modes = {
       char = {
         jump_labels = true,
-        label = { exclude = "hjkliardcs" },
+        label = { exclude = 'hjkliardcs' },
       },
       search = { enabled = true },
     },

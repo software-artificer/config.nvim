@@ -52,7 +52,7 @@ return {
           cond = function()
             return require('nvim-navic').is_available()
           end,
-        }
+        },
       },
     },
   },
