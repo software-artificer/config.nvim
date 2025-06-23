@@ -21,6 +21,8 @@ vim.o.breakindent = true
 vim.o.showbreak = '󱞩 '
 -- Highlight the line where the cursor is positioned
 vim.o.cursorline = true
+-- Use a better fill character for diff views
+vim.o.fillchars = 'diff:'
 
 -- Configure diagnostic options
 vim.diagnostic.config({

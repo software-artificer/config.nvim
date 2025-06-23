@@ -122,7 +122,7 @@ function M.zap()
   end
 
   local listed_bufs = vim.fn.getbufinfo({ buflisted = 1 })
-  table.sort(listed_bufs, function(a,b)
+  table.sort(listed_bufs, function(a, b)
     return (a.lastused or 0) > (b.lastused or 0)
   end)
   local next_buf_id = nil
