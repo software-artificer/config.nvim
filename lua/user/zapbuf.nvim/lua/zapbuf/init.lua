@@ -121,15 +121,14 @@ function M.zap()
     end
   end
 
-  local buf_ids = vim.api.nvim_list_bufs()
-  local loaded_buf_ids = vim.tbl_filter(function(buf_id)
-    return vim.api.nvim_buf_is_loaded(buf_id) and vim.fn.buflisted(buf_id)
-  end, buf_ids)
+  local listed_bufs = vim.fn.getbufinfo({ buflisted = 1 })
+  table.sort(listed_bufs, function(a,b)
+    return (a.lastused or 0) > (b.lastused or 0)
+  end)
   local next_buf_id = nil
-  for _, buf_id in next, loaded_buf_ids do
-    local buf_wins = vim.fn.win_findbuf(buf_id)
-    if buf_id ~= curr_buf_id and #buf_wins == 0 then
-      next_buf_id = buf_id
+  for _, buf in next, listed_bufs do
+    if buf.bufnr ~= curr_buf_id and #buf.windows == 0 then
+      next_buf_id = buf.bufnr
       break
     end
   end
