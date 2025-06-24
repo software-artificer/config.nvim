@@ -137,7 +137,7 @@ return {
       wk.add({
         '<',
         function()
-          api.tree.collapse_all(true)
+          api.tree.collapse_all({ keep_buffers = false })
         end,
         buffer = bufnr,
         desc = 'Collapse all nodes',
