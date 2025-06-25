@@ -6,7 +6,6 @@ return {
     labels = 'arstdhneioqwpgjluyzxcvbkm',
     modes = {
       char = {
-        jump_labels = true,
         label = { exclude = 'hjkliardcs' },
       },
       search = { enabled = true },
