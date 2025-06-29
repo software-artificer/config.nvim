@@ -29,3 +29,10 @@ vim.diagnostic.config({
   severity_sort = true,
   virtual_lines = true,
 })
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function() vim.hl.on_yank({
+    higroup = 'TextYank',
+    timeout = 250,
+  }) end,
+})

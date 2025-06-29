@@ -24,6 +24,8 @@ return {
       highlights.GitSignsAdd = { fg = colors.green1 }
       highlights.GitSignsChangedelet = { fg = colors.magenta }
       highlights.GitSignsUntracked = { fg = colors.fg_dark }
+      -- TextYankPost
+      highlights.TextYank = { bg = colors.magenta }
     end,
     style = 'moon',
   },
