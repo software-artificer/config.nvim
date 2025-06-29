@@ -30,6 +30,7 @@ vim.diagnostic.config({
   virtual_lines = true,
 })
 
+-- Highlight the text that is yanked
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.hl.on_yank({
     higroup = 'TextYank',
