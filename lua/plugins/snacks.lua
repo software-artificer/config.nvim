@@ -157,6 +157,14 @@ return {
       desc = 'List all current [m]arks',
     },
     {
+      '<leader>fr',
+      function()
+        Snacks.picker.resume()
+      end,
+      mode = { 'n', 'v' },
+      desc = '[R]esume previous picker',
+    },
+    {
       '<leader>fu',
       function()
         Snacks.picker.undo()
