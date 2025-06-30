@@ -137,15 +137,6 @@ return {
       })
 
       wk.add({
-        '<leader>hd',
-        gitsigns.diffthis,
-        mode = 'n',
-        buffer = bufnr,
-        desc = '',
-        icon = { icon = '', color = 'yellow' },
-      })
-
-      wk.add({
         '<leader>gB',
         gitsigns.toggle_current_line_blame,
         mode = 'n',
