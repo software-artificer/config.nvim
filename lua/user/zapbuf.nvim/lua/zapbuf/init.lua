@@ -76,6 +76,8 @@ function M.zap()
   local tabs = vim.api.nvim_list_tabpages()
   if #tabs > 1 then
     close_tab()
+
+    return
   end
 
   local open_wins = vim.api.nvim_list_wins()
