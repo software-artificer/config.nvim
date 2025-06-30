@@ -43,9 +43,16 @@ return {
         '^\\.git$',
       },
     },
-    modified = {
-      -- display "modified buffer" icon
+    -- display "modified buffer" icon
+    modified = { enable = true },
+    diagnostics = {
       enable = true,
+      icons = {
+        error = ' ',
+        warning = ' ',
+        info = ' ',
+        hint = ' ',
+      },
     },
     renderer = {
       -- Hide the root folder label (it is printed in the title instead)
