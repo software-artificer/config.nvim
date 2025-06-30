@@ -40,3 +40,14 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     })
   end,
 })
+
+vim.api.nvim_create_autocmd('VimResume', {
+  desc = 'Check if any buffers were changed outside of NeoVim on resume',
+  group = vim.api.nvim_create_augroup(
+    'reload-buffer-on-resume',
+    { clear = true }
+  ),
+  callback = function()
+    vim.cmd.checktime()
+  end,
+})
