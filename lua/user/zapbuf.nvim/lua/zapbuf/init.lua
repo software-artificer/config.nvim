@@ -98,6 +98,9 @@ function M.zap()
   local curr_win_conf = vim.api.nvim_win_get_config(curr_win_id)
   local is_relative_window = curr_win_conf.relative ~= ''
   local is_help_buffer = vim.bo.buftype == 'help'
+    or vim.bo.filetype == 'man'
+    or vim.bo.buflisted == false
+    or vim.bo.bufhidden ~= ''
   if is_relative_window or is_help_buffer and #open_wins > 1 then
     vim.api.nvim_win_close(curr_win_id, {})
 
