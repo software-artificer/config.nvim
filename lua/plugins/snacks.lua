@@ -35,6 +35,47 @@ return {
     },
   },
   priority = 1000,
+  config = function(_, opts)
+    local snacks = require('snacks')
+    snacks.setup(opts)
+
+    vim.lsp.buf.definition = function()
+      snacks.picker.lsp_definitions({ auto_confirm = false, layout = 'bottom' })
+    end
+
+    vim.lsp.buf.declaration = function()
+      snacks.picker.lsp_declarations({ auto_confirm = false, layout = 'bottom' })
+    end
+
+    vim.lsp.buf.references = function()
+      snacks.picker.lsp_references({ auto_confirm = false, layout = 'bottom' })
+    end
+
+    vim.lsp.buf.implementation = function()
+      snacks.picker.lsp_implementations({
+        auto_confirm = false,
+        layout = 'bottom',
+      })
+    end
+
+    vim.lsp.buf.type_definition = function()
+      snacks.picker.lsp_type_definitions({
+        auto_confirm = false,
+        layout = 'bottom',
+      })
+    end
+
+    vim.lsp.buf.workspace_symbol = function()
+      snacks.picker.lsp_workspace_symbols({
+        auto_confirm = false,
+        layout = 'bottom',
+      })
+    end
+
+    vim.lsp.buf.document_symbol = function()
+      snacks.picker.lsp_symbols({ auto_confirm = false, layout = 'bottom' })
+    end
+  end,
   keys = {
     {
       '<leader>ff',
@@ -236,20 +277,10 @@ return {
       mode = { 'n', 'v' },
       desc = 'Copy [g]it [U]RL to the system clipboard',
     },
-
     --[[
     -- Maybe???
     todo_comments()
     trouble()
-
-    -- LSP
-    lsp_definitions()
-    lsp_declarations()
-    lsp_references()
-    lsp_implementations()
-    lsp_type_definitions()
-    lsp_symbols()
-    lsp_workspace_symbols()
     --]]
   },
 }
