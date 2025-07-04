@@ -29,6 +29,6 @@ require('lazy').setup({
   spec = { { import = 'plugins' } },
   pkg = { sources = { 'lazy' } },
   rocks = { enabled = false },
-  -- install = { colorscheme = '' },
+  install = { colorscheme = { 'tokyonight-moon' } },
   change_detection = { enabled = false },
 })
