@@ -73,7 +73,11 @@ return {
     end
 
     vim.lsp.buf.document_symbol = function()
-      snacks.picker.lsp_symbols({ auto_confirm = false, layout = 'bottom' })
+      snacks.picker.lsp_symbols({
+        auto_confirm = false,
+        layout = 'bottom',
+        filter = { default = false },
+      })
     end
   end,
   keys = {
