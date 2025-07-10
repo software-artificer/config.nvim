@@ -9,6 +9,8 @@ return {
 
       colors.guideline_active = util.darken(colors.dark3, 0.8)
       colors.guideline = util.darken(colors.dark3, 0.3)
+      colors.bg1 = util.lighten(colors.bg, 0.9)
+      colors.magenta1 = util.darken(colors.magenta, 0.8)
     end,
     on_highlights = function(highlights, colors)
       -- Line number in normal mode and under current cursor
@@ -26,6 +28,11 @@ return {
       highlights.GitSignsUntracked = { fg = colors.fg_dark }
       -- TextYankPost
       highlights.TextYank = { bg = colors.magenta }
+      -- blink.cmp
+      highlights.BlinkCmpSignatureHelp =
+        { bg = colors.bg, fg = colors.magenta, italic = true }
+      highlights.BlinkCmpSignatureHelpActiveParameter =
+        { bg = colors.bg1, fg = colors.magenta1, bold = true }
     end,
     style = 'moon',
   },
