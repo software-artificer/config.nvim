@@ -79,5 +79,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
         icon = { icon = '', color = 'orange' },
       })
     end
+
+    if client.server_capabilities.codeActionProvider then
+      vim.lsp.buf.code_action = require('actions-preview').code_actions
+    end
   end,
 })
