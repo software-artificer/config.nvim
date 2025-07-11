@@ -65,6 +65,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         desc = '[F]ind document [s]ymbols',
         icon = { icon = '󱊓', color = 'orange' },
       })
+
+      require('nvim-navic').attach(client, event.buf)
     end
   end,
 })
