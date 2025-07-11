@@ -68,5 +68,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
       require('nvim-navic').attach(client, event.buf)
     end
+
+    if client.server_capabilities.documentFormattingProvider then
+      wk.add({
+        '<leader>lf',
+        vim.lsp.buf.format,
+        mode = 'n',
+        buffer = event.buf,
+        desc = '[L]SP [f]ormat the document',
+        icon = { icon = '', color = 'orange' },
+      })
+    end
   end,
 })
