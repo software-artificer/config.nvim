@@ -46,7 +46,7 @@ return {
       documentation = { auto_show = true, auto_show_delay_ms = 250 },
       ghost_text = { enabled = true },
     },
-    signature = { enabled = true, show_on_insert = true },
+    signature = { enabled = true, trigger = { show_on_insert = true } },
     fuzzy = {
       implementation = 'rust',
       use_frecency = false,
