@@ -14,8 +14,6 @@ return {
         },
       },
     },
-    notification = {
-      group_separator = '-----',
-    },
+    notification = { view = { group_separator = '-----' } },
   },
 }
