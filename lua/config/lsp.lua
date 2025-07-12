@@ -13,7 +13,10 @@ vim.diagnostic.config({
   },
 })
 
+vim.opt.inccommand = 'split'
+
 local wk = require('which-key')
+local inc_rename = require('inc_rename')
 
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(event)
@@ -82,6 +85,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     if client.server_capabilities.codeActionProvider then
       vim.lsp.buf.code_action = require('actions-preview').code_actions
+    end
+
+    if client.server_capabilities.renameProvider then
+      vim.lsp.buf.rename = function()
+        vim.fn.feedkeys(
+          ':' .. inc_rename.config.cmd_name .. ' ' .. vim.fn.expand('<cword>')
+        )
+      end
     end
   end,
 })
