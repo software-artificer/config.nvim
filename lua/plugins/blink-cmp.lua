@@ -1,6 +1,6 @@
 return {
   'Saghen/blink.cmp',
-  version = '^1.4.1',
+  version = '^1.6.0',
   opts = {
     completion = {
       keyword = { range = 'prefix' },
