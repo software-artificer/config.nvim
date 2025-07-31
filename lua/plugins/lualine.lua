@@ -4,6 +4,7 @@ return {
     'nvim-tree/nvim-web-devicons',
     'folke/tokyonight.nvim',
     'SmiteshP/nvim-navic',
+    'mfussenegger/nvim-dap',
   },
   opts = {
     theme = 'tokyonight',
@@ -32,7 +33,17 @@ return {
         },
       },
       -- Do not display filename in the status line
-      lualine_c = {},
+      lualine_c = {
+        function()
+          local status = require('dap').status()
+
+          if status ~= nil and status ~= '' then
+            return ' ' .. status
+          end
+
+          return ''
+        end,
+      },
     },
     winbar = {
       lualine_b = {

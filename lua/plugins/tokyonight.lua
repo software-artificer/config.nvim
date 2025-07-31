@@ -35,6 +35,7 @@ return {
         { bg = colors.bg1, fg = colors.magenta1, bold = true }
       highlights.NavicText = { fg = colors.fg }
       highlights.NavicSeparator = { fg = colors.fg_dark }
+      highlights.DapBreakpoint = { fg = colors.red }
     end,
     style = 'moon',
   },
