@@ -9,7 +9,11 @@ return {
       '<leader>ltf',
       function()
         require('lsp-format').toggle({ args = '' })
-        vim.print('󰉼 LSP formatting toggled')
+        vim.api.nvim_echo(
+          { { '󰉼 LSP formatting toggled', 'WarningMsg' } },
+          false,
+          {}
+        )
       end,
       mode = { 'n' },
       desc = 'Toggle automatic LSP formatting',
