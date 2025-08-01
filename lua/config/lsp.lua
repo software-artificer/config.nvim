@@ -94,5 +94,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
         )
       end
     end
+
+    if client.server_capabilities.codeLensProvider then
+      vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+        callback = vim.lsp.codelens.refresh,
+        buffer = event.buf,
+      })
+
+      wk.add({
+        '<leader>lcr',
+        vim.lsp.codelens.run,
+        mode = 'n',
+        buffer = event.buf,
+        desc = 'Run the [L]SP [c]odelens',
+        icon = { icon = '󱖪', color = 'orange' },
+      })
+    end
   end,
 })
