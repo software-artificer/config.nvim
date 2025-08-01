@@ -12,7 +12,7 @@ return {
       {
         '<leader>y',
         '"+y',
-        mode = { 'n', 'v' },
+        mode = { 'n', 'v', 'x' },
         desc = 'Yank to the system clipboard',
         icon = { icon = '󰱗', color = 'yellow' },
         noremap = false,
@@ -20,7 +20,7 @@ return {
       {
         '<leader>Y',
         '"+Y',
-        mode = { 'n', 'v' },
+        mode = { 'n', 'v', 'x' },
         desc = 'Yank [count] lines to the system clipboard',
         icon = { icon = '󰱗', color = 'yellow' },
         noremap = false,
@@ -28,7 +28,7 @@ return {
       {
         '<leader>d',
         '"+d',
-        mode = { 'n', 'v' },
+        mode = { 'n', 'v', 'x' },
         desc = 'Cut to the system clipboard',
         icon = { icon = '', color = 'yellow' },
         noremap = false,
@@ -36,7 +36,7 @@ return {
       {
         '<leader>D',
         '"+D',
-        mode = { 'n', 'v' },
+        mode = { 'n', 'v', 'x' },
         desc = 'Cut line until the end to the system clipboard',
         icon = { icon = '', color = 'yellow' },
         noremap = false,
