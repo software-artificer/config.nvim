@@ -23,6 +23,8 @@ vim.o.showbreak = '󱞩 '
 vim.o.cursorline = true
 -- Use a better fill character for diff views
 vim.o.fillchars = 'diff:'
+-- Disable the use of swapfiles
+vim.o.swapfile = false
 
 -- Configure diagnostic options
 vim.diagnostic.config({
