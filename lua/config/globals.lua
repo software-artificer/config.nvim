@@ -16,15 +16,15 @@ vim.g.loaded_netrwPlugin = 1
 -- Show line numbers
 vim.wo.number = true
 -- Make sure that long lines that break are indented appropriately
-vim.o.breakindent = true
+vim.opt.breakindent = true
 -- Display a line break icon
-vim.o.showbreak = '󱞩 '
+vim.opt.showbreak = '󱞩 '
 -- Highlight the line where the cursor is positioned
-vim.o.cursorline = true
+vim.opt.cursorline = true
 -- Use a better fill character for diff views
-vim.o.fillchars = 'diff:'
+vim.opt.fillchars = 'diff:'
 -- Disable the use of swapfiles
-vim.o.swapfile = false
+vim.opt.swapfile = false
 
 -- Configure diagnostic options
 vim.diagnostic.config({
