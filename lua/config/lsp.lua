@@ -15,7 +15,6 @@ vim.diagnostic.config({
 
 vim.opt.inccommand = 'split'
 
-local wk = require('which-key')
 local inc_rename = require('inc_rename')
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -26,61 +25,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
       vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
     end
 
-    if client.server_capabilities.definitionProvider then
-      wk.add({
-        'gd',
-        vim.lsp.buf.definition,
-        mode = 'n',
-        buffer = event.buf,
-        desc = 'Go to definition',
-        icon = { icon = '', color = 'orange' },
-      })
-    end
-
-    if client.server_capabilities.declarationProvider then
-      wk.add({
-        'gD',
-        vim.lsp.buf.declaration,
-        mode = 'n',
-        buffer = event.buf,
-        desc = 'Go to declaration',
-        icon = { icon = '', color = 'orange' },
-      })
-    end
-
-    if client.server_capabilities.workspaceSymbolProvider then
-      wk.add({
-        '<leader>fS',
-        vim.lsp.buf.workspace_symbol,
-        mode = 'n',
-        buffer = event.buf,
-        desc = '[F]ind workspace [s]ymbols',
-        icon = { icon = '󱊓', color = 'orange' },
-      })
-    end
-
-    if client.server_capabilities.documentSymbolProvider then
-      wk.add({
-        '<leader>fs',
-        vim.lsp.buf.document_symbol,
-        mode = 'n',
-        buffer = event.buf,
-        desc = '[F]ind document [s]ymbols',
-        icon = { icon = '󱊓', color = 'orange' },
-      })
+    if
+      vim.b[event.buf].hasDocumentSymbolProvider ~= true
+      and client.server_capabilities.documentSymbolProvider
+    then
+      vim.b[event.buf].hasDocumentSymbolProvider = true
 
       require('nvim-navic').attach(client, event.buf)
-    end
-
-    if client.server_capabilities.documentFormattingProvider then
-      wk.add({
-        '<leader>lf',
-        vim.lsp.buf.format,
-        mode = 'n',
-        buffer = event.buf,
-        desc = '[L]SP [f]ormat the document',
-        icon = { icon = '', color = 'orange' },
-      })
     end
 
     if client.server_capabilities.codeActionProvider then
@@ -95,19 +46,14 @@ vim.api.nvim_create_autocmd('LspAttach', {
       end
     end
 
-    if client.server_capabilities.codeLensProvider then
+    if
+      vim.b[event.buf].hasLspCodeLensProvider ~= true
+      and client.server_capabilities.codeLensProvider
+    then
+      vim.b[event.buf].hasLspCodeLensProvider = true
       vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
         callback = vim.lsp.codelens.refresh,
         buffer = event.buf,
-      })
-
-      wk.add({
-        '<leader>lcr',
-        vim.lsp.codelens.run,
-        mode = 'n',
-        buffer = event.buf,
-        desc = 'Run the [L]SP [c]odelens',
-        icon = { icon = '󱖪', color = 'orange' },
       })
     end
   end,
