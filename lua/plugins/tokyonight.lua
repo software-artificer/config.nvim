@@ -36,6 +36,7 @@ return {
       highlights.NavicText = { fg = colors.fg }
       highlights.NavicSeparator = { fg = colors.fg_dark }
       highlights.DapBreakpoint = { fg = colors.red }
+      highlights.LightbulbHl = { fg = colors.orange }
     end,
     style = 'moon',
   },

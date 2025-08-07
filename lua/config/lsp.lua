@@ -42,6 +42,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     if client:supports_method('textDocument/codeAction') then
       vim.lsp.buf.code_action = require('actions-preview').code_actions
+      lightbulb.attach(event.buf)
     end
 
     if client:supports_method('textDocument/rename') then
