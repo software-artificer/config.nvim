@@ -41,7 +41,7 @@ local function update_extmark(bufnr, lnum)
   local extmark_id = vim.api.nvim_buf_set_extmark(bufnr, extmark_ns, lnum, 0, {
     id = vim.b[bufnr].lightbulb.extmark_id,
     virt_text_pos = 'overlay',
-    virt_text_win_col = 0,
+    virt_text_win_col = -1,
     virt_text = { { '', 'LightbulbHl' } },
     hl_mode = 'combine',
   })
