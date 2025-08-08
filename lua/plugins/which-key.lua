@@ -26,22 +26,6 @@ return {
         noremap = false,
       },
       {
-        '<leader>d',
-        '"+d',
-        mode = { 'n', 'v', 'x' },
-        desc = 'Cut to the system clipboard',
-        icon = { icon = '', color = 'yellow' },
-        noremap = false,
-      },
-      {
-        '<leader>D',
-        '"+D',
-        mode = { 'n', 'v', 'x' },
-        desc = 'Cut line until the end to the system clipboard',
-        icon = { icon = '', color = 'yellow' },
-        noremap = false,
-      },
-      {
         '<leader>?',
         function()
           require('which-key').show()

@@ -41,119 +41,119 @@ return {
   end,
   keys = {
     {
-      '<leader>bBc',
+      '<leader>dBc',
       function()
         require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))
       end,
       desc = 'Debug: Set conditional breakpoint',
     },
     {
-      '<leader>bBC',
+      '<leader>dBC',
       function()
         require('dap').clear_breakpoints()
       end,
       desc = 'Debug: Clear all breakpoints',
     },
     {
-      '<leader>bBl',
+      '<leader>dBl',
       function()
         require('dap').list_breakpoints()
       end,
       desc = 'Debug: List breakpoints',
     },
     {
-      '<leader>bb',
+      '<leader>db',
       function()
         require('dap').toggle_breakpoint()
       end,
       desc = 'Debug: Toggle current line breakpoint',
     },
     {
-      '<leader>bc',
+      '<leader>dc',
       function()
         require('dap').continue()
       end,
       desc = 'Debug: Run the program or continue execution',
     },
     {
-      '<leader>ba',
+      '<leader>da',
       function()
         require('dap').continue({ before = get_args })
       end,
       desc = 'Debug with arguments',
     },
     {
-      '<leader>bC',
+      '<leader>dC',
       function()
         require('dap').run_to_cursor()
       end,
       desc = 'Debug: Run the program until cursor',
     },
     {
-      '<leader>bl',
+      '<leader>dl',
       function()
         require('dap').step_into()
       end,
       desc = 'Debug: Step into',
     },
     {
-      '<leader>bh',
+      '<leader>dh',
       function()
         require('dap').step_out()
       end,
       desc = 'Debug: Step out',
     },
     {
-      '<leader>bo',
+      '<leader>do',
       function()
         require('dap').step_over()
       end,
       desc = 'Debug: Step over',
     },
     {
-      '<leader>bk',
+      '<leader>dk',
       function()
         require('dap').up()
       end,
       desc = 'Debug: Go up the stack trace without stepping',
     },
     {
-      '<leader>bj',
+      '<leader>dj',
       function()
         require('dap').down()
       end,
       desc = 'Debug: Go down the stack trace without stepping',
     },
     {
-      '<leader>bl',
+      '<leader>dl',
       function()
         require('dap').run_last()
       end,
       desc = 'Debug: Re-run the debugging session',
     },
     {
-      '<leader>bp',
+      '<leader>dp',
       function()
         require('dap').pause()
       end,
       desc = 'Debug: Pause a thread',
     },
     {
-      '<leader>br',
+      '<leader>dr',
       function()
         require('dap').repl.toggle()
       end,
       desc = 'Debug: Toggle the REPL window',
     },
     {
-      '<leader>bq',
+      '<leader>dq',
       function()
         require('dap').terminate()
       end,
       desc = 'Debug: Terminate the session',
     },
     {
-      '<leader>bK',
+      '<leader>dK',
       function()
         require('dap.ui.widgets').hover()
       end,
