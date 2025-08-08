@@ -138,7 +138,7 @@ return {
         end,
         buffer = bufnr,
         desc = 'Expand all nodes under the cursor',
-        icon = { icon = '󰅂', color = 'yellow' },
+        icon = { icon = '󰄾', color = 'yellow' },
       })
 
       wk.add({
