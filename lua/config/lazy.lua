@@ -26,7 +26,7 @@ vim.opt.rtp:prepend(lazy_path)
 
 -- Setup lazy.nvim and plugins
 require('lazy').setup({
-  spec = { { import = 'plugins' } },
+  spec = { { import = 'plugins' }, { import = 'lang' } },
   pkg = { sources = { 'lazy' } },
   rocks = { enabled = false },
   install = { colorscheme = { 'tokyonight-moon' } },
