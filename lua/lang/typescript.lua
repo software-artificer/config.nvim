@@ -6,6 +6,7 @@ local dap_server_path = vim.env.JSDEBUG_DAP_DEBUG_SERVER_PATH
 
 return {
   name = 'lang:typescript',
+  cond = have_lsp,
   dir = vim.fn.stdpath('config') .. '/lua/user/lang/typescript/',
   opts = {
     debugger = {
