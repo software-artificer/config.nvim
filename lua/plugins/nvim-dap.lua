@@ -4,7 +4,7 @@ return {
   -- which-key is not a dependency of nvim-dap, but we are using it here to
   -- add custom mapping with nice descriptions.
   dependencies = { 'folke/which-key.nvim' },
-  config = function(_, opts)
+  config = function()
     vim.fn.sign_define(
       'DapBreakpoint',
       { texthl = 'DapBreakpoint', text = '󰓛' }
@@ -74,13 +74,6 @@ return {
         require('dap').continue()
       end,
       desc = 'Debug: Run the program or continue execution',
-    },
-    {
-      '<leader>da',
-      function()
-        require('dap').continue({ before = get_args })
-      end,
-      desc = 'Debug with arguments',
     },
     {
       '<leader>dC',

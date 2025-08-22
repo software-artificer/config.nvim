@@ -21,20 +21,19 @@ return {
 
     dapui.setup(opts)
 
+    dap.listeners.after.initialize.dapui_config = function(session)
+      session.on_close.dapui_config = function()
+        dapui.close()
+      end
+    end
+
     dap.listeners.before.attach.dapui_config = function()
       dapui.open()
     end
 
     dap.listeners.before.launch.dapui_config = function()
+      vim.print('launch')
       dapui.open()
-    end
-
-    dap.listeners.before.event_terminated.dapui_config = function()
-      dapui.close()
-    end
-
-    dap.listeners.before.event_exited.dapui_config = function()
-      dapui.close()
     end
   end,
   dependencies = {
