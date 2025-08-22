@@ -53,3 +53,7 @@ vim.api.nvim_create_autocmd('VimResume', {
     vim.cmd.checktime()
   end,
 })
+
+vim.api.nvim_create_augroup('IndentSize', {
+  clear = true,
+})

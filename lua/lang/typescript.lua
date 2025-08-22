@@ -4,6 +4,22 @@ local have_node = vim.fn.executable('node') == 1
 local have_jsdebug = vim.fn.executable('js-debug') == 1
 local dap_server_path = vim.env.JSDEBUG_DAP_DEBUG_SERVER_PATH
 
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'Set proper identation for JavaScript/TypeScript files',
+  group = 'IndentSize',
+  pattern = {
+    'typescript',
+    'javascript',
+    'typescriptreact',
+    'javascriptreact',
+  },
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+    vim.opt_local.expandtab = true
+  end,
+})
+
 return {
   name = 'lang:typescript',
   cond = have_lsp,
@@ -21,21 +37,6 @@ return {
     'neovim/nvim-lspconfig',
   },
   config = function(_, opts)
-    vim.api.nvim_create_autocmd('FileType', {
-      desc = 'Set proper identation for JavaScript/TypeScript files',
-      pattern = {
-        'typescript',
-        'javascript',
-        'typescriptreact',
-        'javascriptreact',
-      },
-      callback = function()
-        vim.opt_local.shiftwidth = 2
-        vim.opt_local.tabstop = 2
-        vim.opt_local.expandtab = true
-      end,
-    })
-
     if opts.lsp and opts.lsp.enabled then
       vim.lsp.enable('ts_ls')
     end
