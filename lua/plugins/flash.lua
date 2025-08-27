@@ -5,10 +5,8 @@ return {
   opts = {
     labels = 'arstdhneioqwpgjluyzxcvbkm',
     modes = {
-      char = {
-        label = { exclude = 'hjkliardcs' },
-      },
-      search = { enabled = true },
+      char = { label = { exclude = 'hjkliardcs' }, autohide = true },
+      search = { enabled = true, multi_window = false },
     },
   },
 }
