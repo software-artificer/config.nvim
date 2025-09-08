@@ -118,7 +118,7 @@ return {
       desc = 'Debug: Go down the stack trace without stepping',
     },
     {
-      '<leader>dl',
+      '<leader>dL',
       function()
         require('dap').run_last()
       end,
