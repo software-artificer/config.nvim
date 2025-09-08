@@ -66,8 +66,10 @@ return {
     end
   end,
   dependencies = {
-    'leoluz/nvim-dap-go',
-    dependencies = { 'mfussenegger/nvim-dap', 'folke/which-key.nvim' },
-    cond = have_delve,
+    {
+      'leoluz/nvim-dap-go',
+      dependencies = { 'mfussenegger/nvim-dap', 'folke/which-key.nvim' },
+      cond = have_delve,
+    },
   },
 }
