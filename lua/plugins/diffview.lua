@@ -60,28 +60,28 @@ return {
       { desc = 'Choose the OURS version of the conflict' },
     }
 
-    local keymap_conflict_chose_all_theirs = {
+    local keymap_conflict_choose_all_theirs = {
       'n',
       '<leader>cT',
       actions.conflict_choose_all('theirs'),
       { desc = 'Choose the THEIRS version of the conflict' },
     }
 
-    local keymap_conflict_chose_all_base = {
+    local keymap_conflict_choose_all_base = {
       'n',
       '<leader>cB',
       actions.conflict_choose_all('base'),
       { desc = 'Choose the BASE version of the conflict' },
     }
 
-    local keymap_conflict_chose_all_both = {
+    local keymap_conflict_choose_all_both = {
       'n',
       '<leader>cA',
       actions.conflict_choose_all('all'),
       { desc = 'Choose ALL the versions of the conflict' },
     }
 
-    local keymap_conflict_chose_all_both = {
+    local keymap_conflict_choose_all_none = {
       'n',
       '<leader>cN',
       actions.conflict_choose_all('none'),
