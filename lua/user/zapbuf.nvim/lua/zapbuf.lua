@@ -1,6 +1,6 @@
 local M = {}
 
-function M.setup(opts) end
+function M.setup(_) end
 
 local function get_buf_name(buf_id)
   local name = vim.api.nvim_buf_get_name(buf_id)
@@ -26,7 +26,7 @@ local function handle_buf_modified(buf_id)
       get_buf_name(buf_id)
     )
 
-    local choice = vim.fn.confirm(prompt, '&Yes\n&No\n&Cancel', '3', 'Q')
+    local choice = vim.fn.confirm(prompt, '&Yes\n&No\n&Cancel', 3, 'Q')
 
     if choice == 1 then
       return Action.WRITE
@@ -67,7 +67,7 @@ local function close_tab()
 
       vim.api.nvim_buf_delete(buf_id, { force = force })
     else
-      vim.api.nvim_win_close(win_id, {})
+      vim.api.nvim_win_close(win_id, false)
     end
   end
 end
@@ -84,10 +84,11 @@ function M.zap()
   if vim.wo.diff then
     for _, win_id in next, open_wins do
       local buf_id = vim.api.nvim_win_get_buf(win_id)
-      local buf_type = vim.api.nvim_buf_get_option(buf_id, 'buftype')
+      local buf_type =
+        vim.api.nvim_get_option_value('buftype', { buf = buf_id })
 
       if buf_type == 'acwrite' then
-        vim.api.nvim_win_close(win_id, {})
+        vim.api.nvim_win_close(win_id, false)
       end
     end
 
@@ -102,7 +103,7 @@ function M.zap()
     or vim.bo.buflisted == false
     or vim.bo.bufhidden ~= ''
   if is_relative_window or is_help_buffer and #open_wins > 1 then
-    vim.api.nvim_win_close(curr_win_id, {})
+    vim.api.nvim_win_close(curr_win_id, false)
 
     return
   end
