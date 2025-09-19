@@ -1,6 +1,6 @@
 return {
   'Saghen/blink.cmp',
-  version = '^1.6.0',
+  version = '^1.7.0',
   opts = {
     completion = {
       keyword = { range = 'prefix' },
@@ -13,6 +13,7 @@ return {
         },
       },
       menu = {
+        auto_show_delay_ms = 200,
         border = 'solid',
         draw = {
           columns = {
@@ -41,6 +42,7 @@ return {
               end,
             },
           },
+          snippet_indicator = '',
         },
       },
       documentation = { auto_show = true, auto_show_delay_ms = 250 },
@@ -49,7 +51,9 @@ return {
     signature = { enabled = true, trigger = { show_on_insert = true } },
     fuzzy = {
       implementation = 'rust',
-      use_frecency = false,
+      frecency = {
+        enabled = false,
+      },
     },
     sources = {
       default = { 'lsp', 'path', 'buffer' },
