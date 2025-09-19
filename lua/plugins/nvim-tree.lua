@@ -14,7 +14,7 @@ end
 
 return {
   'nvim-tree/nvim-tree.lua',
-  version = '^1.12',
+  version = '^1.14',
   -- which-key is not a dependency of nvim-tree, but we are using it here to
   -- add custom mapping with nice descriptions.
   dependencies = { 'nvim-tree/nvim-web-devicons', 'folke/which-key.nvim' },
