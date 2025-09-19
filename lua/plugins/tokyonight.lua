@@ -1,6 +1,6 @@
 return {
   'folke/tokyonight.nvim',
-  version = '^4',
+  version = '^4.12',
   lazy = false,
   priority = 1000,
   opts = {
