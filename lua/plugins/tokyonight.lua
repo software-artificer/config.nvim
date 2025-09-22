@@ -21,7 +21,7 @@ return {
       highlights.SnacksIndent = { fg = colors.guideline }
       highlights.SnacksIndentScope = { fg = colors.guideline_active }
       highlights.SnacksIndentChunk = { fg = colors.guideline_active }
-      highlights.VirtColumn = { fg = colors.guideline }
+      highlights.VirtColumn = { fg = colors.guideline_active }
       -- GitSigns
       highlights.GitSignsAdd = { fg = colors.green1 }
       highlights.GitSignsChangedelet = { fg = colors.magenta }
