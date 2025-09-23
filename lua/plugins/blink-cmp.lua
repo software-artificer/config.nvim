@@ -1,3 +1,8 @@
+local lsp_icons = {
+  ['rust-analyzer'] = ' ',
+  ['gopls'] = ' ',
+}
+
 return {
   'Saghen/blink.cmp',
   version = '^1.7.0',
@@ -25,17 +30,16 @@ return {
             source_icon = {
               width = { max = 2 },
               text = function(ctx)
-                if ctx.source_id == 'lsp' then
-                  if ctx.item.client_name == 'rust-analyzer' then
-                    return ' '
-                  end
-                  -- FIXME: add more languages
-                elseif ctx.source_id == 'buffer' then
+                if ctx.source_id == 'buffer' then
                   return ' '
                 elseif ctx.source_id == 'cmdline' then
                   return ' '
                 elseif ctx.source_id == 'path' then
                   return ' '
+                end
+
+                if ctx.source_id == 'lsp' then
+                  return lsp_icons[ctx.item.client_name] or ' '
                 end
 
                 return ' '
