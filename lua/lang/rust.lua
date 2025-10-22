@@ -1,11 +1,13 @@
 local have_lsp = vim.fn.executable('rust-analyzer') == 1
 local have_dap = vim.fn.executable('lldb-dap') == 1
+local have_taplo = vim.fn.executable('taplo') == 1
 
 return {
   name = 'lang:rust',
   dir = vim.fn.stdpath('config') .. '/lua/user/lang/rust/',
   opts = {
     debugger = { enabled = have_dap },
+    taplo = { enabled = have_taplo },
   },
   cond = have_lsp,
   dependencies = {
@@ -20,6 +22,10 @@ return {
   config = function(_, opts)
     local wk = require('which-key')
     local rust_diag = require('rustaceanvim.commands.diagnostic')
+
+    if opts.taplo and opts.taplo.enabled then
+      vim.lsp.enable('taplo')
+    end
 
     local augroup = vim.api.nvim_create_augroup('lang:rust', { clear = true })
     vim.api.nvim_create_autocmd('LspAttach', {
