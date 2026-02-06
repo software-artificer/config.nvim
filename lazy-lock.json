@@ -7,7 +7,7 @@
   "gitsigns.nvim": { "branch": "main", "commit": "7010000889bfb6c26065e0b0f7f1e6aa9163edd9" },
   "guess-indent.nvim": { "branch": "main", "commit": "84a4987ff36798c2fc1169cbaff67960aed9776f" },
   "inc-rename.nvim": { "branch": "main", "commit": "2597bccb57d1b570fbdbd4adf88b955f7ade715b" },
-  "lazy.nvim": { "branch": "main", "commit": "85c7ff3711b730b4030d03144f6db6375044ae82" },
+  "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "lualine.nvim": { "branch": "master", "commit": "47f91c416daef12db467145e16bed5bbfe00add8" },
   "none-ls.nvim": { "branch": "main", "commit": "1917c86818b5e058f53c2ea0ad38fc57534d62fc" },
   "nvim-dap": { "branch": "master", "commit": "6a5bba0ddea5d419a783e170c20988046376090d" },
