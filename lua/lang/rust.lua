@@ -18,8 +18,11 @@ return {
     },
     'mfussenegger/nvim-dap',
     'folke/which-key.nvim',
+    'lukas-reineke/virt-column.nvim',
   },
   config = function(_, opts)
+    require('virt-column').update({ virtcolumn = '120' })
+
     local wk = require('which-key')
     local rust_diag = require('rustaceanvim.commands.diagnostic')
 
