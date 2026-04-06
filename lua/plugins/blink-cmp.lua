@@ -5,7 +5,7 @@ local lsp_icons = {
 
 return {
   'Saghen/blink.cmp',
-  version = '^1.9.1',
+  version = '^1.10',
   opts = {
     completion = {
       keyword = { range = 'prefix' },
