@@ -21,7 +21,7 @@ return {
     'lukas-reineke/virt-column.nvim',
   },
   config = function(_, opts)
-    require('virt-column').update({ virtcolumn = '120' })
+    require('virt-column').update({ virtcolumn = '100' })
 
     local wk = require('which-key')
     local rust_diag = require('rustaceanvim.commands.diagnostic')
