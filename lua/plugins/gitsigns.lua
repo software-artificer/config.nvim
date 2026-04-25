@@ -1,7 +1,7 @@
 return {
   'lewis6991/gitsigns.nvim',
   dependencies = { 'folke/which-key.nvim' },
-  version = '^1.0.2',
+  version = '^2.1.0',
   opts = {
     signs = {
       untracked = '┃',
@@ -137,12 +137,39 @@ return {
       })
 
       wk.add({
-        '<leader>gB',
+        '<leader>gtB',
         gitsigns.toggle_current_line_blame,
         mode = 'n',
         buffer = bufnr,
         desc = 'Toggle current line [b]lame',
         icon = { icon = '', color = 'yellow' },
+      })
+
+      wk.add({
+        '<leader>gtn',
+        gitsigns.toggle_numhl,
+        mode = 'n',
+        buffer = bufnr,
+        desc = 'Toggle changed line number highlight',
+        icon = { icon = '', color = 'yellow' },
+      })
+
+      wk.add({
+        '<leader>gtl',
+        gitsigns.toggle_linehl,
+        mode = 'n',
+        buffer = bufnr,
+        desc = 'Toggle changed line background highlight',
+        icon = { icon = '', color = 'yellow' },
+      })
+
+      wk.add({
+        '<leader>gtw',
+        gitsigns.toggle_word_diff,
+        mode = 'n',
+        buffer = bufnr,
+        desc = 'Toggle changed word diff highlight',
+        icon = { icon = '', color = 'yellow' },
       })
     end,
   },
