@@ -62,7 +62,7 @@ return {
         icon = { icon = '󱊓', color = 'orange' },
       },
       {
-        '<leader>lcr',
+        '<leader>grx',
         function()
           vim.lsp.codelens.run()
         end,
