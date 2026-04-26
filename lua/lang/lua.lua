@@ -53,8 +53,7 @@ return {
     end
 
     if opts.enable_formatting then
-      local none_ls = require('null-ls')
-      none_ls.register(none_ls.builtins.formatting.stylua)
+      vim.lsp.enable('stylua')
     end
   end,
   opts = {
@@ -63,6 +62,5 @@ return {
   },
   dependencies = {
     'neovim/nvim-lspconfig',
-    'nvimtools/none-ls.nvim',
   },
 }
