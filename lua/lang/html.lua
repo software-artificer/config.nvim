@@ -4,7 +4,7 @@ return {
   name = 'lang:html',
   cond = have_htmlls,
   dir = vim.fn.stdpath('config') .. '/lua/user/lang/html/',
-  config = function(_, opts)
-      vim.lsp.enable('html')
+  config = function()
+    vim.lsp.enable('html')
   end,
 }

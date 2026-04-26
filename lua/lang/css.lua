@@ -4,7 +4,7 @@ return {
   name = 'lang:css',
   cond = have_cssls,
   dir = vim.fn.stdpath('config') .. '/lua/user/lang/css/',
-  config = function(_, opts)
+  config = function()
     vim.lsp.enable('cssls')
   end,
 }

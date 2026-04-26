@@ -4,7 +4,7 @@ return {
   name = 'lang:json',
   cond = have_jsonls,
   dir = vim.fn.stdpath('config') .. '/lua/user/lang/json/',
-  config = function(_, opts)
+  config = function()
     vim.lsp.enable('jsonls')
   end,
 }
