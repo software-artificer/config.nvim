@@ -1,6 +1,5 @@
 return {
   'rcarriga/nvim-dap-ui',
-  version = '^4.0.0',
   opts = {
     controls = { enabled = false },
     floating = {
