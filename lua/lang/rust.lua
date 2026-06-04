@@ -13,7 +13,7 @@ return {
   dependencies = {
     {
       'mrcjkb/rustaceanvim',
-      version = '^8.0.5',
+      version = '^9.0.4',
       lazy = false,
     },
     'mfussenegger/nvim-dap',

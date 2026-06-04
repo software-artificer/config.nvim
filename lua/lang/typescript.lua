@@ -50,7 +50,7 @@ return {
         port = '${port}',
         executable = {
           command = 'node',
-          args = { opts.debugger.dap_path, '${port}' },
+          args = { dap_path, '${port}' },
         },
       }
     end

@@ -27,7 +27,7 @@ return {
       dap_python.setup('uv')
 
       local wk = require('which-key')
-      vim.api.nvim_create_autocmd('filetype', {
+      vim.api.nvim_create_autocmd('FileType', {
         pattern = { 'python' },
         desc = 'add additional debugging keymaps for Python files',
         callback = function(event)

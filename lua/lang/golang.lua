@@ -43,7 +43,7 @@ return {
       })
 
       local wk = require('which-key')
-      vim.api.nvim_create_autocmd('filetype', {
+      vim.api.nvim_create_autocmd('FileType', {
         pattern = { 'go' },
         desc = 'add delve-specific keymaps for go files',
         callback = function(event)
