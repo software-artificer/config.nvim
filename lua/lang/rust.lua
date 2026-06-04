@@ -1,6 +1,28 @@
 local have_lsp = vim.fn.executable('rust-analyzer') == 1
 local have_dap = vim.fn.executable('lldb-dap') == 1
 local have_taplo = vim.fn.executable('taplo') == 1
+local rust_opts = nil
+
+vim.g.rustaceanvim = function()
+  local dap_config = { adapter = nil }
+
+  if rust_opts and rust_opts.debugger and rust_opts.debugger.enabled then
+    dap_config = {
+      adapter = {
+        type = 'executable',
+        command = rust_opts.debugger.lldb_path
+          or vim.fn.exepath('lldb-dap')
+          or 'lldb-dap',
+        name = 'lldb',
+      },
+    }
+  end
+
+  return {
+    tools = { enable_clippy = true },
+    dap = dap_config,
+  }
+end
 
 return {
   name = 'lang:rust',
@@ -21,6 +43,7 @@ return {
     'lukas-reineke/virt-column.nvim',
   },
   config = function(_, opts)
+    rust_opts = { debugger = opts.debugger or { enabled = false } }
     require('virt-column').update({ virtcolumn = '100' })
 
     local wk = require('which-key')
@@ -112,25 +135,5 @@ return {
         })
       end,
     })
-
-    vim.g.rustaceanvim = function()
-      local dap_config = { adapter = nil }
-      if opts and opts.debuger and opts.debugger.enabled then
-        dap_config = {
-          adapter = {
-            type = 'executable',
-            command = opts.debugger.lldb_path
-              or vim.fn.exepath('lldb-dap')
-              or 'lldb-dap',
-            name = 'lldb',
-          },
-        }
-      end
-
-      return {
-        tools = { enable_clippy = true },
-        dap = dap_config,
-      }
-    end
   end,
 }
