@@ -57,9 +57,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       end
     end
 
-    if client:supports_method('textDocument/codeLens')
-    then
-      vim.b[event.buf].hasLspCodeLensProvider = true
+    if client:supports_method('textDocument/codeLens') then
       vim.lsp.codelens.enable(true)
     end
 
@@ -98,13 +96,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
         group = lsp_augroup,
         desc = 'Format the file on save using LSP',
         buffer = event.buf,
-        callback = function()
+        callback = function(ev)
           if disable_formatting then
             return
           end
 
           vim.lsp.buf.format({
-            bufnr = event.buf,
+            bufnr = ev.buf,
             id = client.id,
             timeout_ms = 1000,
           })

@@ -21,6 +21,9 @@ return {
       -- This config is copied from lspconfig docs to enable NeoVim integration
       vim.lsp.config('lua_ls', {
         on_init = function(client)
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentFormattingRangeProvider = false
+
           if client.workspace_folders then
             local path = client.workspace_folders[1].name
             if
@@ -46,7 +49,6 @@ return {
               },
             })
         end,
-        settings = { Lua = { format = { enable = false } } },
       })
 
       vim.lsp.enable('lua_ls')
