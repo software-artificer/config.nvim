@@ -21,7 +21,7 @@
   "nvim-treesitter": { "branch": "main", "commit": "4916d6592ede8c07973490d9322f187e07dfefac" },
   "nvim-web-devicons": { "branch": "master", "commit": "dfbfaa967a6f7ec50789bead7ef87e336c1fa63c" },
   "plenary.nvim": { "branch": "master", "commit": "74b06c6c75e4eeb3108ec01852001636d85a932b" },
-  "rustaceanvim": { "branch": "master", "commit": "f69c85a955b9a83d495e3dc8d43adb6364a0b765" },
+  "rustaceanvim": { "branch": "master", "commit": "5a3a4158857ee1f7ec839b6ddd87cc0083a19c5f" },
   "snacks.nvim": { "branch": "main", "commit": "e6fd58c82f2f3fcddd3fe81703d47d6d48fc7b9f" },
   "tokyonight.nvim": { "branch": "main", "commit": "545d72cde6400835d895160ecb5853874fd5156d" },
   "ts-comments.nvim": { "branch": "main", "commit": "79e4337e4231ff8ca33dab85162b5ee8e78f22ce" },
