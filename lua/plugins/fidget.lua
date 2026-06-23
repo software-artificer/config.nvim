@@ -1,6 +1,6 @@
 return {
   'j-hui/fidget.nvim',
-  version = '^1.6.1',
+  version = '^2.0.0',
   opts = {
     progress = {
       ignore_done_already = true,
