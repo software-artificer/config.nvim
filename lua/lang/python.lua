@@ -1,4 +1,4 @@
-local have_basedpyright = vim.fn.executable('basedpyright') == 1
+local have_pyrefly = vim.fn.executable('pyrefly') == 1
 local have_ruff = vim.fn.executable('ruff') == 1
 local have_debugpy = vim.fn.executable('debugpy') == 1
   and vim.fn.executable('debugpy-adapter') == 1
@@ -9,12 +9,20 @@ return {
   dir = vim.fn.stdpath('config') .. '/lua/user/lang/python/',
   opts = {
     enable_debugger = have_debugpy,
-    enable_lsp = have_basedpyright,
+    enable_lsp = have_pyrefly,
     enable_linter = have_ruff,
   },
   config = function(_, opts)
     if opts.enable_lsp then
-      vim.lsp.enable('basedpyright')
+      vim.lsp.config('pyrefly', {
+        init_options = {
+          pyrefly = {
+            typeCheckingMode = 'strict',
+            diagnosticMode = 'workspace',
+          },
+        },
+      })
+      vim.lsp.enable('pyrefly')
     end
 
     if opts.enable_linter then
