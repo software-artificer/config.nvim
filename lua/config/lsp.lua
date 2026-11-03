@@ -22,92 +22,114 @@ local wk = require('which-key')
 local lsp_augroup =
   vim.api.nvim_create_augroup('LspEnhancements', { clear = true })
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  group = lsp_augroup,
-  callback = function(event)
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
+local function register_lsp_capabilities(client_id, bufnr)
+  local client = vim.lsp.get_client_by_id(client_id)
 
-    if client == nil then
+  if client == nil then
+    return
+  end
+
+  if client:supports_method('textDocument/inlayHint') then
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end
+
+  if
+    vim.b[bufnr].hasDocumentSymbolProvider ~= true
+    and client:supports_method('textDocument/documentSymbol')
+  then
+    vim.b[bufnr].hasDocumentSymbolProvider = true
+
+    require('nvim-navic').attach(client, bufnr)
+  end
+
+  if client:supports_method('textDocument/codeAction') then
+    vim.lsp.buf.code_action = require('actions-preview').code_actions
+    lightbulb.attach(bufnr)
+  end
+
+  if client:supports_method('textDocument/rename') then
+    vim.lsp.buf.rename = function()
+      vim.fn.feedkeys(
+        ':' .. inc_rename.config.cmd_name .. ' ' .. vim.fn.expand('<cword>')
+      )
+    end
+  end
+
+  if client:supports_method('textDocument/codeLens') then
+    vim.lsp.codelens.enable(true)
+  end
+
+  if
+    vim.b[bufnr].hasLspFormatting ~= true
+    and not client:supports_method('textDocument/willSaveWaitUntil')
+    and client:supports_method('textDocument/formatting')
+  then
+    vim.b[bufnr].hasLspFormatting = true
+
+    local disable_formatting = false
+
+    wk.add({
+      '<leader>ltf',
+      function()
+        disable_formatting = not disable_formatting
+
+        local state = 'on'
+        if disable_formatting then
+          state = 'off'
+        end
+
+        vim.api.nvim_echo(
+          { { '󰉼 LSP formatting is ' .. state, 'WarningMsg' } },
+          false,
+          {}
+        )
+      end,
+      mode = 'n',
+      buffer = bufnr,
+      desc = 'Toggle LSP formatting on save',
+      icon = { icon = '', color = 'black' },
+    })
+
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      group = lsp_augroup,
+      desc = 'Format the file on save using LSP',
+      buffer = bufnr,
+      callback = function(ev)
+        if disable_formatting then
+          return
+        end
+
+        vim.lsp.buf.format({
+          bufnr = ev.buf,
+          id = client.id,
+          timeout_ms = 1000,
+        })
+      end,
+    })
+  end
+end
+
+vim.lsp.handlers['client/registerCapability'] = (function(overridden)
+  return function(err, res, ctx)
+    local result = overridden(err, res, ctx)
+
+    local client = vim.lsp.get_client_by_id(ctx.client_id)
+
+    if not client then
       return
     end
 
-    if client:supports_method('textDocument/inlayHint') then
-      vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+    for bufnr, _ in pairs(client.attached_buffers) do
+      register_lsp_capabilities(ctx.client_id, bufnr)
     end
 
-    if
-      vim.b[event.buf].hasDocumentSymbolProvider ~= true
-      and client:supports_method('textDocument/documentSymbol')
-    then
-      vim.b[event.buf].hasDocumentSymbolProvider = true
+    return result
+  end
+end)(vim.lsp.handlers['client/registerCapability'])
 
-      require('nvim-navic').attach(client, event.buf)
-    end
-
-    if client:supports_method('textDocument/codeAction') then
-      vim.lsp.buf.code_action = require('actions-preview').code_actions
-      lightbulb.attach(event.buf)
-    end
-
-    if client:supports_method('textDocument/rename') then
-      vim.lsp.buf.rename = function()
-        vim.fn.feedkeys(
-          ':' .. inc_rename.config.cmd_name .. ' ' .. vim.fn.expand('<cword>')
-        )
-      end
-    end
-
-    if client:supports_method('textDocument/codeLens') then
-      vim.lsp.codelens.enable(true)
-    end
-
-    if
-      vim.b[event.buf].hasLspFormatting ~= true
-      and not client:supports_method('textDocument/willSaveWaitUntil')
-      and client:supports_method('textDocument/formatting')
-    then
-      vim.b[event.buf].hasLspFormatting = true
-
-      local disable_formatting = false
-
-      wk.add({
-        '<leader>ltf',
-        function()
-          disable_formatting = not disable_formatting
-
-          local state = 'on'
-          if disable_formatting then
-            state = 'off'
-          end
-
-          vim.api.nvim_echo(
-            { { '󰉼 LSP formatting is ' .. state, 'WarningMsg' } },
-            false,
-            {}
-          )
-        end,
-        mode = 'n',
-        buffer = event.buf,
-        desc = 'Toggle LSP formatting on save',
-        icon = { icon = '', color = 'black' },
-      })
-
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        group = lsp_augroup,
-        desc = 'Format the file on save using LSP',
-        buffer = event.buf,
-        callback = function(ev)
-          if disable_formatting then
-            return
-          end
-
-          vim.lsp.buf.format({
-            bufnr = ev.buf,
-            id = client.id,
-            timeout_ms = 1000,
-          })
-        end,
-      })
-    end
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = lsp_augroup,
+  callback = function(event)
+    register_lsp_capabilities(event.data.client_id, event.buf)
   end,
 })
