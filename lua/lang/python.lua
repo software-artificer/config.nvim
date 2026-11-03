@@ -5,7 +5,7 @@ local have_debugpy = vim.fn.executable('debugpy') == 1
 
 return {
   name = 'lang:python',
-  cond = have_basedpyright or have_ruff or have_debugpy,
+  cond = have_pyrefly or have_ruff or have_debugpy,
   dir = vim.fn.stdpath('config') .. '/lua/user/lang/python/',
   opts = {
     enable_debugger = have_debugpy,
